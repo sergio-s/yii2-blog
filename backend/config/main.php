@@ -36,6 +36,10 @@ return [
             'rules' => [
             ],
         ],
+        'urlManagerFrontend' => [
+            // конфигурация менеджера URL из frontend
+        ],
+
         */
     ],
     'params' => $params,

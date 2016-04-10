@@ -16,55 +16,8 @@ use yii\filters\AccessControl;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends BaseFront
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-
     /**
      * Displays homepage.
      *
@@ -72,7 +25,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        //передаем тайтл
+        Yii::$app->view->title .= ': Страницы сайта';
+
+        return $this->render('index',[
+                                        //'title_meta' =>     $page->title_meta,
+                                        ]);
     }
 
     /**
@@ -82,6 +40,9 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        //передаем тайтл
+        Yii::$app->view->title .= ': вход на сайт';
+
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -138,6 +99,9 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+        //передаем тайтл
+        Yii::$app->view->title .= ': информация';
+
         return $this->render('about');
     }
 
@@ -148,6 +112,9 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
+        //передаем тайтл
+        Yii::$app->view->title .= ': регистрация';
+
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
