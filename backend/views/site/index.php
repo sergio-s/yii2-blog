@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 $this->title = 'Админчасть';
@@ -9,7 +10,7 @@ $this->title = 'Админчасть';
     <div class="jumbotron">
         <h1><?=$this->title;?></h1>
 
-        <p class="lead">...</p>
+        <p class="lead"><a href="<?php echo Url::toRoute('/blog/index'); ?>">Работа с блогом</a></p>
 </div>
 
     <div class="body-content">

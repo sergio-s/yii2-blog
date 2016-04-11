@@ -19,6 +19,8 @@ use Yii;
  */
 class BlogPostsTable extends \yii\db\ActiveRecord
 {
+    public $category_id;
+
     /**
      * @inheritdoc
      */
@@ -36,7 +38,8 @@ class BlogPostsTable extends \yii\db\ActiveRecord
             [['alias', 'title', 'description', 'h1'], 'required'],
             [['content'], 'string'],
             [['createdDate'], 'safe'],
-            [['alias', 'title', 'description', 'h1'], 'string', 'max' => 255]
+            [['alias', 'title', 'description', 'h1'], 'string', 'max' => 255],
+            [['category_id'], 'safe'],//id категории для промежуточной таблицы связей
         ];
     }
 
