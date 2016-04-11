@@ -12,13 +12,18 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="blog-posts-table-index">
 
+
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
 
     <p>
         <?= Html::a('Создать новый пост', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -34,8 +39,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'createdDate',
 
             ['class' => 'yii\grid\ActionColumn'],
-            
+
         ],
     ]); ?>
-
+    </div>
+    </div>
+    </div>
 </div>

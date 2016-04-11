@@ -5,7 +5,7 @@ use yii\helpers\Url;
 
 
 //$this->title = 'Страницы сайта';
-$this->params['breadcrumbs'][] = array('label'=> 'Все посты', 'url'=>Url::toRoute('blog/'));
+$this->params['breadcrumbs'][] = array('label'=> 'Все посты', 'url'=>Url::toRoute('articles/'));
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="list-group-item active">Категории блога</div>
 
                                 <?php foreach($categoris as $category): ?>
-                                <a href="<?=Url::toRoute(['/blog/category/', 'alias' => $category->alias]);?>" class="list-group-item"><?=$category->title;?></a>
+                                <a href="<?=Url::toRoute(['/articles/category/', 'alias' => $category->alias]);?>" class="list-group-item"><?=$category->title;?></a>
                                 <?php endforeach; ?>
                             </div>
                         </div>

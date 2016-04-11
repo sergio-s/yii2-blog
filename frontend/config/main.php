@@ -47,8 +47,8 @@ return [
             'rules' => [
                 '' => 'site/index',
                 'site/<action>' => 'site/<action>',
-                'blog/' => 'blog/index',
-                'blog/<action>/<alias:[\w-]+>' => 'blog/<action>',
+                'articles/' => 'blog/index',
+                'articles/<action>/<alias:[\w-]+>' => 'blog/<action>',
 
 
 

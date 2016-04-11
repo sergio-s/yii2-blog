@@ -22,13 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="col-lg-8">
                             <?php foreach($posts as $post): ?>
                             <div>
-                                <h2><a href="<?=Url::toRoute(['/blog/post/', 'alias' => $post->alias]);?>"><?=$post->h1;?></a></h2>
+                                <h2><a href="<?=Url::toRoute(['articles/post/', 'alias' => $post->alias]);?>"><?=$post->h1;?></a></h2>
                                 <p>
                                     <?=$post->description;?>
                                 </p>
                                 <small>Дата аубликации: <?=$post->createdDate;?></small>
                                 <p>
-                                    <a class="btn btn-default" href="<?=Url::toRoute(['/blog/post/', 'alias' => $post->alias]);?>">Читать пост &raquo;</a>
+                                    <a class="btn btn-default" href="<?=Url::toRoute(['/articles/post/', 'alias' => $post->alias]);?>">Читать пост &raquo;</a>
                                 </p>
                             </div>
                             <?php endforeach; ?>
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="list-group-item active">Категории блога</div>
 
                                 <?php foreach($categoris as $category): ?>
-                                <a href="<?=Url::toRoute(['/blog/category/', 'alias' => $category->alias]);?>" class="list-group-item"><?=$category->title;?></a>
+                                <a href="<?=Url::toRoute(['/articles/category/', 'alias' => $category->alias]);?>" class="list-group-item"><?=$category->title;?></a>
                                 <?php endforeach; ?>
                             </div>
                         </div>

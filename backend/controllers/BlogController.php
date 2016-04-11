@@ -105,13 +105,15 @@ class BlogController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
+        //удаляем в промежуточной таблице постов-категорий, строку с текущим постом, чтобы
+        //вставить новые данные id поста и id обнавленной родительской категории
             \Yii::$app
                 ->db
                 ->createCommand()
-                ->delete('blog_categoris_posts_table', ['id_post' => $model->id, 'id_category' => $model->id_category])
+                ->delete('blog_categoris_posts_table', ['id_post' => $model->id])
                 ->execute();
 
-            //новая связь
+            //создаем новую связь для данного поста с выбранной категорий через таблицу посредник
             $cat_post_table = new \common\models\BlogCategorisPostsTable();
             $cat_post_table->id_post = $model->id;
             $cat_post_table->id_category = $model->category_id;
