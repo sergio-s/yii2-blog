@@ -25,6 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <div>
+        <hr>
+        Текущие категории поста:
+        <?php if(isset($perent_categoris)):?>
+            <?php foreach($perent_categoris as $category):?>
+        <i><?=$category->title;?></i>
+            <?php endforeach;?>
+        <?php endif;?>
+
+    </div>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

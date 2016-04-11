@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
@@ -48,7 +48,7 @@ class BlogCategorisTable extends \yii\db\ActiveRecord
     }
 
             //получение всех фото
-    public static function getAllCategorisPosts($sort = SORT_DESC)
+    public static function getAllCategorisPosts($sort = SORT_ASC)
     {
 
         $obj = self::find()
@@ -63,11 +63,7 @@ class BlogCategorisTable extends \yii\db\ActiveRecord
     //получаем все посты данной категории. Вызов $obj->PostsFromCategory
     public function getPostsFromCategory()
     {
-        $res = $this->hasMany(BlogPostsTable::className(), ['id' => 'id_post'])->viaTable('blog_categoris_posts_table', ['id_category' => 'id']);
-        $res->orderBy([
-                                'createdDate'=> SORT_DESC,//от новых к старым
-                                 ])->all();
-        return $res;
+        return $this->hasMany(BlogPostsTable::className(), ['id' => 'id_post'])->viaTable('blog_categoris_posts_table', ['id_category' => 'id']);
     }
 
     //получаем данные одной категории.
@@ -78,5 +74,14 @@ class BlogCategorisTable extends \yii\db\ActiveRecord
                                         ])
                                         ->one();
     }
+
+//    //получаем данные одной категории.
+//    public static function saveNewRel($id_cat, $id_post)
+//    {
+//        return self::find()->where([   'alias' => $alias,
+//                                        //'status' => '1'
+//                                        ])
+//                                        ->one();
+//    }
 
 }

@@ -9,7 +9,15 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="blog-posts-table-form">
+    <div>
+        Текущие категории поста:<br>
+        <?php if(isset($perent_categoris)):?>
+            <?php foreach($perent_categoris as $category):?>
+        <h2 style="color: green"><?=$category->title;?></h2>
+            <?php endforeach;?>
+        <?php endif;?>
 
+    </div>
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'category_id')->textInput()->dropDownList($categoris_name);// ['prompt' => 'нет',] ?>
@@ -32,7 +40,7 @@ use yii\widgets\ActiveForm;
                                                                                  ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

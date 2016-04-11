@@ -1,4 +1,7 @@
 <?php
+
+//$baseUrl = str_replace('/backend/web', '', (new Request)->getBaseUrl());
+
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
@@ -36,16 +39,13 @@ return [
             'rules' => [
             ],
         ],
-         /* //Yii::$app->urlManagerFrontEnd->createUrl();
-        'urlManagerFrontend' => [
-            // конфигурация менеджера URL из frontend
-         *  'class' => 'yii\web\urlManager',
-            'baseUrl' => '/a/frontend/web',
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-        ],
+//        'urlManagerFrontend' => [
+//            'class' => 'yii\web\UrlManager',
+//            'baseUrl' => $baseUrl.'/frontend/web',
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+//        ],
 
-        */
     ],
     'params' => $params,
 ];

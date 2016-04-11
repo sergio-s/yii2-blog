@@ -50,12 +50,13 @@ class BlogPostsTable extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'alias' => 'Alias',
-            'title' => 'Title',
-            'description' => 'Description',
+            'alias' => 'Алиас',
+            'title' => 'Тайтл',
+            'description' => 'Краткое описание',
             'h1' => 'H1',
-            'content' => 'Content',
-            'createdDate' => 'Created Date',
+            'content' => 'Контент',
+            'createdDate' => 'Дата создания',
+            'category_id' => 'Категория',
         ];
     }
 
@@ -66,4 +67,11 @@ class BlogPostsTable extends \yii\db\ActiveRecord
     {
         return $this->hasMany(BlogCategorisPostsTable::className(), ['id_post' => 'id']);
     }
+
+        //получаем все категории, к которым принадлежит пост
+    public function getParentCategoris()
+    {
+        return $this->hasMany(BlogCategorisTable::className(), ['id' => 'id_category'])->viaTable('blog_categoris_posts_table', ['id_post' => 'id']);
+    }
+
 }

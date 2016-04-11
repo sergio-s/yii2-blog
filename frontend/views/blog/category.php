@@ -25,7 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div>
                                 <h2><a href="<?=Url::toRoute(['/blog/post/', 'alias' => $post->alias]);?>"><?=$post->h1;?></a></h2>
                                 <p>
-                                    <?=$post->description;?>
+                                id: <?=$post->id;?>
+                                <?=$post->description;?>
                                 </p>
                                 <small>Дата аубликации: <?=$post->createdDate;?></small>
                                 <p>

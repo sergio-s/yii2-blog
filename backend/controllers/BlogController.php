@@ -48,8 +48,13 @@ class BlogController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $perent_categoris = $model->parentCategoris;
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'perent_categoris' => $perent_categoris,
+
         ]);
     }
 
@@ -99,10 +104,37 @@ class BlogController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            \Yii::$app
+                ->db
+                ->createCommand()
+                ->delete('blog_categoris_posts_table', ['id_post' => $model->id, 'id_category' => $model->id_category])
+                ->execute();
+
+            //новая связь
+            $cat_post_table = new \common\models\BlogCategorisPostsTable();
+            $cat_post_table->id_post = $model->id;
+            $cat_post_table->id_category = $model->category_id;
+            $cat_post_table->save();
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            $categoris = \common\models\BlogCategorisTable::getAllCategorisPosts();
+
+//категории,в которых состоит этот пост (можеет быть не одна категория)
+            $perent_categoris = $model->parentCategoris;
+
+//            $categoris_name = array(0 => 'нет категорий');
+            foreach ($categoris as $category)
+            {
+                $categoris_name[$category->id] = $category->title;
+            }
+
             return $this->render('update', [
                 'model' => $model,
+                'categoris_name' => $categoris_name,
+                'perent_categoris' => $perent_categoris,
             ]);
         }
     }

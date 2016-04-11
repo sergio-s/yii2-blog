@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
@@ -79,4 +79,11 @@ class BlogPostsTable extends \yii\db\ActiveRecord
 
 
     }
+
+    //получаем все категории, к которым принадлежит пост
+    public function getParentCategoris()
+    {
+        return $this->hasMany(BlogCategorisTable::className(), ['id' => 'id_category'])->viaTable('blog_posts_table', ['id_post' => 'id']);
+    }
+
 }
