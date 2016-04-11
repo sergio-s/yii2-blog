@@ -1,0 +1,6 @@
+# yii2-blog
+[EN]
+This is the basic configuration of the blog for a quick start , and adding functionality to suit your needs ...
+
+[RU]
+Это базовая конфигурация блога для быстрого старта и добавления функционала для своих нужд...
