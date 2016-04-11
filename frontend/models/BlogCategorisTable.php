@@ -46,4 +46,33 @@ class BlogCategorisTable extends \yii\db\ActiveRecord
             'descriptions' => 'Descriptions',
         ];
     }
+
+            //получение всех фото
+    public static function getAllCategorisPosts($sort = SORT_ASC)
+    {
+
+        $obj = self::find()
+                        ->orderBy([
+                                'id'=>$sort,
+                                 ])->all();
+
+        return $obj;
+
+    }
+
+    //получаем все посты данной категории. Вызов $obj->PostsFromCategory
+    public function getPostsFromCategory()
+    {
+        return $this->hasMany(BlogPostsTable::className(), ['id' => 'id_post'])->viaTable('blog_categoris_posts_table', ['id_category' => 'id']);
+    }
+
+    //получаем данные одной категории.
+    public static function getOneCategory($alias)
+    {
+        return self::find()->where([   'alias' => $alias,
+                                        //'status' => '1'
+                                        ])
+                                        ->one();
+    }
+
 }

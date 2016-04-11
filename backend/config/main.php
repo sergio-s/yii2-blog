@@ -29,15 +29,20 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
+         /* //Yii::$app->urlManagerFrontEnd->createUrl();
         'urlManagerFrontend' => [
             // конфигурация менеджера URL из frontend
+         *  'class' => 'yii\web\urlManager',
+            'baseUrl' => '/a/frontend/web',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
         ],
 
         */

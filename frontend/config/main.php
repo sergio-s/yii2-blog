@@ -1,4 +1,9 @@
 <?php
+
+use \yii\web\Request;
+
+$baseUrl = str_replace('/frontend/web', '', (new Request)->getBaseUrl());
+
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
@@ -14,6 +19,10 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'request' => [
+            'baseUrl' => $baseUrl,
+            'cookieValidationKey' => 'sdi8s#fnj98jwiqiw;qfh!fjgh0d8f',
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -30,15 +39,22 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-
+//'urlManagerBackend' => require('../../backend/config/main.php'),
         'urlManager' => [
+
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
                 'site/<action>' => 'site/<action>',
                 'blog/' => 'blog/index',
-                'blog/<action>' => 'blog/<action>',
+                'blog/<action>/<alias:[\w-]+>' => 'blog/<action>',
+
+
+
+
+
+
 
 //                'blog/<pageNum:\d+>' => 'front/blog/index',//@blog_index пагинация блога
 //                'blog' => 'front/blog/index', //@blog_index главная страница блога
@@ -64,4 +80,5 @@ return [
         ],
     ],
     'params' => $params,
+
 ];

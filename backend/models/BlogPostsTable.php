@@ -1,19 +1,21 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
 /**
  * This is the model class for table "blog_posts_table".
  *
- * @property integer $id
+ * @property string $id
  * @property string $alias
  * @property string $title
  * @property string $description
  * @property string $h1
  * @property string $content
  * @property string $createdDate
+ *
+ * @property BlogCategorisPostsTable[] $blogCategorisPostsTables
  */
 class BlogPostsTable extends \yii\db\ActiveRecord
 {
@@ -54,29 +56,11 @@ class BlogPostsTable extends \yii\db\ActiveRecord
         ];
     }
 
-        //получение всех фото
-    public static function getAllPosts($sort = SORT_ASC)
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBlogCategorisPostsTables()
     {
-
-        $obj = self::find()
-                        ->orderBy([
-                                'createdDate'=>$sort,
-                                 ])->all();
-
-        return $obj;
-
-    }
-
-
-
-   //получение один пост
-    public static function getOnePоst($alias)
-    {
-         return self::find()->where([   'alias' => $alias,
-                                        //'status' => '1'
-                                        ])
-                                        ->one();
-
-
+        return $this->hasMany(BlogCategorisPostsTable::className(), ['id_post' => 'id']);
     }
 }
