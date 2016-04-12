@@ -44,11 +44,19 @@ return [
 
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
             'rules' => [
-                '' => 'site/index',
+
+                '/' => 'site/index',
                 'site/<action>' => 'site/<action>',
-                'articles/' => 'blog/index',
-                'articles/<action>/<alias:[\w-]+>' => 'blog/<action>',
+
+/**
+ *  правила роутинга для блога .
+ * В представлении используем для вывода ссыок хелпер вида
+ * Url::toRoute(['/blog/category', 'alias' => $category->alias])
+ */
+                'articles/<action:\w+>/<alias:\w+>' => 'blog/<action>',
+                'articles' => 'blog/index',
 
 
 
