@@ -48,7 +48,7 @@ return [
             'rules' => [
 
                 '/' => 'site/index',
-                'site/<action>' => 'site/<action>',
+                'site/<action:\w+>' => 'site/<action>',
 
 /**
  *  правила роутинга для блога .
@@ -57,18 +57,6 @@ return [
  */
                 'articles/<action:\w+>/<alias:\w+>' => 'blog/<action>',
                 'articles' => 'blog/index',
-
-
-
-
-
-
-
-//                'blog/<pageNum:\d+>' => 'front/blog/index',//@blog_index пагинация блога
-//                'blog' => 'front/blog/index', //@blog_index главная страница блога
-//                'blog/cat/<categoryAlias:[\w-]+>' => 'front/blog/categories', //@blog_cat страница отдельной категории
-//                'blog/tag/<tagName:[\w-]+>' => 'front/blog/tags', //@blog_tag страница выборки статей по тегу блога
-//                'blog/<postAlias:[\w-]+>' => 'front/blog/posts', //@blog_post страница поста вида www.elisdn.ru/blog/84/seo-service-on-yii2-application-testing
 
 
             ],

@@ -1,0 +1,1818 @@
+@charset "utf-8";
+/*------------------------------------------------------------------------------
+                        ПОДКЛЮЧЕНИЕ ШРИФТОВ
+--------------------------------------------------------------------------------*/
+@font-face {
+	font-family: 'Conv_Lato-Black';
+	src: url('../fonts/Lato-Black/fonts/Lato-Black.eot');
+	src: local('☺'), url('../fonts/Lato-Black/fonts/Lato-Black.woff') format('woff'), url('../fonts/Lato-Black/fonts/Lato-Black.ttf') format('truetype'), url('../fonts/Lato-Black/fonts/Lato-Black.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Conv_Lato-Bold';
+	src: url('../fonts/Lato-Bold/fonts/Lato-Bold.eot');
+	src: local('☺'), url('../fonts/Lato-Bold/fonts/Lato-Bold.woff') format('woff'), url('fonts/Lato-Bold/fonts/Lato-Bold.ttf') format('truetype'), url('../fonts/Lato-Bold/fonts/Lato-Bold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Conv_Lato-Heavy';
+	src: url('../fonts/Lato-Heavy/fonts/Lato-Heavy.eot');
+	src: local('☺'), url('../fonts/Lato-Heavy/fonts/Lato-Heavy.woff') format('woff'), url('../fonts/Lato-Heavy/fonts/Lato-Heavy.ttf') format('truetype'), url('../fonts/Lato-Heavy/fonts/Lato-Heavy.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Conv_Lato-Italic';
+	src: url('../fonts/Lato-Italic/fonts/Lato-Italic.eot');
+	src: local('☺'), url('../fonts/Lato-Italic/fonts/Lato-Italic.woff') format('woff'), url('../fonts/Lato-Italic/fonts/Lato-Italic.ttf') format('truetype'), url('../fonts/Lato-Italic/fonts/Lato-Italic.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Conv_Lato-Light';
+	src: url('../fonts/Lato-Light/fonts/Lato-Light.eot');
+	src: local('☺'), url('../fonts/Lato-Light/fonts/Lato-Light.woff') format('woff'), url('../fonts/Lato-Light/fonts/Lato-Light.ttf') format('truetype'), url('../fonts/Lato-Light/fonts/Lato-Light.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Conv_Lato-Medium';
+	src: url('../fonts/Lato-Medium/fonts/Lato-Medium.eot');
+	src: local('☺'), url('../fonts/Lato-Medium/fonts/Lato-Medium.woff') format('woff'), url('../fonts/Lato-Medium/fonts/Lato-Medium.ttf') format('truetype'), url('../fonts/Lato-Medium/fonts/Lato-Medium.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Conv_Lato-Regular';
+	src: url('../fonts/Lato-Regular/fonts/Lato-Regular.eot');
+	src: local('☺'), url('../fonts/Lato-Regular/fonts/Lato-Regular.woff') format('woff'), url('../fonts/Lato-Regular/fonts/Lato-Regular.ttf') format('truetype'), url('../fonts/Lato-Regular/fonts/Lato-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Conv_Raleway-Bold';
+	src: url('../fonts/Raleway-Bold/fonts/Raleway-Bold.eot');
+	src: local('☺'), url('../fonts/Raleway-Bold/fonts/Raleway-Bold.woff') format('woff'), url('../fonts/Raleway-Bold/fonts/Raleway-Bold.ttf') format('truetype'), url('../fonts/Raleway-Bold/fonts/Raleway-Bold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Raleway-Regular';
+	src: local('☺'), url('../fonts/Raleway-Regular/Raleway-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+                            цвета
+--------------------------------------------------------------------------------
+#70A8CD - сине-голубой
+
+#b6cbe5 - линия социальных иконок в верху
+
+        хедер
+#8fb0da - линия в меню
+#7fa6d7 - синий текст в верхнем меню
+
+        формы
+#d1d1d1 - цвет бордюров форм
+#7ea0ce - синий цвет кнопки
+
+        центр
+#868686 - темно-серый цвет текста в центральном блоке
+#52a7dc - голубой цвет заголовка в центральном блоке
+
+#86a8d4 - заголовок в блоке ссылок центрального блока
+#919191 - цвет ссылок в блоке ссылок центрального блока
+
+        сайдбар
+#e5e5e5 - светло-серый -рамки в блоках иконок в сайдбаре
+#f9cd8e - оранжевый цвет заголовка в сайдбаре
+
+
+        футер
+#80b0d6 - заголовки в футере
+#aeaeae - цвет текста в футере
+
+
+
+
+*/
+.grey{
+    color:#868686;
+}
+/*
+---------------------------------------------------------------------------------
+                        часто-используемые стили
+--------------------------------------------------------------------------------
+*/
+.display-none{
+    display: none;
+}
+.center-text{
+    text-align: center;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////*/
+
+/* ФОРМЫ */
+line
+form{
+    position: relative;
+}
+
+form  input{
+    width: 100%;
+    height: 35px;
+    border: 1px #d1d1d1 solid;
+    text-indent: 20px;
+    font-family: 'Conv_Lato-Light';
+    font-size: 13px;
+}
+/*input[tupe = "text"]:focus,
+input[tupe = "search"]:focus,
+input[tupe = "email"]:focus*/
+input:focus
+{
+    border-color: #7ea0ce;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+    box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+}
+form button{
+/*    position: absolute;*/
+/*    right: 10px;
+    top:50%;
+    margin-top:-10px;*/
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px #d1d1d1 solid;
+/*    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    background-color: transparent;*/
+    font-size: 12px;
+    color: #b2b2b2;
+    text-align: center;
+}
+input::-webkit-input-placeholder {
+    font-family: 'Conv_Lato-Light';
+    font-size: 13px;
+}
+input:-moz-placeholder {
+    font-family: 'Conv_Lato-Light';
+    font-size: 13px;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////*/
+
+/* БЛОКИ */
+
+/*отступы между блоками*/
+.selection{
+    margin-bottom: 30px;
+}
+
+.block-style-1{
+    padding: 15px;
+/*    border: 1px solid #b2b2b2;*/
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+}
+.block-shadow{
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow:    0px 1px 3px 0px rgba(0,0,0,0.25);
+    box-shadow:         0px 1px 3px 0px rgba(0,0,0,0.25);
+}
+.hover-horder:hover{
+/*    border-color: #7ea0ce;*/
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+    box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+}
+/* стиль заголовка подборок материалов */
+.h3-box-selection{
+    overflow:hidden;
+    position: relative;
+    margin-bottom: 17px;
+}
+        .h3-box-selection span{
+            display: block;
+            float: left;
+        }
+        .h3-selection{
+            font-family: 'Raleway-Regular';
+            font-weight: 600;
+            color: #52a7dc;
+            font-size: 23.28px;
+/*            text-transform: uppercase;*/
+            line-height: 152%;
+            text-indent: 10px;
+            margin-left: 50px;
+
+        }
+/*курсивное подчеркивание        */
+.b-dash-grey{
+    border-bottom: 2px #b2b2b2 dashed;
+}
+.b-dash-red{
+    border-bottom: 2px #E9744C dashed;
+}
+
+/*светло-салатовый*/
+.b-dash-light-green{
+    border-bottom: 2px #d6e8cd dashed;
+}
+
+/*светло-красный*/
+.b-dash-light-red{
+    border-bottom: 2px #f4b9a5 dashed;
+}
+
+/*светло-серый*/
+.b-dash-light-grey{
+    border-bottom: 2px #e9e9e9 dashed;
+}
+
+/*светло-голубой*/
+.b-dash-light-blue{
+    border-bottom: 2px #c7d7ec dashed;
+}
+
+/*светло-розовый*/
+.b-dash-light-rose{
+    border-bottom: 2px #ffc2c8 dashed;
+}
+
+/*светло-желтый*/
+.b-dash-light-yellow{
+    border-bottom: 2px #fce6c6 dashed;
+}
+
+/*светло-сереневый*/
+.b-dash-light-purple{
+    border-bottom: 2px #c9c4de dashed;
+}
+
+/*светло-коричневый*/
+.b-dash-light-brown{
+    border-bottom: 2px #e5ddd0 dashed;
+}
+
+/*светло-коричневый*/
+.b-dash-light-rose-2{
+    border-bottom: 2px #f7d2e4 dashed;
+}
+
+/*светло-коричневый*/
+.b-dash-light-brightgreen{
+    border-bottom: 2px #a2d9d7 dashed;
+}
+
+
+
+/*отступы*/
+.m-b-10{
+    margin: 0 0 10px 0;
+}
+
+
+/* КОНТРОЛЬНЫЕ ЭЛЕМЕНТЫ В ЗАГОЛОВКЕ */
+.h3-control{
+    display: inline-block;
+    position: absolute;
+    top:50%;
+    margin-top: -10px;
+    right: 0;
+}
+        /* КНОПКА В ЗАГОЛОВКЕ
+        <div class="h3-box-selection">
+            <span class="sprite sprite-circle-ph"></span>
+            <h3 class="h3-selection b-dash-red">Загаловок</h3>
+            <p class="h3-control">
+                <a class="control-but">Смотреть все</a>
+            </p>
+        </div>
+        */
+        .control-but{
+            border: 1px solid #b2b2b2;
+            border-radius: 2px;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            color:#b2b2b2;
+            padding: 4px 15px;
+            cursor: pointer;
+            font-size: 11px;
+            margin-right: 2px;
+        }
+        .control-but:hover{
+            border-color: #7ea0ce;
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+            box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+        }
+
+        /*    СТРЕЛКИ В ЗАГОЛОВКЕ
+        <div class="h3-box-selection">
+            <span class="sprite sprite-circle-f"></span>
+            <h3 class="h3-selection b-dash-grey">Загаловок</h3>
+            <p class="h3-control">
+                <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
+                <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
+            </p>
+        </div>
+        */
+        .control-arrow{
+           display: inline-block;
+           margin-left: 4px;
+           border:1px #fff solid;
+           border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+        }
+        .control-arrow:hover{
+            border-color: #7ea0ce;
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+            box-shadow: 0px 0px 5px 0px rgba(126,160,206,0.7);
+        }
+
+
+
+/*=========================================================================================================
+                                                                                        СПРАЙТ
+===========================================================================================================
+*/
+.sprite {
+    background-image: url(../img/spritesheet.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-botton-arrow-for-input {
+    width: 20px;
+    height: 19px;
+    background-position: -97px -5px;
+}
+
+.sprite-circle {
+    width: 67px;
+    height: 66px;
+    background-position: -127px -5px;
+}
+
+.sprite-circle-bell {
+    width: 66px;
+    height: 66px;
+    background-position: -204px -5px;
+}
+
+.sprite-circle-bulb-green {
+    width: 67px;
+    height: 66px;
+    background-position: -280px -5px;
+}
+
+.sprite-circle-bulb-rose {
+    width: 67px;
+    height: 66px;
+    background-position: -357px -5px;
+}
+
+.sprite-circle-deck {
+    width: 67px;
+    height: 66px;
+    background-position: -97px -81px;
+}
+
+.sprite-circle-ey {
+    width: 67px;
+    height: 66px;
+    background-position: -174px -81px;
+}
+
+.sprite-circle-f {
+    width: 66px;
+    height: 66px;
+    background-position: -251px -81px;
+}
+
+.sprite-circle-pb {
+    width: 67px;
+    height: 67px;
+    background-position: -327px -81px;
+}
+
+.sprite-circle-pfb {
+    width: 67px;
+    height: 66px;
+    background-position: -404px -81px;
+}
+
+.sprite-circle-ph {
+    width: 67px;
+    height: 67px;
+    background-position: -5px -157px;
+}
+
+.sprite-circle-women {
+    width: 67px;
+    height: 66px;
+    background-position: -82px -157px;
+}
+
+.sprite-enlarger {
+    width: 22px;
+    height: 23px;
+    background-position: -434px -5px;
+}
+
+.sprite-fork-and-knife {
+    width: 16px;
+    height: 24px;
+    background-position: -466px -5px;
+}
+
+.sprite-header-arrow {
+    width: 89px;
+    height: 121px;
+    background-position: -159px -157px;
+}
+
+.sprite-header-arrow-text {
+    width: 246px;
+    height: 118px;
+    background-position: -5px -288px;
+}
+
+.sprite-ico-abc {
+    width: 26px;
+    height: 26px;
+    background-position: -434px -39px;
+}
+
+.sprite-ico-arrow {
+    width: 25px;
+    height: 20px;
+    background-position: -258px -157px;
+}
+
+.sprite-ico-comment {
+    width: 23px;
+    height: 20px;
+    background-position: -293px -157px;
+}
+
+.sprite-ico-figure {
+    width: 16px;
+    height: 28px;
+    background-position: -97px -39px;
+}
+
+.sprite-ico-heart {
+    width: 21px;
+    height: 20px;
+    background-position: -404px -157px;
+}
+
+.sprite-ico-m {
+    width: 21px;
+    height: 21px;
+    background-position: -435px -157px;
+}
+
+.sprite-ico-some {
+    width: 26px;
+    height: 19px;
+    background-position: -258px -188px;
+}
+
+.sprite-ico-some-1 {
+    width: 21px;
+    height: 24px;
+    background-position: -466px -157px;
+}
+
+.sprite-ico-stork {
+    width: 29px;
+    height: 20px;
+    background-position: -294px -188px;
+}
+
+.sprite-ico-w {
+    width: 17px;
+    height: 26px;
+    background-position: -470px -39px;
+}
+
+.sprite-left-arrow-medium {
+    width: 40px;
+    height: 40px;
+    background-position: -333px -188px;
+}
+
+.sprite-left-slider-button {
+    width: 66px;
+    height: 66px;
+    background-position: -383px -188px;
+}
+
+.sprite-left-smoll-button {
+    width: 23px;
+    height: 23px;
+    background-position: -459px -191px;
+}
+
+.sprite-logo {
+    width: 417px;
+    height: 103px;
+    background-position: -497px -5px;
+}
+
+.sprite-plus {
+    width: 22px;
+    height: 22px;
+    background-position: -5px -118px;
+}
+
+.sprite-rigth-arrow-medium {
+    width: 40px;
+    height: 40px;
+    background-position: -497px -118px;
+}
+
+.sprite-rigth-slider-button {
+    width: 66px;
+    height: 66px;
+    background-position: -547px -118px;
+}
+
+.sprite-rigth-smoll-button {
+    width: 23px;
+    height: 23px;
+    background-position: -37px -118px;
+}
+
+.sprite-ruler {
+    width: 24px;
+    height: 24px;
+    background-position: -623px -118px;
+}
+
+.sprite-soc-bottons-content {
+    width: 241px;
+    height: 57px;
+    background-position: -657px -118px;
+}
+
+.sprite-soc-buttons-top {
+    width: 164px;
+    height: 27px;
+    background-position: -623px -185px;
+}
+
+.sprite-soc-ico-big-1 {
+    width: 43px;
+    height: 42px;
+    background-position: -797px -185px;
+}
+
+.sprite-soc-ico-big-2 {
+    width: 43px;
+    height: 42px;
+    background-position: -850px -185px;
+}
+
+.sprite-soc-ico-big-3 {
+    width: 43px;
+    height: 42px;
+    background-position: -261px -237px;
+}
+
+.sprite-soc-ico-big-4 {
+    width: 43px;
+    height: 42px;
+    background-position: -459px -237px;
+}
+
+.sprite-soc-ico-big-5 {
+    width: 43px;
+    height: 42px;
+    background-position: -512px -237px;
+}
+
+.sprite-tablet-menu {
+    width: 60px;
+    height: 63px;
+    background-position: -565px -237px;
+}
+
+.sprite-top-menu-pointer {
+    width: 18px;
+    height: 15px;
+    background-position: -497px -185px;
+}
+
+
+/*
+========================================================================================================
+                                                                                        ОБЩИЕ СТИЛИ
+========================================================================================================
+*/
+html, body {
+    height: 100%;
+}
+#all {
+    min-height: 100%;
+    font-family: 'Conv_Lato-Light';
+    color: #868686;
+    font-size: 15.52px;
+/*    line-height: 130%;*/
+}
+li{
+    list-style: none;
+}
+
+/*
+========================================================================================================
+                                                                                        header
+========================================================================================================
+*/
+/*стили вержней линии с кнопками соцсетей*/
+#top-line{
+    background-color: #b6cbe5;
+    height: 35px;
+    overflow: hidden;
+}
+#top-line-boxsoc{
+    float: right;
+    display: table;
+    margin: 3px 0 0 0;
+
+
+}
+#top-line-boxsoc li{
+    overflow: hidden;
+    list-style: none;
+    float:left;
+    display: inline-block;
+    padding-left:10px;
+
+}
+
+#top-line-boxsoc li a{
+    display: block;
+    overflow: hidden;
+    height: 27px;
+    width: 27px;
+    position:relative;
+}
+
+#top-line-boxsoc li a span{
+    position:absolute;
+    top:0
+}
+#top-line-boxsoc li#soc-ico-1 a span{
+    position:absolute;
+}
+#top-line-boxsoc li#soc-ico-2 a span{
+    left: -35px;
+}
+#top-line-boxsoc li#soc-ico-3 a span{
+    left: -71px;
+}
+#top-line-boxsoc li#soc-ico-4 a span{
+    left: -104px;
+}
+#top-line-boxsoc li#soc-ico-5 a span{
+    left: -136px;
+}
+
+/*контент хедера*/
+#header-logo-box{
+    height: 156px;
+/*    overflow: hidden;*/
+}
+/*header-logo*/
+#header-logo{
+    margin-top: 16px;
+    position: relative;
+    left:-7px;
+}
+#header-logo a{
+    display: table;
+/*    margin: 0 auto;*/
+}
+.logo-img-xs{
+    width: 100%;
+    height: auto;
+}
+/*блок-обертка с формами хедера*/
+#header-actions{
+    margin-top: 48px;
+/*    margin-left: 4%;*/
+
+}
+#header-actions form input, #header-actions form button{
+    height: 46px;
+}
+#header-actions form input{
+    border: 1px #d1d1d1 solid;
+}
+#header-actions form button{
+    border: 1px #d1d1d1 solid;
+
+}
+/*.form-group{
+    margin-bottom: 0;
+}*/
+/*поиск*/
+#search-action-box{
+    border-right: 1px #d1d1d1 solid;
+
+}
+#search-action-box form{
+    position: relative;
+    padding-right: 46px;
+
+}
+#search-action-box form input{
+    float: left;
+    width: 100%;
+    border-right: none;
+    text-indent: 10px;
+}
+#search-action-box button{
+    width: 46px;
+    position: absolute;
+    background-color: #fff;
+
+}
+#search-action-box button span{
+    margin: 0 auto;
+}
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*email*/
+#email-action-box{
+
+/*    position: relative;*/
+}
+#email-action-box form{
+    position: relative;
+    padding-right: 96px;
+}
+#email-action-box form input{
+    float: left;
+    width: 100%;
+    text-indent: 10px;
+}
+#email-action-box button{
+    font-family: 'Conv_Lato-Regular';
+    width: 96px;
+    position: absolute;
+    text-transform: uppercase;
+    font-size:10px;
+    letter-spacing: 0.5px;
+    background-color: #7d9fce;
+    color: #fff;
+}
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*картинка со стрелкой возле формы*/
+#header-arrow-text {
+    width: 96%;
+    max-width: 246px;
+    margin: 0 auto;
+    position: relative;
+    top:-15px;
+    left:-20px;
+
+}
+#header-arrow-text img{
+    max-width: 100%;
+    max-height: 100px;
+}
+/*меню*/
+#header-nav{
+    height: 100px;
+}
+ul#header-nav-menu{
+    display:table;
+    width:100%;
+    border-bottom: 7px #98aed7 solid;
+    margin-bottom: 0;
+}
+#header-nav-menu-before{
+    width:100%;
+    height: 60px;
+    border-left: 1px #E8E8E8 solid;
+    border-right: 1px #E8E8E8 solid;
+}
+#header-nav-menu > li{
+    display:table-cell;
+    padding:10px;
+    text-align:center;
+    white-space:nowrap;
+    list-style: none;
+/*    float: left;*/
+    position: relative;
+}
+#header-nav-menu > li a{
+    font-family: 'Conv_Lato-Light';
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #98aed7;
+    font-size: 14px;
+
+}
+
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*горизонтальное подменю*/
+#header-nav-menu li ul {
+    display: table;
+    position: absolute;
+    left: -10%;
+    top:68px;
+    width:100%;
+    height: 100%;
+}
+#header-nav-menu li ul li{
+    padding: 0 20px;
+    border-right: 1px #b2b2b2 solid;
+}
+#header-nav-menu li ul li:last-child{
+    padding: 0 20px;
+    border-right: none;
+}
+#header-nav-menu li ul li a{
+    font-size: 70%;
+    color:#b2b2b2;
+
+}
+/*#header-nav-menu li:hover ul {
+    display: table;
+}
+#header-nav-menu li:hover ul li{
+    display:table-cell;
+}*/
+#header-nav-menu li ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+/*
+########################################################################################################
+                                                                                        header
+########################################################################################################
+*/
+
+#slider{
+    height: 484px;
+    background-color: #E0E0E0;
+}
+
+#slider-box{
+    height: 484px;
+    background-color: #b2b2b2;
+
+}
+#slider-box ul{
+    overflow: hidden;
+
+}
+#slider-box ul li{
+
+}
+
+/*
+========================================================================================================
+                                                                                        ЦЕНТРАЛЬНЫЙ БЛОК
+========================================================================================================
+*/
+
+/*article*/
+article{
+    padding: 30px 0 0 0;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*стили горизонтальной секции */
+/*.h3-selection-horizontal{
+    color: #70A8CD;
+    text-transform: uppercase;
+    line-height: 150%;
+    text-indent: 20px;
+    margin-left: 50px;
+}*/
+/*.control-arrow-selection-horizontal{
+    position: absolute;
+    top:50%;
+    margin-top: -10px;
+    right: 0;
+}
+.control-arrow-selection-horizontal span{
+   margin-left: 4px;
+}*/
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*картинки горизонтальной секции (подборка материалов)*/
+/*.imgbox-selection-horizontal{
+    border: 1px solid #b2b2b2;
+    border-radius: 0px 0px 6px 6px;
+    -moz-border-radius: 0px 0px 6px 6px;
+    -webkit-border-radius: 0px 0px 6px 6px;
+    border: 1px solid #b2b2b2;
+    тень
+ 1-menu   -webkit-box-shadow: 0px 12px 16px -14px rgba(0,0,0,0.45);
+    -moz-box-shadow: 0px 12px 16px -14px rgba(0,0,0,0.45);
+    box-shadow: 0px 12px 16px -14px rgba(0,0,0,0.45);
+}*/
+img.img-selection-horizontal{
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+ .caption-selection-horizontal{
+    border-top: 4px solid #AED29B;
+    padding: 4% 2%;
+    font-family: 'Conv_Lato-Medium';
+    color: #979696;
+    font-size: 12.42px;
+/*    font-weight:;*/
+}
+
+#selection-horizontal-1 .caption-selection-horizontal{
+    border-color:#AED29B; /* зеленый бордюр*/
+}
+
+#selection-horizontal-2 .caption-selection-horizontal{
+    border-color:#d2d2d2; /* серый бордюр*/
+}
+
+#selection-horizontal-3 .caption-selection-horizontal{
+    border-color:#ff8592; /* розовый бордюр*/
+}
+
+
+ .caption-selection-horizontal p{
+    font-family: 'Conv_Lato-Light';
+    color: #979696;
+    font-size: 13px;
+/*    font-weight:;*/
+}
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*стили вертикальной секции секции */
+.selection-vertical{
+
+}
+.selection-vertical-content{
+    position: relative;
+    margin-bottom: 16px;
+    padding: 10px;
+}
+
+/*растягиваем ссылку на всю ширину блока*/
+.box-block-w100-h100{
+    position: relative;
+    z-index: 1;
+}
+a.block-w100-h100{
+    position: absolute;
+    left:0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+img.img-selection-vertical{
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+/*    min-height: 149px;*/
+    border: 2px #fff solid;
+}
+.img-selection-vertical:hover{
+    border-color: #7ea0ce;
+
+}
+.textbox-selection-vertical{
+    font-family: 'Conv_Lato-Light';
+    color: #868686;
+    font-size: 15.52px;
+    line-height: 130%;
+    margin-left: -8px;
+}
+.textbox-selection-vertical > p{
+    margin: 0 0 30px 0;
+}
+.h4-selection-vertical{
+    font-family: 'Conv_Lato-Regular';
+    color: #52a7dc;
+    font-size: 18.1px;
+    margin-top: 0;
+    line-height: 145%;
+}
+.h4-selection-vertical a{
+    font-family: 'Conv_Lato-Regular';
+    color: inherit;
+    font-size: 18.1px;
+}
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*блок иконок*/
+ul.icon-box{
+    display: inline-block;
+    min-width: 170px;
+    overflow: hidden;
+    position: absolute;
+    right: 40px;
+    bottom: 1px;
+}
+.icon-box li{
+    float: left;
+    margin-left: 20px;
+}
+.icon-box li span{
+    display: inline-block;
+    vertical-align: middle;
+}
+.icon-box li small{
+    padding-left: 6px;
+    color:#b2b2b2;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*нижний блок ссылок центрального блока */
+#wrap-linkbox{
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.25);
+    margin: 30px 0;
+}
+.linkbox-centerblock{
+    display: table;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.block-linkbox{
+   display: table-cell;
+/*   text-align: center;*/
+}
+.block-linkbox > div{
+   display: table;
+   margin: 0 auto;
+/*   text-align: center;*/
+}
+.block-linkbox ul{
+   padding: 0 0 0 15px;
+}
+.block-linkbox li{
+   list-style: disc;
+   color: #8fa6d1;
+
+
+}
+.h5-block-linkbox{
+    display: inline-block;
+    font-family: 'Conv_Lato-Regular';
+    font-size: 15px;
+    color: #86a8d4;
+    text-transform: uppercase;
+    line-height: 100%;
+    font-weight: 300;
+}
+.block-linkbox ul li a{
+/*    font-family: 'Conv_Lato-Regular';*/
+    font-family: 'Conv_Lato-Light';
+    font-size: 14.11px;
+    color: #909090;
+    margin-left: -5px;
+
+}
+
+/*
+========================================================================================================
+                                                                                        БОКОВОЙ БЛОК
+========================================================================================================
+*/
+aside{
+    padding: 30px 0 0 0;
+}
+
+#subscribe{
+
+}
+.label-subscribe{
+/*    font-weight: 300;*/
+    font-size: 15.52px;
+    color: #969696;
+    width: 100%;
+    word-wrap: break-word;
+    display: inline-block;
+}
+form#subscribe-form{
+    position: relative;
+    padding-right: 95px;
+    overflow: hidden;
+}
+/*form#subscribe-form label{
+
+}*/
+form#subscribe-form input{
+    height: 46px;
+    float: left;
+    padding-right: 5px;
+
+}
+form#subscribe-form button{
+    font-family: 'Conv_Lato-Regular';
+    display: inline-block;
+    width: 95px;
+    height: 46px;
+    position: absolute;
+    top:0;
+    right: 0;
+    background-color: #7ea0ce;
+    color: #fff;
+    text-transform: uppercase;
+    font-size:11px;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 0;
+}
+
+/*секция - новости*/
+#news-aside{
+
+}
+.news-aside-content{
+    overflow: hidden;
+    display: table;
+}
+.news-aside-content div{
+    display: table-cell;
+    vertical-align: middle;
+}
+        .news-aside-content img{
+            width: 97px;
+            height: 86px;
+            margin-right: 8px;
+            border:2px transparent solid;
+
+        }
+        .news-aside-content img:hover{
+            border:2px #7ea0ce solid;
+        }
+        .news-aside-content small{
+            font-family: 'Conv_Lato-Regular';
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #edcc90;
+            font-size: 11.29px;
+/*            font-weight: 700;*/
+        }
+                .news-aside-content small a{
+                    color: inherit;
+                }
+        .news-aside-content p{
+            font-family: 'Conv_Lato-Regular';
+            color: #9c9c9c;
+            font-size: 16.93px;
+
+        }
+/*секция - блок иконок и категорий*/
+#iconslinks-aside{
+
+}
+/*#iconslinks-aside .block-shadow{
+    padding: 0 5px;
+}*/
+#iconslinks-aside .block-style-1{
+    padding-bottom: 11px;
+}
+.iconslinks-aside-box{
+    margin: -5px;
+}
+    .wrap-it{
+/*        border:1px #E9744C solid;*/
+        padding: 5px;
+    }
+
+        .wrap-it p{
+            display: table;
+            width: 100%;
+            border:1px #e5e5e5 solid;
+            padding: 4px 4px 4px 0;
+            margin-bottom: 0;
+        }
+                .i-wrap{
+                    display: table-cell;
+                    height: 50px;
+                    width: 58px;
+                }
+                        .i-wrap span{
+                            display: table;
+                            margin: 0 auto;
+                            position: relative;
+                            top:50%;
+                            margin-top: -13px;
+                        }
+                .t-wrap {
+/*                    font-family: 'Conv_Lato-Regular';*/
+                    font-size: 16.93px;
+                    display: table-cell;
+                    border-left:1px #e5e5e5 solid;
+                    overflow: hidden;
+                    padding: 0 4px;
+                    text-align: left;
+                    vertical-align: middle;
+                    color:#898989
+                }
+
+                        .wrap-it p a:hover .t-wrap{
+                            text-decoration: underline;
+                        }
+
+/*секция - блок слайдер*/
+#slider-aside .block-style-1{
+    padding: 0px;
+}
+
+    .aside-block-slider img{
+        width: 100%;
+        height: auto;
+
+    }
+.aside-caption-slider{
+    padding: 15px;
+    text-align: center;
+    border-top: 8px #CCBBA2 solid;
+}
+    .aside-caption-slider a{
+        font-family: 'Conv_Lato-Bold';
+        color:#72a5d9;
+        font-size: 18px;
+        line-height: 100%;
+
+    }
+
+#aside-slider-box{
+    position: relative;
+}
+    #l-b-aside-slider-box, #r-b-aside-slider-box{
+        position: absolute;
+        top:50%;
+        margin-top: -20px;
+        cursor: pointer;
+    }
+    #l-b-aside-slider-box{
+        left: 5%;
+
+    }
+    #r-b-aside-slider-box{
+        right: 5%;
+    }
+
+/*  секция - цитаты  */
+#quote-box-aside{
+    overflow: hidden;
+}
+    #blockquote-wrap{
+        overflow: hidden;
+        padding: 0 0 0 10px;
+        color: #868686;
+    }
+
+        #quote-box-aside img{
+            width: 84px;
+            height: 84px;
+            float: left;
+        }
+
+        #blockquote-wrap blockquote {
+            font-family: 'Conv_Lato-Italic';
+            border: none;
+            color: #8a8989;
+            font-size: 16px;
+            padding: 0;
+            margin-bottom: 5px;
+            width: 100%;
+        }
+
+        #blockquote-wrap blockquote:before {
+            color: #c2c2c2;
+            content: "\201C"; /* Непечатаемый символ слева */
+            font-size: 3em;
+            line-height: 0.1em;
+            margin-right: 0.2em;
+            vertical-align: -.4em;
+        }
+
+        #blockquote-wrap blockquote:after {
+            color: #c2c2c2;
+            content: "\201D"; /* Непечатаемый символ справа */
+            font-size: 3em;
+            line-height: 0.1em;
+            vertical-align: -.45em;
+        }
+
+        #blockquote-wrap blockquote > p:first-child {
+            display: inline;
+        }
+
+        #blockquote-footer cite{
+            font-family: 'Conv_Lato-Heavy' !important;
+            color: #cf89b4;
+            font-size: 14px;
+            font-style: normal;
+        }
+        #blockquote-footer p{
+            font-family: 'Conv_Lato-Regular';
+            font-style: normal;
+            text-transform: uppercase;
+            font-size: 11.29px;
+            color: #7f7f7f;
+
+        }
+/*секция - темы или теги*/
+
+#topics-box-aside{
+    display: block;
+    width: 100%;
+    padding: 0 !important;
+    margin-bottom: 0;
+    text-align: center;
+}
+#topics-box-aside li{
+    display: inline-block;
+    line-height: 140%;
+}
+#topics-box-aside a{
+    font-family: 'Conv_Lato-Regular';
+    color: #aaaaaa;
+    font-size: 14px;
+    font-weight: 400;
+}
+#topics-box-aside a:hover{
+    color: #46B3B0;
+    text-decoration: none;
+    border-bottom: 1px #aeaeae dotted;
+
+}
+
+
+
+/*
+========================================================================================================
+                                                                                        FOOTER
+========================================================================================================
+*/
+
+#wrap-linkbox-footer{
+
+}
+/*обертка всех секций*/
+.linkbox-footerblock{
+    display: table;
+    width: 100%;
+    padding: 20px 0;
+}
+/*одна секция блока*/
+.block-linkbox-footer{
+    display: table-cell;
+}
+.block-linkbox-footer > div{
+   display: table;
+   margin: 0 auto;
+/*   text-align: center;*/
+}
+.block-linkbox-footer ul{
+    padding: 0;
+}
+.block-linkbox-footer li{
+    line-height: 190%;
+}
+.h5-block-linkbox-footer{
+    font-family: 'Conv_Lato-Regular';
+    font-size:18px;
+    font-weight: 700;
+    display: inline-block;
+    color: #70A8CD;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+.block-linkbox-footer ul li a{
+    font-family: 'Conv_Lato-Light';
+    font-size:14px;
+    color: #9b9b9b;
+    text-transform: uppercase;
+}
+
+#send-emale{
+}
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*форма в footer*/
+#email-form{
+    position: relative;
+    max-width: 240px;
+    margin-top: 10px;
+}
+
+#email-form  input[type="email"]{
+/*    float: left;*/
+    width: 100%;
+    height: 35px;
+    border: 1px #b3b3b3 solid;
+    text-indent: 0;
+    padding-right: 36px;
+    padding-left: 20px;
+}
+#email-form button{
+    position: absolute;
+    right: 13px;
+    top:0%;
+    margin-top:13px;
+    width: 20px;
+    height: 20px;
+    border: none;
+/*    background-color: #fff;
+    border: 2px #b3b3b3 solid;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;*/
+    background-color: transparent;
+/*    font-size: 18px;
+    color: #b2b2b2;
+    text-align: center;    */
+}
+
+
+
+
+#email-form button i{
+    position: relative;
+    top:-5px;
+    left:-3px;
+    font-style: normal;
+}
+#check-footer-wrap{
+    overflow: hidden;
+    padding-top: 10px;
+}
+#check-footer{
+    border:none;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    color: #d1d1d1;
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    margin:0;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    *overflow: hidden;
+    outline: none; /* Убираем границу вокруг ссылок  */
+}
+
+#check-footer-wrap label{
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+    font-size: 12px;
+    line-height: 120%;
+}
+#check-footer-wrap label span{
+/*    font-family: Tahoma;*/
+    font-family: 'Conv_Lato-Light';
+    font-size: 11px;
+}
+
+#check-footer-wrap label a{
+    color: #66c3cb;
+}
+
+
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*соц. кнопки футера    */
+#footer-boxsoc-wrap{
+    margin-top: 30px;
+}
+#footer-boxsoc{
+    display: table;
+}
+#footer-boxsoc li{
+    overflow: hidden;
+    list-style: none;
+    float:left;
+    display: inline-block;
+    padding-right:3px;
+
+}
+
+#footer-boxsoc li a{
+    display: block;
+    overflow: hidden;
+    height: 47px;
+    width: 45px;
+    position:relative;
+}
+
+#footer-boxsoc li a span{
+    position:absolute;
+    top:0
+}
+#footer-boxsoc li#soc-ico-1 a span{
+    position:absolute;
+}
+#footer-boxsoc li#soc-ico-2 a span{
+    left: -48px;
+}
+#footer-boxsoc li#soc-ico-3 a span{
+    left: -95px;
+}
+#footer-boxsoc li#soc-ico-4 a span{
+    left: -142px;
+}
+#footer-boxsoc li#soc-ico-5 a span{
+    left: -190px;
+}
+
+
+
+/*линия меню в футере */
+
+#line-linkbox-footer{
+    background-color: #52a7dc;
+    overflow: hidden;
+}
+#line-linkbox-footer ul{
+    margin: 0;
+    padding: 0;
+}
+#line-linkbox-footer li{
+    display: inline-block;
+    padding:4px 0;
+}
+
+#line-linkbox-footer li > span{
+    display: table;
+    width: 100%;
+    border-left: 1px #fff solid;
+    text-align: center;
+    line-height: 0;
+    position: relative;
+    z-index: 1;
+}
+#line-linkbox-footer li:first-child > span{
+    border-left: none;
+}
+
+#line-linkbox-footer li span > a{
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 11px;
+    line-height: 16px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+
+}
+
+/*спрайт не больших иконок соцсетей*/
+.sprite-soc-bottons-min {
+    background-image: url(../img/soc-bottons-content-small.png);
+    background-repeat: no-repeat;
+    display: block;
+    width: 100px;
+    height: 22px;
+}
+
+ul#footer-boxsoc-min{
+    display: table;
+    margin: 0 auto;
+}
+
+#footer-boxsoc-min li{
+    overflow: hidden;
+    list-style: none;
+    float:left;
+    display: inline-block;
+    padding:0 5px 0 0;
+
+}
+
+#footer-boxsoc-min li  a{
+    display: block;
+    overflow: hidden;
+    height: 18px;
+    width: 16px;
+    position:relative;
+}
+
+#footer-boxsoc-min li a span{
+    position:absolute;
+    top:-2px;
+}
+#footer-boxsoc-min li#soc-ico-1-min a span{
+    position:absolute;
+    left: -1px;
+}
+#footer-boxsoc-min li#soc-ico-2-min a span{
+    left: -22px;
+}
+#footer-boxsoc-min li#soc-ico-3-min a span{
+    left: -43px;
+}
+#footer-boxsoc-min li#soc-ico-4-min a span{
+    left: -63px;
+}
+#footer-boxsoc-min li#soc-ico-5-min a span{
+    left: -82px;
+}
+
+/*копирайт*/
+#copyright{
+    padding: 50px 0 64px 0;
+}
+#copyright p{
+    display: table;
+    margin: 0 auto;
+    font-family: 'Conv_Lato-Light';
+    font-size: 13px;
+}
+#copyright a{
+    text-decoration: underline;
+}
+
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                            МЕДИА ЗАПРОСЫ
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+/*    отступы в блоке иконок между текстом и блоком иконки*/
+    .t-wrap {
+        padding: 0 6px 0 16px;
+
+    }
+
+}
+
+/* Landscape tablets and medium desktops md */
+@media (min-width: 992px) and (max-width: 1199px) {
+/*    уменьшаем кнопку на верхней форме отправки почты*/
+    #email-action-box form{
+        padding-right: 96px;
+    }
+    #email-action-box form input{
+        text-indent: 3px;
+    }
+    #email-action-box button{
+        width: 96px;
+
+    }
+}
+
+/* Portrait tablets and small desktops sm*/
+@media (min-width: 768px) and (max-width: 991px) {
+/*    центрирование лого*/
+    #header-logo-box{
+        height: auto;
+    }
+
+    #header-logo{
+        margin: 0;
+        padding: 32px 0 38px 0 ;
+        position: relative;
+        left:0;
+    }
+
+    #header-logo a{
+        margin: 0 auto;
+    }
+
+/*    убераем правый бордер у формы поиска в шапке*/
+    #search-action-box{
+        border-right: none;
+        padding-bottom:12px;
+    }
+/*передвигаем форму поиска в шапке по вертикали    */
+    #header-actions{
+        margin-top: 0;
+/*        padding: 20px 0;*/
+    }
+
+    /*убираем высоту скрытого на этом разрешении row меню*/
+    #header-nav{
+        height: 0;
+    }
+
+}
+
+
+
+/* Landscape phones and portrait tablets xs */
+@media (max-width: 767px) {
+
+    /*    центрирование лого*/
+    #header-logo-box{
+        height: auto;
+    }
+
+    #header-logo{
+        margin: 0;
+        padding: 32px 0 38px 0 ;
+        position: relative;
+        left:0;
+    }
+
+    #header-logo a{
+        margin: 0 auto;
+    }
+
+/*    убераем правый бордер у формы поиска в шапке*/
+    #search-action-box{
+        border-right: none;
+        padding-bottom:12px;
+    }
+/*передвигаем форму поиска в шапке по вертикали    */
+    #header-actions{
+        margin-top: 0;
+/*        padding: 20px 0;*/
+    }
+
+    /*убираем высоту скрытого на этом разрешении row меню*/
+    #header-nav{
+        height: 0;
+    }
+
+    /*копирайт-изменяем вертикальные отступы*/
+    #copyright{
+        padding: 34px 0 40px 0;
+    }
+
+    /*нижний блок ссылок центрального блока - перестройка в две колонки из одной*/
+    .linkbox-centerblock{
+        display: block;
+        width: 100%;
+        padding: 20px 0;
+        overflow: hidden;
+    }
+
+    .block-linkbox{
+        display: block;
+        float: left;
+        width: 50%;
+        overflow: hidden;
+
+    /*   text-align: center;*/
+    }
+    .block-linkbox > div{
+       display: table;
+       margin: 0 auto;
+    /*   text-align: center;*/
+    }
+
+/*    картинки в вертикальной подборке материалов*/
+    .img-selection-vertical{
+        overflow: hidden;
+        width: 100%;
+        height: auto;
+/*        min-height: 149px;*/
+        border: 2px #fff solid;
+    }
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    #search-action-box{
+        width: 80%;
+        margin-left: 15%;
+    }
+
+    .h3-control{
+        display: none;
+    }
+}
