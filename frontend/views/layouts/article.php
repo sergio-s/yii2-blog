@@ -6,9 +6,4 @@
  * and open the template in the editor.
  */
 ?>
-<article class="col-md-15">
-    
-<!--контент блока article-->
-<?= $content ?>
 
-</article>

@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = Html::encode($currentCategory->h1);
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-ph"></span>
-                <h3 class="h3-selection b-dash-light-red"><?= Html::encode($currentCategory->h1) ?></h3>
+                <h3 class="h3-selection b-dash-light-red">Категория "<?= Html::encode($currentCategory->h1) ?>"</h3>
 <!--                <p class="h3-control">
                     <a class="control-but">Смотреть все</a>
                 </p>-->
@@ -51,57 +51,3 @@ $this->params['breadcrumbs'][] = Html::encode($currentCategory->h1);
         </div>
     </div>
 </div>
-
-<?php $this->beginBlock('block1'); ?>
-
-...содержимое блока 1...
-
-<?php $this->endBlock(); ?>
-
-
-<!--<div class="site-index">
-<h1><?= Html::encode($this->title) ?></h1>
-
-<blockquote><p>Описание категории: <?=$currentCategory->descriptions;?></p></blockquote>
-
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <?php foreach($currentCategory->postsFromCategory as $post): ?>
-                            <div>
-                                <h2><a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>"><?=$post->h1;?></a></h2>
-                                <p>
-                                id: <?=$post->id;?>
-                                <?=$post->description;?>
-                                </p>
-                                <small>Дата аубликации: <?=$post->createdDate;?></small>
-                                <p>
-                                    <a class="btn btn-default" href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>">Читать пост &raquo;</a>
-                                </p>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="list-group">
-                                <div class="list-group-item active">Категории блога</div>
-
-                                <?php foreach($categoris as $category): ?>
-                                <a href="<?=Url::toRoute(['/blog/category', 'alias' => $category->alias]);?>" class="list-group-item"><?=$category->title;?></a>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-
-    </div>
-</div>-->

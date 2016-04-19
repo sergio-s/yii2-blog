@@ -10,6 +10,21 @@ use app\models\BlogCategorisTable;
  */
 class BlogController extends BaseFront
 {
+
+    // у раздела Блог шаблон другой, поэтому укажем его
+    public $layout = '@app/views/layouts/page/blog';
+    private $allCats;
+
+
+    public function beforeAction($action)
+    {
+      //все категории
+       $this->allCats = BlogCategorisTable::getAllCategorisPosts();
+
+      return parent::beforeAction($action);
+    }
+
+
     /**
      * @inheritdoc
      */
@@ -18,12 +33,15 @@ class BlogController extends BaseFront
         //передаем тайтл
         Yii::$app->view->title .= ': главная блога';
 
+
         $posts = BlogPostsTable::getAllPosts();
-        $categoris = BlogCategorisTable::getAllCategorisPosts();
+
+
+        //будет доступно в layout как $this->params['sidebar']['key']
+        $this->passToSidebar(['blog-categoris' => $this->allCats]);
 
         return $this->render('index',[
                                         'posts' =>     $posts,
-                                        'categoris' => $categoris,
                                         ]);
     }
 
@@ -37,11 +55,13 @@ class BlogController extends BaseFront
         Yii::$app->view->title .= ': пост блога';
 
         $post = BlogPostsTable::getOnePоst($alias);
-        $categoris = BlogCategorisTable::getAllCategorisPosts();
+
+
+        //будет доступно в layout как $this->params['sidebar']['key']
+        $this->passToSidebar(['blog-categoris' => $this->allCats]);
 
         return $this->render('post',[
                                         'post' =>     $post,
-                                        'categoris' => $categoris,
                                         ]);
     }
 
@@ -51,21 +71,29 @@ class BlogController extends BaseFront
      */
     public function actionCategory($alias = null)
     {
-
-
-        //все категории
-        $categoris = BlogCategorisTable::getAllCategorisPosts();
-
         //получаем одну категорию по алиасу
         $currentCategory = BlogCategorisTable::getOneCategory($alias);
 
         //передаем тайтл
         Yii::$app->view->title .= ": категория блога - '$currentCategory->title' ";
 
+        //будет доступно в layout как $this->params['sidebar']['key']
+        $this->passToSidebar(['blog-categoris' => $this->allCats]);
+
         return $this->render('category',[
-                                        'categoris' => $categoris,
                                         'currentCategory' => $currentCategory,
                                         ]);
+    }
+
+
+    protected function passToSidebar(array $var)
+    {
+        //будет доступно в layout как $this->params['sidebar']['key']
+        foreach($var as $k => $v)
+        {
+            Yii::$app->view->params['sidebar'][$k] = $v;
+        }
+
     }
 
 }

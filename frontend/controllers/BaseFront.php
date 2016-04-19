@@ -18,6 +18,10 @@ use yii\filters\AccessControl;
  */
 class BaseFront extends Controller
 {
+
+    // по умолчанию для всего сайта
+    public $layout = '@app/views/layouts/page/default';
+
     /**
      * @inheritdoc
      */
