@@ -79,4 +79,12 @@ class BlogPostsTable extends \yii\db\ActiveRecord
 
 
     }
+
+    //получаем все категории, к которым принадлежит пост (getter)
+    public function getParentCategoris()
+    {
+        return $this->hasMany(BlogCategorisTable::className(), ['id' => 'id_category'])->viaTable('blog_categoris_posts_table', ['id_post' => 'id']);
+    }
+
+
 }

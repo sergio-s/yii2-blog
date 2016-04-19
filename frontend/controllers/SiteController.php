@@ -76,6 +76,9 @@ class SiteController extends BaseFront
      */
     public function actionContact()
     {
+        //передаем тайтл
+        Yii::$app->view->title .= ': контакты';
+
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
