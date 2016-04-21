@@ -11,7 +11,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Все посты', 'url' => ['ind
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="blog-posts-table-view">
-
+ Информация о вновь созданной статье ...
+    <hr>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -35,7 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php endif;?>
 
     </div>
-
+    <hr>
+    <h3>Изображение поста.</h3>
+<?=Html::img('@blogImg-web/'.$model->id.'/thumb/'.$model->img,['alt'=> 'нет изображения']);?>
+    <hr>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

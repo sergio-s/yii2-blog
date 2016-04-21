@@ -50,6 +50,12 @@ class BaseFront extends Controller
                     'logout' => ['post'],
                 ],
             ],
+//            //понадобиться отключить CSRF-проверку Yii2 для OpenID callbacks
+//            'eauth' => [
+//                // required to disable csrf validation on OpenID requests
+//                'class' => \nodge\eauth\openid\ControllerBehavior::className(),
+//                'only' => ['login'],
+//            ],
         ];
     }
 

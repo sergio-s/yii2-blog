@@ -22,6 +22,11 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+<style>
+    .blog-posts-table-index .grid-view td {
+        white-space: normal;
+    }
+</style>
 <body>
 <?php $this->beginBody() ?>
 

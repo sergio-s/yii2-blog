@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 //$this->title = 'Страницы сайта';
-$this->params['breadcrumbs'][] = array('label'=> 'Все посты', 'url'=>Url::toRoute('/blog/index'));
+$this->params['breadcrumbs'][] = array('label'=> 'Все посты', 'url'=> Url::toRoute('/blog/index'));
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -20,6 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php endforeach; ?>
         </p>
     <?php endif;?>
+
+    <?php //echo Html::img('@blogImg-web/'.$model->id.'/thumb/'.$model->img, ['alt'=>'', 'class'=>'gen-img-blogPost']);?>
+    <?php echo Html::img('@blogImg-web/'.$post->id.'/'.$post->img, ['alt'=>'', 'class'=>'gen-img-blogPost']);?>
 
     <blockquote><p><?=Html::encode($post->description);?></p></blockquote>
     <div>

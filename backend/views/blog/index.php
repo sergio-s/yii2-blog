@@ -21,14 +21,31 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Создать новый пост', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <div class="container">
+<!--    <div class="container">
     <div class="row">
-    <div class="col-lg-12">
+        <div class="col-lg-12">-->
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered'
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
+            [
+                'attribute' => 'img',
+                'format' => 'raw',
+                'label' => 'Картинка',
+                'value' =>  function ($model)
+                            {
+                                if($model->img)
+                                     return Html::img('@blogImg-web/'.$model->id.'/thumb/'.$model->img, ['style'=>'width:150px']);
+
+                                return 'нет фото';
+                            }
+             ],
+
 
             'id',
             'alias',
@@ -42,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ],
     ]); ?>
+<!--    </div>
     </div>
-    </div>
-    </div>
+    </div>-->
 </div>

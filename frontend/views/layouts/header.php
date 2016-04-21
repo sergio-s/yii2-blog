@@ -27,6 +27,27 @@ AppAsset::register($this);
                     <div id="header-content" class="row">
                         <div id="header-logo-box" class="col-sm-24">
                             <div class="row">
+                                <!--вход на сайт-->
+                                <div id="login-links">
+                                    <?php if (Yii::$app->user->isGuest): ?>
+                                        <a href="<?=Url::toRoute(['/site/login']);?>"><small>Вход</small></a>
+                                        <a href="<?=Url::toRoute(['/site/signup']);?>"><small>Регистрация</small></a>
+                                    <?php else: ?>
+                                        <small>Привет, <?=Yii::$app->user->identity->username;?> </small>
+                                        <a href="<?=Url::to('@web/backend/web');?>"><small>Админ. часть</small></a>
+                                        <?php echo
+                                             Html::beginForm(['/site/logout'], 'post',['class' => 'button-like-link'])
+                                           . Html::submitButton(
+                                                'Выход ',
+                                                ['class' => '']
+                                            )
+                                            . Html::endForm();?>
+                                        <!--<a data-method="post" href="<?=Url::toRoute(['/site/logout']);?>"><small>Выход</small></a>-->
+
+                                    <?php endif;?>
+                                </div>
+
+
                                 <!--logo-->
                                 <div  id="header-logo" class="col-lg-9 col-lg-offset-1 col-md-10 col-sm-24 col-xs-24">
                                     <a href="">
@@ -92,3 +113,10 @@ AppAsset::register($this);
                     </div>
                 </div>
             </header>
+
+<?php
+//    $identity = Yii::$app->getUser()->getIdentity();
+//    if (isset($identity->profile)) {
+//        \yii\helpers\VarDumper::dump($identity->profile, 10, true);
+//    }
+?>

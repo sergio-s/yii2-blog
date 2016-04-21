@@ -47,8 +47,8 @@ class BlogCategorisTable extends \yii\db\ActiveRecord
         ];
     }
 
-            //получение всех фото
-    public static function getAllCategorisPosts($sort = SORT_DESC)
+    //получение всех категорий
+    public static function getAllCategorisPosts($sort = SORT_ASC)
     {
 
         $obj = self::find()

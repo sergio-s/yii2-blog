@@ -14,6 +14,7 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'name' => 'Сайт',
+    'aliases' => require(__DIR__ . '/aliases.php'),
     'language' => 'ru-RU',//язык нашего сайта по умолчанию
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -27,6 +28,10 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
+
+        //авторизация через соц.сети
+        'eauth' => require(__DIR__ . '/eauth.php'),
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -71,6 +76,11 @@ return [
                         'app' => 'app.php',
                         'app/error' => 'error.php',
                     ],
+                ],
+                //файл перевода для компонента eauth (авторизация через соц.сети)
+                'eauth' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@eauth/messages',
                 ],
             ],
         ],

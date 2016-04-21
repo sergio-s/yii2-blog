@@ -15,7 +15,8 @@ return [
     //'@blog_index' => 'front/blog/index',//Url::toRoute(['@blog_index', 'pageNum' => 100], true) or Url::to(['@blog_index'], true);
 
 
-//    ПУТИ К ИЗОБРАЖЕНИЯМ КОНТЕНТА
-    '@blogImg-web' =>  $baseUrl.'/img/blog',//
-    '@blogImg-path' => '@frontend/web/img/blog',
+    //ПУТИ К ИЗОБРАЖЕНИЯМ КОНТЕНТА
+////    '@blogImg-web' => $baseUrl.'/frontend/web/img/blog',
+//    '@blogImg-web' =>  $baseUrl,
+//    '@blogImg-path' => '@frontend/web/img/blog',
 ];
