@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\web\UploadedFile;
 //для загрузки картинок
 use kartik\file\FileInput;
+use dosamigos\tinymce\TinyMce;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\BlogPostsTable */
@@ -20,9 +21,9 @@ use kartik\file\FileInput;
 
         <?php if(isset($perent_categoris)):?>
             <?php foreach($perent_categoris as $category):?>
-        <hr>
-        Текущие категории поста : <strong style="color: green"><?=$category->title;?></strong>
-        <hr>
+            <hr>
+            Текущие категории поста : <strong style="color: green"><?=$category->title;?></strong>
+            <hr>
             <?php endforeach;?>
         <?php endif;?>
 
@@ -74,7 +75,26 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'h1')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?php //echo $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'content')->widget(TinyMce::className(), [
+    'options' => ['rows' => 16],
+    'language' => 'ru',
+    'clientOptions' => [
+        'plugins' => [
+            "advlist autolink lists link charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste",
+            "textcolor",
+            "fullscreen",
+            //"image",
+        ],
+        'menubar'=> "insert",
+        'toolbar' => "image |undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor | fullscreen ",
+
+    ]
+    ]);?>
+
 
     <?php //echo $form->field($model, 'createdDate')->textInput() ?>
 

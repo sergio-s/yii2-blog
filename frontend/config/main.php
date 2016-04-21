@@ -10,7 +10,8 @@ $params = array_merge(
     require(__DIR__ . '/params.php'),
     require(__DIR__ . '/params-local.php')
 );
-
+//раскомментировать extension=php_fileinfo.dll в php ini для работы с файлами
+//нужно расширение extension=php_intl.dll для работы перевода (интернационализация)
 return [
     'id' => 'app-frontend',
     'name' => 'Сайт',
@@ -66,6 +67,7 @@ return [
 
             ],
         ],
+        //нужно расширение extension=php_intl.dll для работы перевода (интернационализация)
         'i18n' => [
             'translations' => [
                 'app*' => [

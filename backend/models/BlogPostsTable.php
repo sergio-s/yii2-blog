@@ -45,12 +45,12 @@ class BlogPostsTable extends \yii\db\ActiveRecord
 
             //валидация картинки из формы
 //            [['file'],  'safe'],
-            [['file'], 'image',
-                'extensions' => 'jpg, gif, png',
-                'maxSize' => 500 * 1024 * 3 , 'tooBig' => 'Слишком большое. Лимит - 1500KB',
-                'minWidth' => 1200, 'underWidth' => 'Слишком маленькая ширина, минимум - 1200px',
-                'minHeight' => 864, 'underHeight' => 'Слишком маленькая высота, минимум - 864px',
-            ],
+//            [['file'], 'image',
+//                'extensions' => 'jpg, gif, png',
+//                'maxSize' => 500 * 1024 * 3 , 'tooBig' => 'Слишком большое. Лимит - 1500KB',
+//                'minWidth' => 1200, 'underWidth' => 'Слишком маленькая ширина, минимум - 1200px',
+//                'minHeight' => 864, 'underHeight' => 'Слишком маленькая высота, минимум - 864px',
+//            ],
 
         ];
     }

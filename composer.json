@@ -21,7 +21,8 @@
         "yiisoft/yii2-jui": "~2.0.0",
         "yiisoft/yii2-imagine": "^2.0",
         "kartik-v/yii2-widget-fileinput": "@dev",
-        "nodge/yii2-eauth": "~2.0"
+        "nodge/yii2-eauth": "~2.0",
+        "2amigos/yii2-tinymce-widget": "~1.1"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

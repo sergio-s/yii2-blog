@@ -46,6 +46,31 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
              ],
 
+             [
+                'attribute' => 'category',
+                'format' => 'raw',
+                'label' => 'Родительская категория',
+                'value' =>  function ($model)
+                            {
+                                if(isset($model->parentCategoris))
+                                {
+                                    foreach($model->parentCategoris as $category)
+                                    {
+                                        $array[] = $category->title.' ';
+                                    }
+                                    return implode(",", $array);
+                                }
+                                else
+                                {
+                                    return 'нет';
+                                }
+
+
+
+
+                            }
+             ],
+
 
             'id',
             'alias',

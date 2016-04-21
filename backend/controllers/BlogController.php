@@ -32,6 +32,16 @@ class BlogController extends Controller
         ];
     }
 
+    public function beforeAction()
+    {
+        if ($this->action->id == 'create') {
+            Yii::$app->controller->enableCsrfValidation = false;
+        }
+
+        return true;
+
+    }
+
     /**
      * Lists all BlogPostsTable models.
      * @return mixed
@@ -72,63 +82,69 @@ class BlogController extends Controller
      */
     public function actionCreate()
     {
+        //$this->enableCsrfValidation = false;
         $model = new BlogPostsTable();
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()))
+        {
 
             $file = UploadedFile::getInstance($model, 'file');
 
-
-            if ($file && $file->tempName) {
+            if ($file && $file->tempName)
+            {
                 $model->file = $file;
 
+                //имя файла
+                $fileName = $model->file->baseName . '.' . $model->file->extension;
 
-                    //имя файла
-                    $fileName = $model->file->baseName . '.' . $model->file->extension;
+                //имя картинки для записи в базу данных
+                $model->img = $fileName;
 
-                    //имя картинки для записи в базу данных
-                    $model->img = $fileName;
+                //сохраняем данные в базу данных
+                if($model->validate() and $model->save())
+                {
 
-                    //сохраняем данные в базу данных
-                    if($model->validate() and $model->save()){
+                    //сохранение родительской категории, выбранной в выпадающем меню
+                    $this->saveParentCategory($model->id, $model->category_id );
 
-                        //сохранение родительской категории, выбранной в выпадающем меню
-                        $this->saveParentCategory($model->id, $model->category_id );
+                    // ID нового элемента
+                    $new_id = $model->id;
 
-                        // ID нового элемента
-                        $new_id = $model->id;
+                    //путь к папке для сохранения изображения текущей записи
+                    $dir = Yii::getAlias('@blogImg-path/'.$new_id.'/');
+                    $dirThumb = Yii::getAlias('@blogImg-path/'.$new_id.'/thumb/');
 
-                        //путь к папке для сохранения изображения текущей записи
-                        $dir = Yii::getAlias('@blogImg-path/'.$new_id.'/');
-                        $dirThumb = Yii::getAlias('@blogImg-path/'.$new_id.'/thumb/');
+                    //создаем папку, если не существует
+                    FileHelper::createDirectory($dir);
+                    FileHelper::createDirectory($dirThumb);
 
-                        //создаем папку, если не существует
-                        FileHelper::createDirectory($dir);
-                        FileHelper::createDirectory($dirThumb);
+                    //сохраняем картинку в созданную папку
+                    $pathToBig = $dir.$fileName;
+                    $pathToThumb = $dirThumb.$fileName;
 
-                        //сохраняем картинку в созданную папку
-                        $pathToBig = $dir.$fileName;
-                        $pathToThumb = $dirThumb.$fileName;
+                    if($model->file->saveAs($pathToBig))
+                    {
+                        //превью
+                        Image::thumbnail($pathToBig, 406, 324)->save($pathToThumb, ['quality' => 100]);
+                        sleep(1);
 
-                        if($model->file->saveAs($pathToBig))
-                        {
-                            //превью
-                            Image::thumbnail($pathToBig, 406, 324)->save($pathToThumb, ['quality' => 100]);
-                            sleep(1);
-
-                            //ресайз большой картинки
-                            Image::thumbnail($pathToBig, 1084, 864)->save($pathToBig, ['quality' => 100]);
-
-
-                            return $this->redirect(['view', 'id' => $model->id]);
-                        }
-                        else{
-                            echo 'изображение не загрузилось';
-                        }
+                        //ресайз большой картинки
+                        Image::thumbnail($pathToBig, 1084, 864)->save($pathToBig, ['quality' => 100]);
 
 
+                        return $this->redirect(['view', 'id' => $model->id]);
                     }
 
+                }
+
+            }
+            elseif($model->validate() and $model->save())
+            {
+
+                //обновление родительской категории, выбранной в выпадающем меню с флагом true
+                $this->saveParentCategory($model->id, $model->category_id);
+
+                return $this->redirect(['view', 'id' => $model->id]);
             }
 
         }
@@ -138,10 +154,9 @@ class BlogController extends Controller
             $categoris = \common\models\BlogCategorisTable::getAllCategorisPosts();
 
 
-//            $categoris_name = array(0 => 'нет категорий');
+            //$categoris_name = array(0 => 'нет категорий');
             foreach ($categoris as $category)
             {
-
                 $categoris_name[$category->id] = $category->title;
             }
 
@@ -176,8 +191,10 @@ class BlogController extends Controller
                     //имя картинки для записи в базу данных
                     $model->img = $fileName;
 
+
                     //сохраняем данные в базу данных
-                    if($model->validate() and $model->save()){
+                    if($model->validate() and $model->save())
+                    {
 
                         //обновление родительской категории, выбранной в выпадающем меню с флагом true
                         $this->saveParentCategory($model->id, $model->category_id, true );
@@ -186,8 +203,8 @@ class BlogController extends Controller
                         $new_id = $model->id;
 
                         //путь к папке для сохранения изображения текущей записи
-                        $dir = Yii::getAlias('@blogImg-path/'.$new_id.'/');
-                        $dirThumb = Yii::getAlias('@blogImg-path/'.$new_id.'/thumb/');
+                        $dir = Yii::getAlias('@blogImg-path').DIRECTORY_SEPARATOR.$new_id;
+                        $dirThumb = Yii::getAlias('@blogImg-path').DIRECTORY_SEPARATOR.$new_id.DIRECTORY_SEPARATOR.'thumb';
 
                         //удаляем папку картинок с id статьи блога и все ее картинки для создания вновь
 
@@ -198,8 +215,8 @@ class BlogController extends Controller
                         FileHelper::createDirectory($dirThumb);
 
                         //сохраняем картинку в созданную папку
-                        $pathToBig = $dir.$fileName;
-                        $pathToThumb = $dirThumb.$fileName;
+                        $pathToBig = $dir.DIRECTORY_SEPARATOR.$fileName;
+                        $pathToThumb = $dirThumb.DIRECTORY_SEPARATOR.$fileName;
 
                         if($model->file->saveAs($pathToBig))
                         {
@@ -220,15 +237,13 @@ class BlogController extends Controller
 
                     }
 
+            }elseif($model->validate() and $model->save()){
+
+                //обновление родительской категории, выбранной в выпадающем меню с флагом true
+                $this->saveParentCategory($model->id, $model->category_id, true );
+
+                return $this->redirect(['view', 'id' => $model->id]);
             }
-                    //сохраняем без изменения картинки
-                    if($model->validate() and $model->save()){
-
-                        //обновление родительской категории, выбранной в выпадающем меню с флагом true
-                        $this->saveParentCategory($model->id, $model->category_id, true );
-
-                        return $this->redirect(['view', 'id' => $model->id]);
-                    }
 
         }
         else
@@ -314,6 +329,7 @@ class BlogController extends Controller
         $cat_post_table->id_post = $id_post;
         $cat_post_table->id_category = $id_category;
         $cat_post_table->save();
+
     }
 
 

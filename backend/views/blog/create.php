@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="blog-posts-table-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
-<?php //print_r($categoris);?>
+
     <?= $this->render('_form', [
         'model' => $model,
         'categoris_name' => $categoris_name,
