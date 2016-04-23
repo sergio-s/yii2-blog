@@ -31,7 +31,7 @@ return [
         ],
 
         //авторизация через соц.сети
-        'eauth' => require(__DIR__ . '/eauth.php'),
+//        'eauth' => require(__DIR__ . '/eauth.php'),
 
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -54,7 +54,7 @@ return [
             'rules' => [
 
                 '/' => 'site/index',
-                'site/<action:\w+>' => 'site/<action>',
+                'site/<action>' => 'site/<action>',
 
                 /**
                  *  правила роутинга для блога .
@@ -100,6 +100,8 @@ return [
                 //регестрируем свой jquery за место встроенного
                 'yii\web\JqueryAsset' => [
                     'sourcePath' => null, // не опубликовывать комплект
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
                     'js' => [
                                 'js/jquery1.11.3.min.js',
 //                              YII_ENV_DEV ? 'jquery.js' : 'jquery.min.js',

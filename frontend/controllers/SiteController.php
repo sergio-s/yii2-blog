@@ -12,6 +12,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use rmrevin\yii\ulogin\AuthAction;
 
 /**
  * Site controller
@@ -19,22 +20,77 @@ use yii\filters\AccessControl;
 class SiteController extends BaseFront
 {
 
-    //public $enableCsrfValidation = false;
-
-        /**
+   /**
      * @inheritdoc
      */
-    public function behaviors()
+//    public function behaviors()
+//    {
+//        return [
+//            //понадобиться отключить CSRF-проверку Yii2 для OpenID callbacks
+//            'eauth' => [
+//                // required to disable csrf validation on OpenID requests
+//                'class' => \nodge\eauth\openid\ControllerBehavior::className(),
+//                'only' => ['login'],
+//            ],
+//        ];
+//    }
+
+
+    // rmrevin/yii2-ulogin виджет отключеаем enableCsrfValidation
+    public function beforeAction($action)
+    {
+        if ($this->action->id == 'ulogin-auth')
+        {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+
+    }
+
+    public function actions()
     {
         return [
-            //понадобиться отключить CSRF-проверку Yii2 для OpenID callbacks
-            'eauth' => [
-                // required to disable csrf validation on OpenID requests
-                'class' => \nodge\eauth\openid\ControllerBehavior::className(),
-                'only' => ['login'],
+            // rmrevin/yii2-ulogin виджет
+            'ulogin-auth' => [
+                'class' => AuthAction::className(),
+                'successCallback' => [$this, 'uloginSuccessCallback'],
+                'errorCallback' => function($data){
+                    \Yii::error($data['error']);
+                },
             ],
+
+//            'index' =>[
+//
+//            ]
         ];
     }
+
+    // rmrevin/yii2-ulogin виджет
+    public function uloginSuccessCallback($attributes)
+    {
+
+//        print_r(\Yii::$app->user->identity->uloginUser[0]->last_name);die;
+
+        $model = new \common\models\ulogin\UloginModel();
+        if($model->uLogin($attributes))
+        {
+            //print_r(\Yii::$app->user->identity->username);
+
+            return $this->goHome();
+
+        }
+        else
+        {
+            //throw new Exception('Вход не удался');
+            return $this->goBack();
+        }
+
+
+    }
+
+
+
 
     /**
      * Displays homepage.
@@ -45,6 +101,7 @@ class SiteController extends BaseFront
     {
         //передаем тайтл
         Yii::$app->view->title .= ': Страницы сайта';
+        $this->slider = true;//включаем слайдер
 
         return $this->render('index',[
                                         //'title_meta' =>     $page->title_meta,
@@ -75,50 +132,51 @@ class SiteController extends BaseFront
 //        }
 //    }
 
-    
+
 
     public function actionLogin()
     {
-        $serviceName = Yii::$app->getRequest()->getQueryParam('service');
-        if (isset($serviceName))
-        {
-            /** @var $eauth \nodge\eauth\ServiceBase */
-            $eauth = Yii::$app->get('eauth')->getIdentity($serviceName);
-            $eauth->setRedirectUrl(Yii::$app->getUser()->getReturnUrl());
-            $eauth->setCancelUrl(Yii::$app->getUrlManager()->createAbsoluteUrl('site/login'));
-
-            try
-            {
-                if ($eauth->authenticate())
-                {
-//                  var_dump($eauth->getIsAuthenticated(), $eauth->getAttributes()); exit;
-
-                    $identity = User::findByEAuth($eauth);
-                    Yii::$app->getUser()->login($identity);
-
-                    // special redirect with closing popup window
-                    $eauth->redirect();
-                }
-                else
-                {
-                    // close popup window and redirect to cancelUrl
-                    $eauth->cancel();
-                }
-            }
-            catch (\nodge\eauth\ErrorException $e)
-            {
-                // save error to show it later
-                Yii::$app->getSession()->setFlash('error', 'EAuthException: ' . $e->getMessage());
-
-                // close popup window and redirect to cancelUrl
-//              $eauth->cancel();
-                $eauth->redirect($eauth->getCancelUrl());
-            }
-        }
+//        $serviceName = Yii::$app->getRequest()->getQueryParam('service');
+//        if (isset($serviceName))
+//        {
+//            /** @var $eauth \nodge\eauth\ServiceBase */
+//            $eauth = Yii::$app->get('eauth')->getIdentity($serviceName);
+//            $eauth->setRedirectUrl(Yii::$app->getUser()->getReturnUrl());
+//            $eauth->setCancelUrl(Yii::$app->getUrlManager()->createAbsoluteUrl('site/login'));
+//
+//            try
+//            {
+//                if ($eauth->authenticate())
+//                {
+////                  var_dump($eauth->getIsAuthenticated(), $eauth->getAttributes()); exit;
+//
+//                    $identity = User::findByEAuth($eauth);
+//                    Yii::$app->getUser()->login($identity);
+//
+//                    // special redirect with closing popup window
+//                    $eauth->redirect();
+//                }
+//                else
+//                {
+//                    // close popup window and redirect to cancelUrl
+//                    $eauth->cancel();
+//                }
+//            }
+//            catch (\nodge\eauth\ErrorException $e)
+//            {
+//                // save error to show it later
+//                Yii::$app->getSession()->setFlash('error', 'EAuthException: ' . $e->getMessage());
+//
+//                // close popup window and redirect to cancelUrl
+////              $eauth->cancel();
+//                $eauth->redirect($eauth->getCancelUrl());
+//            }
+//        }
 
         // встроеннаа авторизация в yii2 по умолчанию размещается ниже
         //передаем тайтл
         Yii::$app->view->title .= ': вход на сайт';
+
 
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();

@@ -29,22 +29,39 @@ AppAsset::register($this);
                             <div class="row">
                                 <!--вход на сайт-->
                                 <div id="login-links">
+                                    <!--если гость-->
                                     <?php if (Yii::$app->user->isGuest): ?>
-                                        <a href="<?=Url::toRoute(['/site/login']);?>"><small>Вход</small></a>
-                                        <a href="<?=Url::toRoute(['/site/signup']);?>"><small>Регистрация</small></a>
-                                    <?php else: ?>
-                                        <small>Привет, <?=Yii::$app->user->identity->username;?> </small>
-                                        <a href="<?=Url::to('@web/backend/web');?>"><small>Админ. часть</small></a>
-                                        <?php echo
-                                             Html::beginForm(['/site/logout'], 'post',['class' => 'button-like-link'])
-                                           . Html::submitButton(
-                                                'Выход ',
-                                                ['class' => '']
-                                            )
-                                            . Html::endForm();?>
-                                        <!--<a data-method="post" href="<?=Url::toRoute(['/site/logout']);?>"><small>Выход</small></a>-->
+                                            <a href="<?=Url::toRoute(['/site/login']);?>"><small>Вход</small></a>
+                                            <a href="<?=Url::toRoute(['/site/signup']);?>"><small>Регистрация</small></a>
 
+                                    <!--если зарегестрированный пользователь-->
+                                    <?php else: ?>
+                                        <div class="hidden-lg hidden-md"><!--показываем только на малых экранах-->
+                                                <?php if(Yii::$app->user->identity->userLoginSocData):?>
+
+                                                    <?php //если юзер вошел через соц сеть и есть отметка 	login_soc = '1' ;?>
+                                                    <img style="width: 20px; height:auto; margin-right: 4px;" src="<?php echo Yii::$app->user->identity->userLoginSocData->photo;?>">
+                                                    <small>Привет, <?php echo Yii::$app->user->identity->userLoginSocData->first_name;?> </small>
+
+                                                <?php else:?>
+
+                                                    <small>Привет, <?php echo Yii::$app->user->identity->username;?> </small>
+
+                                                <?php endif;?>
+
+                                                <?php if(Yii::$app->user->identity->role == 'admin'):?>
+                                                    <a href="<?=Url::to('@web/backend/web');?>"><small>Админ. часть</small></a>
+                                                <?php endif;?>
+
+                                                <?php echo
+                                                     Html::beginForm(['/site/logout'], 'post',['class' => 'button-like-link'])
+                                                    . Html::submitButton('Выход ',['class' => ''])
+                                                    . Html::endForm();
+                                                ?>
+
+                                        </div>
                                     <?php endif;?>
+
                                 </div>
 
 
@@ -67,7 +84,8 @@ AppAsset::register($this);
                                             </form>
                                         </div>
 
-                                        <!--email-->
+                                        <!--email показывается только гостей-->
+                                        <?php if (Yii::$app->user->isGuest): ?>
                                         <div id="email-action-box" class="col-md-10 hidden-sm hidden-xs">
                                             <form id="search-form" role="form" class="">
 
@@ -77,11 +95,39 @@ AppAsset::register($this);
                                             </form>
                                         </div>
 
+
                                         <!--arrow-->
                                         <div class="col-md-5 hidden-sm hidden-xs">
                                             <div id="header-arrow-text"><?= Html::img('@web/css/img/header-arrow-text.jpg', ['alt'=>'', 'class'=>'']);?></div>
                                         </div>
 
+                                        <!--если зарегестрированный пользователь-->
+                                        <?php else: ?>
+                                        <!--email показывается только пользователям-->
+                                        <div class="col-md-11 hidden-sm hidden-xs">
+                                            <?php if(Yii::$app->user->identity->userLoginSocData):?>
+
+                                            <?php //если юзер вошел через соц сеть и есть отметка 	login_soc = '1' ;?>
+                                            <img style="width: 20px; height:auto; margin-right: 4px;" src="<?php echo Yii::$app->user->identity->userLoginSocData->photo;?>">
+                                            <small>Привет, <?php echo Yii::$app->user->identity->userLoginSocData->first_name;?> </small>
+
+                                            <?php else:?>
+
+                                                <small>Привет, <?php echo Yii::$app->user->identity->username;?> | </small>
+
+                                            <?php endif;?>
+
+                                            <?php if(Yii::$app->user->identity->role == 'admin'):?>
+                                                <a href="<?=Url::to('@web/backend/web');?>"><small>Админ. часть | </small></a>
+                                            <?php endif;?>
+
+                                            <?php echo
+                                                Html::beginForm(['/site/logout'], 'post',['class' => 'button-like-link'])
+                                                . Html::submitButton('Выход ',['class' => ''])
+                                                . Html::endForm();
+                                            ?>
+                                        </div>
+                                        <?php endif;?>
                                     </div>
 
                                 </div>

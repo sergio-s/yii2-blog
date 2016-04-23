@@ -20,6 +20,8 @@ use yii\helpers\FileHelper;
  */
 class BlogController extends Controller
 {
+    
+
     public function behaviors()
     {
         return [

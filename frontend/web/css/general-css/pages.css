@@ -123,12 +123,12 @@
 /*стиль для кнопки - выход из сайта*/
 .button-like-link{
     display: inline;
-    border:none;
+    border:none !important;
 }
 .button-like-link button{
     display: inline-block;
     width: 45px;
-    border:none;
+    border:none !important;
 }
 
 .display-none{

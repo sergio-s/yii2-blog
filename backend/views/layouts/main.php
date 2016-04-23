@@ -21,22 +21,27 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-</head>
+
 <style>
     .blog-posts-table-index .grid-view td {
         white-space: normal;
     }
+/*    .padding-top{
+        padding-top: 40px;
+    }*/
 </style>
+</head>
+
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
+<div class="wrap padding-top">
     <?php
     NavBar::begin([
         'brandLabel' => 'Админ часть',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar navbar-inverse',
         ],
     ]);
     $menuItems = [

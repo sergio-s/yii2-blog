@@ -14,8 +14,8 @@ return [
             'google' => [
                 // register your app here: https://code.google.com/apis/console/
                 'class' => 'nodge\eauth\services\GoogleOAuth2Service',
-                'clientId' => '...',
-                'clientSecret' => '...',
+                'clientId' => '308699153600-eqpj14rft15vldmt51rvmq2d6rbvgig9.apps.googleusercontent.com',
+                'clientSecret' => 'A2geUaZ_Q0Onj36MSwKYrK03',
                 'title' => 'Google',
             ],
             'twitter' => [

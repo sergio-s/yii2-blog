@@ -21,6 +21,7 @@ class BaseFront extends Controller
 
     // по умолчанию для всего сайта
     public $layout = '@app/views/layouts/page/default';
+    public $slider = false;
 
     /**
      * @inheritdoc

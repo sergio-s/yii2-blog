@@ -29,7 +29,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @var array EAuth attributes для входа через соцсети
      */
-    public $profile;
+//    public $soc_profile;
 
     /**
      * @inheritdoc
@@ -67,26 +67,27 @@ class User extends ActiveRecord implements IdentityInterface
      * для входа через соцсети
      */
 
-    public static function findIdentity($id)
-    {
-        if (Yii::$app->getSession()->has('user-' . $id))
-        {
-            return new self(Yii::$app->getSession()->get('user-' . $id));
-        }
-        else
-        {
-//            return isset(self::$users[$id]) ? new self(self::$users[$id]) : null;
-            return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-        }
-    }
-
-        /**
-     * @inheritdoc
-     */
 //    public static function findIdentity($id)
 //    {
-//        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+//        if (Yii::$app->getSession()->has('user-' . $id))
+//        {
+//            return new self(Yii::$app->getSession()->get('user-' . $id));
+//        }
+//        else
+//        {
+////            return isset(self::$users[$id]) ? new self(self::$users[$id]) : null;
+//            return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+//        }
 //    }
+
+     /**
+     * @inheritdoc
+     * встроеннаа авторизация в yii2 по умолчанию размещается ниже
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    }
 
 
      /**
@@ -95,22 +96,22 @@ class User extends ActiveRecord implements IdentityInterface
      * @throws ErrorException
      * для входа через соцсети
      */
-    public static function findByEAuth($service) {
-        if (!$service->getIsAuthenticated()) {
-            throw new ErrorException('EAuth user should be authenticated before creating identity.');
-        }
-
-        $id = $service->getServiceName().'-'.$service->getId();
-        $attributes = [
-            'id' => $id,
-            'username' => $service->getAttribute('name'),
-            'authKey' => md5($id),
-            'profile' => $service->getAttributes(),
-        ];
-        $attributes['profile']['service'] = $service->getServiceName();
-        Yii::$app->getSession()->set('user-'.$id, $attributes);
-        return new self($attributes);
-    }
+//    public static function findByEAuth($service) {
+//        if (!$service->getIsAuthenticated()) {
+//            throw new ErrorException('EAuth user should be authenticated before creating identity.');
+//        }
+//
+//        $id = $service->getServiceName().'-'.$service->getId();
+//        $attributes = [
+//            'id' => $id,
+//            'username' => $service->getAttribute('name'),
+//            'authKey' => md5($id),
+//            'profile' => $service->getAttributes(),
+//        ];
+//        $attributes['profile']['service'] = $service->getServiceName();
+//        Yii::$app->getSession()->set('user-'.$id, $attributes);
+//        return new self($attributes);
+//    }
 
 
 
@@ -131,6 +132,11 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public static function findByEmail($email)
+    {
+        return static::findOne(['email' => $email]);
     }
 
     /**
@@ -167,6 +173,7 @@ class User extends ActiveRecord implements IdentityInterface
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
+
 
     /**
      * @inheritdoc
@@ -236,4 +243,19 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+
+    //получаем все аккаунты в соц.сетях пользователя, что зарегестрированны на него в базе
+    public function getUserAllSocData()
+    {
+        return $this->hasMany(\common\models\ulogin\UloginUser::className(), ['id_user' => 'id']);
+    }
+
+    //получаем аккаунт в соц.сетях пользователя, через который он вошел, если вход был через соц сеть
+    public function getUserLoginSocData()
+    {
+        return $this-> hasOne(\common\models\ulogin\UloginUser::className(), ['id_user' => 'id'])
+                ->andWhere(['login_soc' => '1']);
+    }
+
 }
