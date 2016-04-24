@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\BaseStringHelper;
 
 ?>
 
@@ -15,7 +16,10 @@ use yii\helpers\Url;
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-f"></span>
-                <h3 class="h3-selection b-dash-light-green">Беременность</h3>
+                <h3 class="h3-selection b-dash-light-green">
+                    <!--Беременность-->
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Беременность'; ?>
+                </h3>
                 <p class="h3-control">
                     <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
                     <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
@@ -24,8 +28,28 @@ use yii\helpers\Url;
         </div>
         <div class="row">
             <!--картинки-->
+            <?php $i = 0;?>
+            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '4') as $post):?>
+            <?php $i++;?>
+            <div class="col-md-6 col-sm-6 col-xs-12 <?= ($i>2)?'hidden-xs':'';?>">
+                <div class="block-shadow hover-horder box-block-w100-h100">
+                    <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="block-w100-h100"></a>
+                    <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="">
+                        <!--<img class="img-selection-horizontal" src="css/img/index.jpg" alt="...">-->
+                        <?php if(isset($post->img)): ?>
+                            <?php echo Html::img('@blogImg-web/'.$post->id.'/thumb/'.$post->img, ['alt'=>'нет изображения', 'class'=>'img-selection-horizontal']);?>
+                        <?php else:?>
+                            <?= Html::img('@blogImg-web/default.jpg', ['alt'=>'нет картинки', 'class'=>'img-selection-horizontal']);?>
+                        <?php endif;?>
+                    </a>
+                    <div class="caption-selection-horizontal  center-text">
+                        <p><?=BaseStringHelper::truncateWords(strip_tags($post->title), 5, $suffix = '...' );?></p>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach;?>
             <!--1-->
-            <div class="col-md-6 col-sm-6 col-xs-12">
+<!--        <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="block-shadow hover-horder box-block-w100-h100">
                     <a href="" class="block-w100-h100"></a>
                     <a href="#" class="">
@@ -37,7 +61,7 @@ use yii\helpers\Url;
                 </div>
             </div>
 
-            <!--2-->
+            2
 
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -51,7 +75,7 @@ use yii\helpers\Url;
                 </div>
             </div>
 
-            <!--3 hidden-xs-->
+            3 hidden-xs
 
             <div class="col-md-6 col-sm-6 hidden-xs">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -64,7 +88,7 @@ use yii\helpers\Url;
                 </div>
             </div>
 
-            <!--4 hidden-xs-->
+            4 hidden-xs
 
             <div class="col-md-6 col-sm-6 hidden-xs">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -75,7 +99,7 @@ use yii\helpers\Url;
                         <p>Какой-то текст (описание) ...</p>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
         </div>
     </div>
@@ -114,7 +138,10 @@ use yii\helpers\Url;
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-bell"></span>
-                <h3 class="h3-selection b-dash-light-yellow">Новости</h3>
+                <h3 class="h3-selection b-dash-light-yellow">
+<!--                    Новости-->
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Новости'; ?>
+                </h3>
                 <p class="h3-control">
                     <a class="control-but">Все</a>
                 </p>
@@ -123,7 +150,28 @@ use yii\helpers\Url;
         <!--контент-->
         <div class="row">
             <!--1-->
-            <div class="col-sm-12 block-style-1 block-shadow m-b-10 hover-horder"><!-- отступы блоков m-b-10 -->
+            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '4') as $post):?>
+            <div class="col-sm-12 block-style-1 block-shadow m-b-10 hover-horder">
+
+                <div class="news-aside-content">
+                    <div>
+                        <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>">
+                            <?php if(isset($post->img)): ?>
+                                <?php echo Html::img('@blogImg-web/'.$post->id.'/thumb/'.$post->img, ['alt'=>'нет изображения', 'class'=>'']);?>
+                            <?php else:?>
+                                <?= Html::img('@blogImg-web/default.jpg', ['alt'=>'нет картинки', 'class'=>'']);?>
+                            <?php endif;?>
+                        </a>
+                    </div>
+                    <div>
+                        <small><a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>"><?= Html::encode($post->title); ?></a></small>
+                        <p><?=BaseStringHelper::truncateWords(strip_tags($post->content), 5, $suffix = '...' );?></p>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach;?>
+
+<!--            <div class="col-sm-12 block-style-1 block-shadow m-b-10 hover-horder"> отступы блоков m-b-10
 
                 <div class="news-aside-content">
                     <div>
@@ -135,7 +183,7 @@ use yii\helpers\Url;
                     </div>
                 </div>
             </div>
-            <!--2-->
+            2
             <div class="col-sm-12 block-style-1 block-shadow m-b-10 hover-horder">
 
                 <div class="news-aside-content">
@@ -148,8 +196,8 @@ use yii\helpers\Url;
                     </div>
                 </div>
             </div>
-            <!--3-->
-            <div class="col-sm-12 block-style-1 block-shadow m-b-10 hover-horder"><!-- отступы блоков m-b-10 -->
+            3
+            <div class="col-sm-12 block-style-1 block-shadow m-b-10 hover-horder"> отступы блоков m-b-10
 
                 <div class="news-aside-content">
                     <div>
@@ -161,8 +209,8 @@ use yii\helpers\Url;
                     </div>
                 </div>
             </div>
-            <!--4-->
-            <div class="col-sm-12 block-style-1 block-shadow hover-horder"><!-- отступы блоков m-b-10 -->
+            4
+            <div class="col-sm-12 block-style-1 block-shadow hover-horder"> отступы блоков m-b-10
 
                 <div class="news-aside-content">
                     <div>
@@ -173,7 +221,7 @@ use yii\helpers\Url;
                         <p  >Какой-то текст (описание). Какой-то текст ..</p>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
         </div>
 
@@ -315,16 +363,48 @@ use yii\helpers\Url;
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-ph"></span>
-                <h3 class="h3-selection b-dash-light-red">Питание</h3>
+                <h3 class="h3-selection b-dash-light-red">
+<!--                    Питание-->
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Питание'; ?>
+                </h3>
                 <p class="h3-control">
                     <a class="control-but">Смотреть все</a>
                 </p>
             </div>
         </div>
         <div class="row">
+            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '3') as $post):?>
+            <div class="col-md-24 col-sm-24 col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
+                <div class="row row box-block-w100-h100">
+                    <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="block-w100-h100"></a>
+                    <div class="col-md-7 col-sm-7 col-xs-7">
+                        <!--<img class="img-selection-vertical" src="css/img/index.jpg" alt="...">-->
+                        <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>">
+                            <?php if(isset($post->img)): ?>
+                                <?php echo Html::img('@blogImg-web/'.$post->id.'/thumb/'.$post->img, ['alt'=>'нет изображения', 'class'=>'img-selection-vertical']);?>
+                            <?php else:?>
+                                <?= Html::img('@blogImg-web/default.jpg', ['alt'=>'нет картинки', 'class'=>'img-selection-vertical']);?>
+                            <?php endif;?>
+                        </a>
+
+                    </div>
+                    <div class="col-md-17 col-sm-17 col-xs-17">
+                        <div class="textbox-selection-vertical">
+                            <h4 class="h4-selection-vertical"><a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>"><?= Html::encode($post->title); ?></a></h4>
+                            <p><?=BaseStringHelper::truncateWords(strip_tags($post->content), 20, $suffix = '...' );?></p>
+                        </div>
+                    </div>
+                </div>
+                <ul class="icon-box">
+                    <li><a href=""><span class="sprite sprite-ico-arrow"></span><small>0</small></a></li>
+                    <li><a href=""><span class="sprite sprite-ico-heart"></span><small>15</small></a></li>
+                    <li><a href=""><span class="sprite sprite-ico-comment"></span><small>1</small></a></li>
+                </ul>
+            </div>
+            <?php endforeach;?>
             <!--материалы -->
             <!--1-->
-            <div class="col-md-24 col-sm-24 col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
+<!--            <div class="col-md-24 col-sm-24 col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
                 <div class="row box-block-w100-h100">
                     <a href="" class="block-w100-h100"></a>
                     <div class="col-md-7 col-sm-7 col-xs-7">
@@ -344,7 +424,7 @@ use yii\helpers\Url;
                 </ul>
             </div>
 
-            <!--2-->
+            2
             <div class="col-md-24 col-sm-24 col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
                 <div class="row row box-block-w100-h100">
                     <a href="" class="block-w100-h100"></a>
@@ -365,7 +445,7 @@ use yii\helpers\Url;
                 </ul>
             </div>
 
-            <!--3-->
+            3
             <div class="col-md-24 col-sm-24 col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
                 <div class="row row box-block-w100-h100">
                     <a href="" class="block-w100-h100"></a>
@@ -384,7 +464,7 @@ use yii\helpers\Url;
                     <li><a href=""><span class="sprite sprite-ico-heart"></span><small>15</small></a></li>
                     <li><a href=""><span class="sprite sprite-ico-comment"></span><small>1</small></a></li>
                 </ul>
-            </div>
+            </div>-->
 
         </div>
     </div>
@@ -398,7 +478,10 @@ use yii\helpers\Url;
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle"></span>
-                <h3 class="h3-selection b-dash-light-grey">Психология</h3>
+                <h3 class="h3-selection b-dash-light-grey">
+<!--                    Психология-->
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Психология'; ?>
+                </h3>
                 <p class="h3-control">
                     <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
                     <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
@@ -408,7 +491,27 @@ use yii\helpers\Url;
         <div class="row">
             <!--картинки-->
             <!--1-->
-            <div class="col-sm-6 col-xs-12">
+            <?php $j=0;?>
+            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '4') as $post):?>
+            <?php $j++;?>
+            <div class="col-md-6 col-sm-6 col-xs-12 <?= ($j>2)?'hidden-xs':'';?>">
+                <div class="block-shadow hover-horder box-block-w100-h100">
+                    <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="block-w100-h100"></a>
+                    <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="">
+                        <!--<img class="img-selection-horizontal" src="css/img/index.jpg" alt="...">-->
+                        <?php if(isset($post->img)): ?>
+                            <?php echo Html::img('@blogImg-web/'.$post->id.'/thumb/'.$post->img, ['alt'=>'нет изображения', 'class'=>'img-selection-horizontal']);?>
+                        <?php else:?>
+                            <?= Html::img('@blogImg-web/default.jpg', ['alt'=>'нет картинки', 'class'=>'img-selection-horizontal']);?>
+                        <?php endif;?>
+                    </a>
+                    <div class="caption-selection-horizontal  center-text">
+                        <p><?=BaseStringHelper::truncateWords(strip_tags($post->title), 5, $suffix = '...' );?></p>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach;?>
+<!--            <div class="col-sm-6 col-xs-12">
                 <div class="block-shadow hover-horder box-block-w100-h100">
                     <a href="" class="block-w100-h100"></a>
                     <a href="#" class="">
@@ -420,7 +523,7 @@ use yii\helpers\Url;
                 </div>
             </div>
 
-            <!--2-->
+            2
 
             <div class="col-sm-6 col-sm-6 col-xs-12">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -434,7 +537,7 @@ use yii\helpers\Url;
                 </div>
             </div>
 
-            <!--3 hidden-xs-->
+            3 hidden-xs
 
             <div class="col-md-6 col-sm-6 hidden-xs">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -448,7 +551,7 @@ use yii\helpers\Url;
                 </div>
             </div>
 
-            <!--4 hidden-xs-->
+            4 hidden-xs
 
             <div class="col-sm-6 hidden-xs">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -460,7 +563,7 @@ use yii\helpers\Url;
                         <p>Какой-то текст (описание) ...</p>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
         </div>
     </div>
@@ -545,7 +648,10 @@ use yii\helpers\Url;
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-pb"></span>
-                <h3 class="h3-selection b-dash-light-blue">Роды</h3>
+                <h3 class="h3-selection b-dash-light-blue">
+<!--                    Роды-->
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Роды'; ?>
+                </h3>
                 <p class="h3-control">
                     <a class="control-but">Смотреть все</a>
                 </p>
@@ -554,7 +660,57 @@ use yii\helpers\Url;
 
         <div class="row">
             <!--материалы -->
+            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '3') as $post):?>
+            <div class="col-md-24 col-sm-24 col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
+                <div class="row row box-block-w100-h100">
+                    <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="block-w100-h100"></a>
+                    <div class="col-md-7 col-sm-7 col-xs-7">
+                        <!--<img class="img-selection-vertical" src="css/img/index.jpg" alt="...">-->
+                        <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>">
+                            <?php if(isset($post->img)): ?>
+                                <?php echo Html::img('@blogImg-web/'.$post->id.'/thumb/'.$post->img, ['alt'=>'нет изображения', 'class'=>'img-selection-vertical']);?>
+                            <?php else:?>
+                                <?= Html::img('@blogImg-web/default.jpg', ['alt'=>'нет картинки', 'class'=>'img-selection-vertical']);?>
+                            <?php endif;?>
+                        </a>
+
+                    </div>
+                    <div class="col-md-17 col-sm-17 col-xs-17">
+                        <div class="textbox-selection-vertical">
+                            <h4 class="h4-selection-vertical"><a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>"><?= Html::encode($post->title); ?></a></h4>
+                            <p><?=BaseStringHelper::truncateWords(strip_tags($post->content), 20, $suffix = '...' );?></p>
+                        </div>
+                    </div>
+                </div>
+                <ul class="icon-box">
+                    <li><a href=""><span class="sprite sprite-ico-arrow"></span><small>0</small></a></li>
+                    <li><a href=""><span class="sprite sprite-ico-heart"></span><small>15</small></a></li>
+                    <li><a href=""><span class="sprite sprite-ico-comment"></span><small>1</small></a></li>
+                </ul>
+            </div>
+            <?php endforeach;?>
             <!--1-->
+<!--            <div class="col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
+                <div class="row row box-block-w100-h100">
+                    <a href="" class="block-w100-h100"></a>
+                    <div class="col-xs-7">
+                        <a href=""><img class="img-selection-vertical" src="css/img/index.jpg" alt="..."></a>
+                    </div>
+                    <div class="col-xs-17">
+                        <div class="textbox-selection-vertical">
+                            <h4 class="h4-selection-vertical"><a href="">Заголовок</a></h4>
+                            <p  >Какой-то текст (описание) .Какой-то текст (описание) ...Какой-то текст (описание) ...Какой-то текст (описание) .Какой-то текст (описание) .Какой-то текст (описание) .Какой-то текст (описание) ...</p>
+                        </div>
+                    </div>
+                </div>
+                <ul class="icon-box">
+                    <li><a href=""><span class="sprite sprite-ico-arrow"></span><small>0</small></a></li>
+                    <li><a href=""><span class="sprite sprite-ico-heart"></span><small>15</small></a></li>
+                    <li><a href=""><span class="sprite sprite-ico-comment"></span><small>1</small></a></li>
+                </ul>
+            </div>
+
+            2
             <div class="col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
                 <div class="row row box-block-w100-h100">
                     <a href="" class="block-w100-h100"></a>
@@ -575,7 +731,7 @@ use yii\helpers\Url;
                 </ul>
             </div>
 
-            <!--2-->
+            3
             <div class="col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
                 <div class="row row box-block-w100-h100">
                     <a href="" class="block-w100-h100"></a>
@@ -594,28 +750,7 @@ use yii\helpers\Url;
                     <li><a href=""><span class="sprite sprite-ico-heart"></span><small>15</small></a></li>
                     <li><a href=""><span class="sprite sprite-ico-comment"></span><small>1</small></a></li>
                 </ul>
-            </div>
-
-            <!--3-->
-            <div class="col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
-                <div class="row row box-block-w100-h100">
-                    <a href="" class="block-w100-h100"></a>
-                    <div class="col-xs-7">
-                        <a href=""><img class="img-selection-vertical" src="css/img/index.jpg" alt="..."></a>
-                    </div>
-                    <div class="col-xs-17">
-                        <div class="textbox-selection-vertical">
-                            <h4 class="h4-selection-vertical"><a href="">Заголовок</a></h4>
-                            <p  >Какой-то текст (описание) .Какой-то текст (описание) ...Какой-то текст (описание) ...Какой-то текст (описание) .Какой-то текст (описание) .Какой-то текст (описание) .Какой-то текст (описание) ...</p>
-                        </div>
-                    </div>
-                </div>
-                <ul class="icon-box">
-                    <li><a href=""><span class="sprite sprite-ico-arrow"></span><small>0</small></a></li>
-                    <li><a href=""><span class="sprite sprite-ico-heart"></span><small>15</small></a></li>
-                    <li><a href=""><span class="sprite sprite-ico-comment"></span><small>1</small></a></li>
-                </ul>
-            </div>
+            </div>-->
 
         </div>
     </div>
@@ -670,7 +805,10 @@ use yii\helpers\Url;
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-pfb"></span>
-                <h3 class="h3-selection b-dash-light-rose">Новорожденный</h3>
+                <h3 class="h3-selection b-dash-light-rose">
+<!--                    Новорожденный-->
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Новорожденный'; ?>
+                </h3>
                 <p class="h3-control">
                     <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
                     <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
@@ -679,8 +817,28 @@ use yii\helpers\Url;
         </div>
         <div class="row">
             <!--картинки-->
+            <?php $k=0;?>
+            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '4') as $post):?>
+            <?php $k++;?>
+            <div class="col-md-6 col-sm-6 col-xs-12 <?= ($k>2)?'hidden-xs':'';?>">
+                <div class="block-shadow hover-horder box-block-w100-h100">
+                    <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="block-w100-h100"></a>
+                    <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="">
+                        <!--<img class="img-selection-horizontal" src="css/img/index.jpg" alt="...">-->
+                        <?php if(isset($post->img)): ?>
+                            <?php echo Html::img('@blogImg-web/'.$post->id.'/thumb/'.$post->img, ['alt'=>'нет изображения', 'class'=>'img-selection-horizontal']);?>
+                        <?php else:?>
+                            <?= Html::img('@blogImg-web/default.jpg', ['alt'=>'нет картинки', 'class'=>'img-selection-horizontal']);?>
+                        <?php endif;?>
+                    </a>
+                    <div class="caption-selection-horizontal  center-text">
+                        <p><?=BaseStringHelper::truncateWords(strip_tags($post->title), 5, $suffix = '...' );?></p>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach;?>
             <!--1-->
-            <div class="col-md-6 col-sm-6 col-xs-12">
+<!--            <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="block-shadow hover-horder box-block-w100-h100">
                     <a href="" class="block-w100-h100"></a>
                     <a href="" class="block-w100-h100"></a>
@@ -693,7 +851,7 @@ use yii\helpers\Url;
                 </div>
             </div>
 
-            <!--2-->
+            2
 
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -708,7 +866,7 @@ use yii\helpers\Url;
                 </div>
             </div>
 
-            <!--3 hidden-xs-->
+            3 hidden-xs
 
             <div class="col-md-6 col-sm-6 hidden-xs">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -723,7 +881,7 @@ use yii\helpers\Url;
                 </div>
             </div>
 
-            <!--4 hidden-xs-->
+            4 hidden-xs
 
             <div class="col-md-6 col-sm-6 hidden-xs">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -735,7 +893,7 @@ use yii\helpers\Url;
                         <p>Какой-то текст (описание) ...</p>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
         </div>
     </div>

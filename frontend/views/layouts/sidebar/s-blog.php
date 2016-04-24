@@ -5,8 +5,22 @@
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
+use yii\helpers\BaseStringHelper;
 
 AppAsset::register($this);
+//var_dump(\Yii::$app->controller->categoryDataBlog);
+//foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory('2') as $category)
+//{
+//    print_r($category->h1."<br>");
+//
+////    foreach($category->categorisPosts as $post)
+////    {
+////        var_dump($post->blogPost);
+////        //die;
+////    }
+//    //var_dump($category->categorisPosts);die;
+//   //echo $row->categorisPosts['0']->blogPost->title;
+//}
 ?>
 <aside class="col-md-8 col-md-offset-1 visible-lg visible-md">
 
@@ -71,7 +85,10 @@ AppAsset::register($this);
                                         <div class="row">
                                             <div class="h3-box-selection">
                                                 <span class="sprite sprite-circle-bell"></span>
-                                                <h3 class="h3-selection b-dash-light-yellow">Новости</h3>
+                                                <h3 class="h3-selection b-dash-light-yellow">
+                                                    <!--Новости-->
+                                                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Новости'; ?>
+                                                </h3>
                                                 <p class="h3-control">
                                                     <a class="control-but">Все</a>
                                                 </p>
@@ -80,24 +97,32 @@ AppAsset::register($this);
                                         <!--контент-->
                                         <div class="row">
                                             <!--1-->
-                                            <div class="col-md-24 block-style-1 block-shadow m-b-10 hover-horder"><!-- отступы блоков m-b-10 -->
 
-                                                <div class="news-aside-content">
-                                                    <div>
-                                                        <a href=""><?= Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
-                                                    </div>
-                                                    <div>
-                                                        <small><a href="">Заголовок</a></small>
-                                                        <p  >Какой-то текст (описание). Какой-то текст ..</p>
+                                            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '4') as $post):?>
+                                                <div class="col-md-24 block-style-1 block-shadow m-b-10 hover-horder"><!-- отступы блоков m-b-10 -->
+                                                    <div class="news-aside-content">
+                                                        <div>
+                                                            <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>">
+                                                                <?php if(isset($post->img)): ?>
+                                                                    <?php echo Html::img('@blogImg-web/'.$post->id.'/thumb/'.$post->img, ['alt'=>'нет изображения', 'class'=>'']);?>
+                                                                <?php else:?>
+                                                                    <?= Html::img('@blogImg-web/default.jpg', ['alt'=>'нет картинки', 'class'=>'']);?>
+                                                                <?php endif;?>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <small><a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>"><?= Html::encode($post->title); ?></a></small>
+                                                            <p><?=BaseStringHelper::truncateWords(strip_tags($post->content), 5, $suffix = '...' );?></p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!--2-->
+                                            <?php endforeach;?>
+<!--                                            2
                                             <div class="col-md-24 block-style-1 block-shadow m-b-10 hover-horder">
 
                                                 <div class="news-aside-content">
                                                     <div>
-                                                        <a href=""><?= Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
+                                                        <a href=""><?php //echo Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
                                                     </div>
                                                     <div>
                                                         <small><a href="">Заголовок</a></small>
@@ -105,12 +130,12 @@ AppAsset::register($this);
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--3-->
-                                            <div class="col-md-24 block-style-1 block-shadow m-b-10 hover-horder"><!-- отступы блоков m-b-10 -->
+                                            3
+                                            <div class="col-md-24 block-style-1 block-shadow m-b-10 hover-horder"> отступы блоков m-b-10
 
                                                 <div class="news-aside-content">
                                                     <div>
-                                                        <a href=""><?= Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
+                                                        <a href=""><?php //echo Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
                                                     </div>
                                                     <div>
                                                         <small><a href="">Заголовок</a></small>
@@ -118,19 +143,19 @@ AppAsset::register($this);
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--4-->
-                                            <div class="col-md-24 block-style-1 block-shadow hover-horder"><!-- отступы блоков m-b-10 -->
+                                            4
+                                            <div class="col-md-24 block-style-1 block-shadow hover-horder"> отступы блоков m-b-10
 
                                                 <div class="news-aside-content">
                                                     <div>
-                                                        <a href=""><?= Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
+                                                        <a href=""><?php //echo Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
                                                     </div>
                                                     <div>
                                                         <small><a href="">Заголовок</a></small>
                                                         <p  >Какой-то текст (описание). Какой-то текст ..</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
 
                                         </div>
 

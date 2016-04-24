@@ -61,7 +61,7 @@ return [
                  * В представлении используем для вывода ссыок хелпер вида
                  * Url::toRoute(['/blog/category', 'alias' => $category->alias])
                  */
-                'articles/<action:\w+>/<alias:\w+>' => 'blog/<action>',
+                'articles/<action:[\w-]+>/<alias:[\w_-]+>' => 'blog/<action>',//[\w_-]слова,нижн.подч. и тере
                 'articles' => 'blog/index',
 
 

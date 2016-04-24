@@ -32,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--                    ссылка покрывает весь блок-->
                     <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="block-w100-h100"></a>
                     <div class="col-md-7 col-sm-7 col-xs-7">
-                        <a href=""><?= Html::img('@blogImg-web/'.$post->id.'/thumb/'.$post->img, ['alt'=>'нет изображения', 'class'=>'img-selection-horizontal']);?></a>
+                        <a href="">
+                            <?php if(isset($post->img)): ?>
+                            <?php echo Html::img('@blogImg-web/'.$post->id.'/thumb/'.$post->img, ['alt'=>'нет изображения', 'class'=>'img-selection-horizontal']);?>
+                            <?php endif;?>
+                        </a>
                     </div>
                     <div class="col-md-17 col-sm-17 col-xs-17">
                         <div class="textbox-selection-vertical">

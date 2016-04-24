@@ -61,13 +61,16 @@ class BlogCategorisTable extends \yii\db\ActiveRecord
     }
 
     //получаем все посты данной категории. Вызов $obj->PostsFromCategory
-    public function getPostsFromCategory()
+    public function getPostsFromCategory($limit = false, $orderBy = ['createdDate'=> SORT_DESC] )//от новых к старым
     {
-        $res = $this->hasMany(BlogPostsTable::className(), ['id' => 'id_post'])->viaTable('blog_categoris_posts_table', ['id_category' => 'id']);
-        $res->orderBy([
-                                'createdDate'=> SORT_DESC,//от новых к старым
-                                 ])->all();
-        return $res;
+         $res = $this->hasMany(BlogPostsTable::className(), ['id' => 'id_post'])
+                ->viaTable('blog_categoris_posts_table', ['id_category' => 'id'])
+                ->limit($limit)
+                ->orderBy($orderBy)
+                ->all();
+
+         return $res;
+
     }
 
     //получаем данные одной категории.
@@ -78,5 +81,47 @@ class BlogCategorisTable extends \yii\db\ActiveRecord
                                         ])
                                         ->one();
     }
+
+    public function getCategorisPosts()
+    {
+        return $this->hasMany(BlogCategorisPostsTable::className(), ['id_category' => 'id']);
+    }
+
+    //получаем данные одной категории.
+    //жадная загрузка greedy
+    //получить можнов foreach($res as $row) var_dump($row->categorisPosts['0']->blogPost->title);die;
+    public static function greedyOneCategoryFromId($catId, $postsLimit)
+    {
+        return static::find()->where([ 'id' => $catId])
+//                                                    ->orderBy('id')
+                                                    ->with('categorisPosts.blogPost')//через public function getCategorisPosts() и public function getBlogPost()(class BlogCategorisPostsTable)
+                                                    ->limit($postsLimit)
+                                                    ->all();
+
+
+    }
+//lazy
+
+    //получаем данные одной категории.
+    //жадная загрузка greedy
+    //получить можно var_dump($row->categorisPosts['0']->blogPost->title);die;
+    //только у обьекта
+//    public function lazyOneCategoryFromId($andWhere=false, $orderBy = ['createdDate'=> SORT_DESC])//от новых к старым
+//    {
+//        $res = $this->hasMany(BlogPostsTable::className(), ['id' => 'id_post'])
+//                ->viaTable('blog_categoris_posts_table', ['id_category' => 'id']);
+//
+//        if($andWhere && is_array($andWhere))
+//        {
+//            $res->andWhere($andWhere);//['important' => 1]
+//        }
+//
+//        $res->orderBy($orderBy);
+//        $res->all();
+//
+//        return $res;
+//    }
+
+
 
 }

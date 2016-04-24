@@ -43,4 +43,11 @@ class BlogCategorisPostsTable extends \yii\db\ActiveRecord
             'id_category' => 'Id Category',
         ];
     }
+
+    //одна запись в этой таблице имеет одно соответствие в таблице постов
+    public function getBlogPost()
+    {
+        return $this->hasOne(BlogPostsTable::className(), ['id' => 'id_post']);
+    }
+
 }

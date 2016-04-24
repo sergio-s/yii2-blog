@@ -23,6 +23,10 @@ class BaseFront extends Controller
     public $layout = '@app/views/layouts/page/default';
     public $slider = false;
 
+    //временные данные одной категории для вывода в блоках сайдбара и центрального блока
+    public $oneCatBlog;
+    public $dbBlogCatTitlte = false;//во временных блоках заголовок из бд, иначе - что в верстке
+
     /**
      * @inheritdoc
      */
@@ -82,7 +86,12 @@ class BaseFront extends Controller
     public function beforeAction($action)
     {
       //общий для всех тайтл
-        Yii::$app->view->title = Yii::$app->name;
+        Yii::$app->view->title = Yii::$app->name." ";
+
+        //временное сохранение данных категории для заполнения сайдбара и центральных блоков данными 1 категории блога
+        $this->oneCatBlog = \app\models\BlogCategorisTable::find()->where(['id' => 1])->one();
+
+
 
       return parent::beforeAction($action);
     }

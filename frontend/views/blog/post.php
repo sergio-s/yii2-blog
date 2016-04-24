@@ -22,9 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php endif;?>
 
     <?php //echo Html::img('@blogImg-web/'.$model->id.'/thumb/'.$model->img, ['alt'=>'', 'class'=>'gen-img-blogPost']);?>
-    <?php echo Html::img('@blogImg-web/'.$post->id.'/'.$post->img, ['alt'=>'', 'class'=>'gen-img-blogPost']);?>
 
-    <blockquote><p><?=Html::encode($post->description);?></p></blockquote>
+    <?php if(isset($post->img)): ?>
+    <?php echo Html::img('@blogImg-web/'.$post->id.'/'.$post->img, ['alt'=>'', 'class'=>'gen-img-blogPost']);?>
+    <?php endif;?>
+
+<!--    <blockquote><p><?php //echo Html::encode($post->description);?></p></blockquote>-->
     <div>
         <?php echo HtmlPurifier::process($post->content);//чистим контент перед выводом от XSS элементов?>
     </div>

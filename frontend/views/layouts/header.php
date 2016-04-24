@@ -13,7 +13,12 @@ AppAsset::register($this);
                 <div class="container-fluid">
                     <!--полоса с ссылками соцсетей-->
                     <div id="top-line" class="row">
-                        <div class="col-md-8 col-md-offset-15 col-sm-8 col-sm-offset-16 col-xs-21 col-xs-offset-2">
+                        <div class="col-md-3 col-sm-3 col-xs-2">
+                            <!--авторизация по фейсбук и вконтакте-->
+                            <?=$this->render('@app/views/layouts/socloginsmall.php'); ?>
+                        </div>
+
+                        <div class="col-md-8 col-md-offset-12 col-sm-8 col-sm-offset-12 col-xs-20 col-xs-offset-2">
                             <ul id="top-line-boxsoc">
                                 <li id="soc-ico-1"><a href=""><span class="sprite sprite-soc-buttons-top"></span></a></li>
                                 <li id="soc-ico-2"><a href=""><span class="sprite sprite-soc-buttons-top"></span></a></li>
@@ -109,7 +114,7 @@ AppAsset::register($this);
 
                                             <?php //если юзер вошел через соц сеть и есть отметка 	login_soc = '1' ;?>
                                             <img style="width: 20px; height:auto; margin-right: 4px;" src="<?php echo Yii::$app->user->identity->userLoginSocData->photo;?>">
-                                            <small>Привет, <?php echo Yii::$app->user->identity->userLoginSocData->first_name;?> </small>
+                                            <small>Привет, <?php echo Yii::$app->user->identity->userLoginSocData->first_name;?> | </small>
 
                                             <?php else:?>
 
@@ -118,7 +123,7 @@ AppAsset::register($this);
                                             <?php endif;?>
 
                                             <?php if(Yii::$app->user->identity->role == 'admin'):?>
-                                                <a href="<?=Url::to('@web/backend/web');?>"><small>Админ. часть | </small></a>
+                                                <a href="<?=Url::to('@web/backend/web');?>"><small>Админ. часть</small></a> |
                                             <?php endif;?>
 
                                             <?php echo

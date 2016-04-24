@@ -51,10 +51,10 @@ class BlogController extends BaseFront
     public function actionPost($alias = null)
     {
 
-        //передаем тайтл
-        Yii::$app->view->title .= ': пост блога';
-
         $post = BlogPostsTable::getOnePоst($alias);
+
+        //передаем тайтл
+        Yii::$app->view->title .= ': '.$post->title;
 
 
         //будет доступно в layout как $this->params['sidebar']['key']
@@ -75,7 +75,7 @@ class BlogController extends BaseFront
         $currentCategory = BlogCategorisTable::getOneCategory($alias);
 
         //передаем тайтл
-        Yii::$app->view->title .= ": категория блога - '$currentCategory->title' ";
+        Yii::$app->view->title .= " - '$currentCategory->title' ";
 
         //будет доступно в layout как $this->params['sidebar']['key']
         $this->passToSidebar(['blog-categoris' => $this->allCats]);

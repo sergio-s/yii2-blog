@@ -35,7 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php ActiveForm::end(); ?>
 
-
+            <hr>
+            <small>Вход через соц.сеть:</small>
+            <hr>
+            <?= $this->render('soclogin') ?>
+            <hr>
 
 
         </div>
