@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <!---------------------------------Секция вертикальная подборка материалов---------------------------------------------->
 <div class="row selection">
     <div class="col-xs-24  selection-vertical">
-        <!--заголовок-->
+       <!--заголовок-->
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-ph"></span>

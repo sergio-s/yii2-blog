@@ -1191,7 +1191,12 @@ form#subscribe-form button{
     text-align: center;
     padding: 0;
 }
-
+#subscribe-form-soc{
+/*    border-top: 1px #b2b2b2 solid;
+    border-bottom: 1px #b2b2b2 solid;*/
+    height: 46px;
+    padding-left: 0px;
+}
 /*секция - новости*/
 #news-aside{
 

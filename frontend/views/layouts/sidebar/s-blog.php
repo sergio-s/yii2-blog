@@ -6,6 +6,7 @@ use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
 use yii\helpers\BaseStringHelper;
+use rmrevin\yii\ulogin\ULogin;
 
 AppAsset::register($this);
 //var_dump(\Yii::$app->controller->categoryDataBlog);
@@ -67,11 +68,19 @@ AppAsset::register($this);
                                             <div class="col-md-24 block-style-1 block-shadow">
 
                                                 <p class="label-subscribe">Подпишитесь на бесплатную рассылку. Получите в подарок бесплатную версию журнала.</p>
-                                                <form id="subscribe-form" role="form" class="">
-<!--                                                    <label for="exampleInput"></label>-->
-                                                    <input type="email" class="" placeholder="Введите ваш email">
-                                                    <button type="submit" class="">Отправить</button>
-                                                </form>
+                                                <div class="row">
+                                                    <div class="col-md-18">
+                                                        <form id="subscribe-form" role="form" class="">
+        <!--                                                    <label for="exampleInput"></label>-->
+                                                            <input type="email" class="" placeholder="Введите ваш email">
+                                                            <button type="submit" class="">Отправить</button>
+                                                        </form>
+                                                    </div>
+                                                    <div id="subscribe-form-soc" class="col-md-6">
+                                                        <!--авторизация по фейсбук и вконтакте-->
+                                                        <?=$this->render('@app/views/layouts/socloginmedium.php',['display' => ULogin::D_PANEL]); ?>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 

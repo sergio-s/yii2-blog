@@ -7,7 +7,8 @@ use rmrevin\yii\ulogin\ULogin;
 <?php
 echo ULogin::widget([
     // widget look'n'feel
-    'display' => ULogin::D_PANEL,//D_PANEL D_SMALL
+    'display' => isset($display) ? $display : ULogin::D_PANEL,//D_PANEL D_SMALL D_WINDOW
+
 
     // required fields
     'fields' => [   ULogin::F_FIRST_NAME,
@@ -28,7 +29,7 @@ echo ULogin::widget([
 //                    ULogin::P_TWITTER,
 //                    ULogin::P_GOOGLE,
 //                    ULogin::P_ODNOKLASSNIKI
-        ],
+    ],
 
     // login providers that are shown when user clicks on additonal providers button
     'hidden' => [],

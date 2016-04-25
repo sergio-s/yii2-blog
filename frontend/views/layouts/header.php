@@ -15,7 +15,7 @@ AppAsset::register($this);
                     <div id="top-line" class="row">
                         <div class="col-md-3 col-sm-3 col-xs-2">
                             <!--авторизация по фейсбук и вконтакте-->
-                            <?=$this->render('@app/views/layouts/socloginsmall.php'); ?>
+                            <?=$this->render('@app/views/layouts/socloginmedium.php'); ?>
                         </div>
 
                         <div class="col-md-8 col-md-offset-12 col-sm-8 col-sm-offset-12 col-xs-20 col-xs-offset-2">
