@@ -7,21 +7,10 @@ use frontend\assets\AppAsset;
 use yii\helpers\Url;
 use yii\helpers\BaseStringHelper;
 use rmrevin\yii\ulogin\ULogin;
+use common\widgets\subscription\SubscriptionWidget;
 
 AppAsset::register($this);
-//var_dump(\Yii::$app->controller->categoryDataBlog);
-//foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory('2') as $category)
-//{
-//    print_r($category->h1."<br>");
-//
-////    foreach($category->categorisPosts as $post)
-////    {
-////        var_dump($post->blogPost);
-////        //die;
-////    }
-//    //var_dump($category->categorisPosts);die;
-//   //echo $row->categorisPosts['0']->blogPost->title;
-//}
+
 ?>
 <aside class="col-md-8 col-md-offset-1 visible-lg visible-md">
 
@@ -69,17 +58,7 @@ AppAsset::register($this);
 
                                                 <p class="label-subscribe">Подпишитесь на бесплатную рассылку. Получите в подарок бесплатную версию журнала.</p>
                                                 <div class="row">
-                                                    <div class="col-md-18">
-                                                        <form id="subscribe-form" role="form" class="">
-        <!--                                                    <label for="exampleInput"></label>-->
-                                                            <input type="email" class="" placeholder="Введите ваш email">
-                                                            <button type="submit" class="">Отправить</button>
-                                                        </form>
-                                                    </div>
-                                                    <div id="subscribe-form-soc" class="col-md-6">
-                                                        <!--авторизация по фейсбук и вконтакте-->
-                                                        <?=$this->render('@app/views/layouts/socloginmedium.php',['display' => ULogin::D_PANEL]); ?>
-                                                    </div>
+                                                    <?=$this->render('@app/views/layouts/sidebar/common/subscribe.php'); ?>
                                                 </div>
                                             </div>
                                         </div>

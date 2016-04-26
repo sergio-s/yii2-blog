@@ -1,5 +1,19 @@
 <?php
-
+//изменения в php.ini
+//memory_limit = 128M поменял на (256M переставил обратно)
+//
+//post_max_size = 40M
+//upload_max_filesize = 35M
+//max_execution_time=100 место 30
+//max_input_time = 100
+//
+//а также в нужно настроить тут /etc/php5/cgiphp.ini на удаленном сервере
+//post_max_size = 40M
+//upload_max_filesize = 35M
+//max_execution_time=100 место 30
+//max_input_time = 100
+//
+//а также тут \\\Secure FTP\_Quick Connection\etc\php5\cli\
 use \yii\web\Request;
 
 $baseUrl = str_replace('/frontend/web', '', (new Request)->getBaseUrl());
@@ -43,7 +57,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'error/error',
         ],
 //'urlManagerBackend' => require('../../backend/config/main.php'),
         'urlManager' => [

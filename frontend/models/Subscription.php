@@ -28,10 +28,14 @@ class Subscription extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_user'], 'integer'],
-            [['email', 'actionDate'], 'required'],
+
+            ['email', 'unique'],
+            ['email', 'email'],
+            [['id_user'], 'safe'],
             [['actionDate'], 'safe'],
-            [['email'], 'string', 'max' => 255],
+            [['actionDate', 'email'], 'required'],
+
+
         ];
     }
 

@@ -315,4 +315,60 @@ class SiteController extends BaseFront
             'model' => $model,
         ]);
     }
+
+       /**
+     *@return mixed
+     *  обработка формы отправки почты из формы подписки
+     */
+    public function actionSubscription()
+    {
+
+            $model = new MyModel();
+    if ($this->modelSubscription->load(Yii::$app->request->post()) && $model->save()) {
+        if (!Yii::$app->request->isPjax) {
+//            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+    }
+
+    return $this->render('create', [
+        'model' => $model,
+    ]);
+//        //передаем тайтл
+//        Yii::$app->view->title .= ': контакты';
+//
+//        $model = new ContactForm();
+//        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+//            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+//                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+//            } else {
+//                Yii::$app->session->setFlash('error', 'There was an error sending email.');
+//            }
+//
+//            return $this->refresh();
+//        } else {
+//            return $this->render('contact', [
+//                'model' => $model,
+//            ]);
+//        }
+
+
+
+//        if (Yii::$app->request->isPost and Yii::$app->request->isPjax ) {
+//               //return //$this->redirect(Yii::$app->request->referrer);
+//               Yii::$app->response->getHeaders()->set('X-PJAX-Url',Yii::$app->request->referrer);
+//
+//$videoId = Yii::$app->request->post('videoId');
+
+//            $videoId = Yii::$app->request->post('videoId');
+//            if($videoId != NULL)
+//            {
+//                $aktiveVideo = Video::findOne($videoId);
+//
+//            }
+//        }
+
+    }
+
+
 }

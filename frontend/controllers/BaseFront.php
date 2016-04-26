@@ -27,6 +27,9 @@ class BaseFront extends Controller
     public $oneCatBlog;
     public $dbBlogCatTitlte = false;//во временных блоках заголовок из бд, иначе - что в верстке
 
+   
+
+
     /**
      * @inheritdoc
      */
@@ -95,6 +98,8 @@ class BaseFront extends Controller
 
       return parent::beforeAction($action);
     }
+
+
 
 }
 

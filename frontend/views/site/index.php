@@ -5,6 +5,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\BaseStringHelper;
+use rmrevin\yii\ulogin\ULogin;
+use common\widgets\subscription\SubscriptionWidget;
 
 ?>
 
@@ -120,11 +122,15 @@ use yii\helpers\BaseStringHelper;
             <div class="col-md-24 block-style-1 block-shadow">
 
                 <p class="label-subscribe">Подпишитесь на бесплатную рассылку. Получите в подарок бесплатную версию журнала.</p>
-                <form id="subscribe-form" role="form" class="">
-                    <!--                                                    <label for="exampleInput"></label>-->
+<!--                <form id="subscribe-form" role="form" class="">
+                                                                        <label for="exampleInput"></label>
                     <input type="email" class="" placeholder="Введите ваш email">
                     <button type="submit" class="">Отправить</button>
-                </form>
+                </form>-->
+                <div class="row">
+                    <?php echo $this->render('@app/views/layouts/sidebar/common/subscribe.php'); ?>
+                </div>
+
             </div>
         </div>
 

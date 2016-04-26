@@ -6,9 +6,12 @@ use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
 use yii\helpers\BaseStringHelper;
+use rmrevin\yii\ulogin\ULogin;
+use common\widgets\subscription\SubscriptionWidget;
 
 AppAsset::register($this);
 ?>
+
 <aside class="col-md-8 col-md-offset-1 visible-lg visible-md">
 
                                 <!--секция - подписаться-->
@@ -24,13 +27,10 @@ AppAsset::register($this);
                                         <!--контент-->
                                         <div class="row">
                                             <div class="col-md-24 block-style-1 block-shadow">
-
                                                 <p class="label-subscribe">Подпишитесь на бесплатную рассылку. Получите в подарок бесплатную версию журнала.</p>
-                                                <form id="subscribe-form" role="form" class="">
-<!--                                                    <label for="exampleInput"></label>-->
-                                                    <input type="email" class="" placeholder="Введите ваш email">
-                                                    <button type="submit" class="">Отправить</button>
-                                                </form>
+                                                <div class="row">
+                                                    <?=$this->render('@app/views/layouts/sidebar/common/subscribe.php'); ?>
+                                                </div>
                                             </div>
                                         </div>
 

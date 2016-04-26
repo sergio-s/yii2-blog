@@ -20,7 +20,7 @@ use yii\helpers\FileHelper;
  */
 class BlogController extends Controller
 {
-    
+
 
     public function behaviors()
     {
@@ -126,13 +126,14 @@ class BlogController extends Controller
 
                     if($model->file->saveAs($pathToBig))
                     {
+                        
                         //превью
                         Image::thumbnail($pathToBig, 406, 324)->save($pathToThumb, ['quality' => 100]);
                         sleep(1);
 
                         //ресайз большой картинки
-                        Image::thumbnail($pathToBig, 1084, 864)->save($pathToBig, ['quality' => 100]);
-
+                        Image::thumbnail($pathToBig, 1084, 864)->save($pathToBig, ['quality' => 90]);
+                        sleep(1);
 
                         return $this->redirect(['view', 'id' => $model->id]);
                     }
@@ -222,13 +223,14 @@ class BlogController extends Controller
 
                         if($model->file->saveAs($pathToBig))
                         {
+
                             //превью
                             Image::thumbnail($pathToBig, 406, 324)->save($pathToThumb, ['quality' => 100]);
                             sleep(1);
 
                             //ресайз большой картинки
-                            Image::thumbnail($pathToBig, 1084, 864)->save($pathToBig, ['quality' => 100]);
-
+                            Image::thumbnail($pathToBig, 1084, 864)->save($pathToBig, ['quality' => 90]);
+                            sleep(1);
 
                             return $this->redirect(['view', 'id' => $model->id]);
                         }
