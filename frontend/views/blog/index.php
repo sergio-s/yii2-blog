@@ -4,11 +4,14 @@ use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 use yii\helpers\BaseStringHelper;
+use yii\widgets\LinkPager;//для пагинации
 
 
 //$this->title = 'Страницы сайта';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $h1;
 ?>
+
+
 
 <!---------------------------------Секция вертикальная подборка материалов---------------------------------------------->
 <div class="row selection">
@@ -17,12 +20,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-ph"></span>
-                <h3 class="h3-selection b-dash-light-red"><?= Html::encode($this->title) ?></h3>
+                <h3 class="h3-selection b-dash-light-red"><?= Html::encode($h1) ?><small><?=($pageNum) ? " ( стр.-{$pageNum} )" : null; ?></small></h3>
 <!--                <p class="h3-control">
                     <a class="control-but">Смотреть все</a>
                 </p>-->
             </div>
         </div>
+
+        <div id="pagination-box">
+            <?= LinkPager::widget(['pagination' => $pagination, 'hideOnSinglePage' => true]) ?>
+        </div>
+
         <div class="row">
             <!--материалы -->
 <?php foreach($posts as $post): ?>
@@ -54,4 +62,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php endforeach; ?>
         </div>
     </div>
+</div>
+
+<div id="pagination-box">
+    <?= LinkPager::widget(['pagination' => $pagination, 'hideOnSinglePage' => true]) ?>
 </div>

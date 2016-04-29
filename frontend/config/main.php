@@ -57,7 +57,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'error/error',
+            'errorAction' => 'error/error',//контроллер и экшэн обработки ошибок
         ],
 //'urlManagerBackend' => require('../../backend/config/main.php'),
         'urlManager' => [
@@ -75,7 +75,9 @@ return [
                  * В представлении используем для вывода ссыок хелпер вида
                  * Url::toRoute(['/blog/category', 'alias' => $category->alias])
                  */
-                'articles/<action:[\w-]+>/<alias:[\w_-]+>' => 'blog/<action>',//[\w_-]слова,нижн.подч. и тере
+                'articles/category/<alias:[\w_-]+>/<pageNum:\d+>' => 'blog/category',//категория по алиасу с цифрой страницы пагинации(articles/category/cat1/2)
+                'articles/<action:[\w-]+>/<alias:[\w_-]+>' => 'blog/<action>',//пост по алиасу(articles/post/cdscdsc), категория по алиасу(articles/category/cat1)
+                'articles/<pageNum:\d+>' => 'blog/index',//пагинация блога
                 'articles' => 'blog/index',
 
 
@@ -86,8 +88,8 @@ return [
             'translations' => [
                 'app*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    //'basePath' => '@app/messages',
-                    //'sourceLanguage' => 'en-US',
+//                    'basePath' => '@app/messages',
+//                    'sourceLanguage' => 'ru-RU',
                     'fileMap' => [
                         'app' => 'app.php',
                         'app/error' => 'error.php',

@@ -5,12 +5,8 @@
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
-use yii\helpers\BaseStringHelper;
-use rmrevin\yii\ulogin\ULogin;
-use common\widgets\subscription\SubscriptionWidget;
 
 AppAsset::register($this);
-
 ?>
 <aside class="col-md-8 col-md-offset-1 visible-lg visible-md">
 
@@ -57,9 +53,11 @@ AppAsset::register($this);
                                             <div class="col-md-24 block-style-1 block-shadow">
 
                                                 <p class="label-subscribe">Подпишитесь на бесплатную рассылку. Получите в подарок бесплатную версию журнала.</p>
-                                                <div class="row">
-                                                    <?php echo $this->render('@app/views/layouts/sidebar/common/subscribe.php'); ?>
-                                                </div>
+                                                <form id="subscribe-form" role="form" class="">
+<!--                                                    <label for="exampleInput"></label>-->
+                                                    <input type="email" class="" placeholder="Введите ваш email">
+                                                    <button type="submit" class="">Отправить</button>
+                                                </form>
                                             </div>
                                         </div>
 
@@ -73,10 +71,7 @@ AppAsset::register($this);
                                         <div class="row">
                                             <div class="h3-box-selection">
                                                 <span class="sprite sprite-circle-bell"></span>
-                                                <h3 class="h3-selection b-dash-light-yellow">
-                                                    <!--Новости-->
-                                                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Новости'; ?>
-                                                </h3>
+                                                <h3 class="h3-selection b-dash-light-yellow">Новости</h3>
                                                 <p class="h3-control">
                                                     <a class="control-but">Все</a>
                                                 </p>
@@ -85,32 +80,24 @@ AppAsset::register($this);
                                         <!--контент-->
                                         <div class="row">
                                             <!--1-->
+                                            <div class="col-md-24 block-style-1 block-shadow m-b-10 hover-horder"><!-- отступы блоков m-b-10 -->
 
-                                            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '4') as $post):?>
-                                                <div class="col-md-24 block-style-1 block-shadow m-b-10 hover-horder"><!-- отступы блоков m-b-10 -->
-                                                    <div class="news-aside-content">
-                                                        <div>
-                                                            <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>">
-                                                                <?php if(isset($post->img)): ?>
-                                                                    <?php echo Html::img('@blogImg-web/'.$post->id.'/thumb/'.$post->img, ['alt'=>'нет изображения', 'class'=>'']);?>
-                                                                <?php else:?>
-                                                                    <?= Html::img('@blogImg-web/default.jpg', ['alt'=>'нет картинки', 'class'=>'']);?>
-                                                                <?php endif;?>
-                                                            </a>
-                                                        </div>
-                                                        <div>
-                                                            <small><a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>"><?= Html::encode($post->title); ?></a></small>
-                                                            <p><?=BaseStringHelper::truncateWords(strip_tags($post->content), 5, $suffix = '...' );?></p>
-                                                        </div>
+                                                <div class="news-aside-content">
+                                                    <div>
+                                                        <a href=""><?= Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
+                                                    </div>
+                                                    <div>
+                                                        <small><a href="">Заголовок</a></small>
+                                                        <p  >Какой-то текст (описание). Какой-то текст ..</p>
                                                     </div>
                                                 </div>
-                                            <?php endforeach;?>
-<!--                                            2
+                                            </div>
+                                            <!--2-->
                                             <div class="col-md-24 block-style-1 block-shadow m-b-10 hover-horder">
 
                                                 <div class="news-aside-content">
                                                     <div>
-                                                        <a href=""><?php //echo Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
+                                                        <a href=""><?= Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
                                                     </div>
                                                     <div>
                                                         <small><a href="">Заголовок</a></small>
@@ -118,12 +105,12 @@ AppAsset::register($this);
                                                     </div>
                                                 </div>
                                             </div>
-                                            3
-                                            <div class="col-md-24 block-style-1 block-shadow m-b-10 hover-horder"> отступы блоков m-b-10
+                                            <!--3-->
+                                            <div class="col-md-24 block-style-1 block-shadow m-b-10 hover-horder"><!-- отступы блоков m-b-10 -->
 
                                                 <div class="news-aside-content">
                                                     <div>
-                                                        <a href=""><?php //echo Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
+                                                        <a href=""><?= Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
                                                     </div>
                                                     <div>
                                                         <small><a href="">Заголовок</a></small>
@@ -131,19 +118,19 @@ AppAsset::register($this);
                                                     </div>
                                                 </div>
                                             </div>
-                                            4
-                                            <div class="col-md-24 block-style-1 block-shadow hover-horder"> отступы блоков m-b-10
+                                            <!--4-->
+                                            <div class="col-md-24 block-style-1 block-shadow hover-horder"><!-- отступы блоков m-b-10 -->
 
                                                 <div class="news-aside-content">
                                                     <div>
-                                                        <a href=""><?php //echo Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
+                                                        <a href=""><?= Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?></a>
                                                     </div>
                                                     <div>
                                                         <small><a href="">Заголовок</a></small>
                                                         <p  >Какой-то текст (описание). Какой-то текст ..</p>
                                                     </div>
                                                 </div>
-                                            </div>-->
+                                            </div>
 
                                         </div>
 

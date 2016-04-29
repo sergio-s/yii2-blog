@@ -6,7 +6,7 @@ use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 //$this->title = 'Страницы сайта';
 $this->params['breadcrumbs'][] = array('label'=> 'Все посты', 'url'=> Url::toRoute('/blog/index'));
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = Html::encode($post->h1);
 ?>
 
 <div class="blog-post">

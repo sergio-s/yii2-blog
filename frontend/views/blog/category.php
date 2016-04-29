@@ -4,10 +4,11 @@ use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 use yii\helpers\BaseStringHelper;
+use yii\widgets\LinkPager;//для пагинации
 
 //$this->title = 'Страницы сайта';
 $this->params['breadcrumbs'][] = array('label'=> 'Все посты', 'url'=>Url::toRoute('/blog/index'));
-$this->params['breadcrumbs'][] = Html::encode($currentCategory->h1);
+$this->params['breadcrumbs'][] = Html::encode($h1);
 ?>
 <!---------------------------------Секция вертикальная подборка материалов---------------------------------------------->
 <!--все материалы категории-->
@@ -17,15 +18,20 @@ $this->params['breadcrumbs'][] = Html::encode($currentCategory->h1);
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-ph"></span>
-                <h3 class="h3-selection b-dash-light-red">Категория "<?= Html::encode($currentCategory->h1) ?>"</h3>
+                <h3 class="h3-selection b-dash-light-red">Категория: "<?= Html::encode($h1) ?>"<small><?=($pageNum) ? " ( стр.-{$pageNum} )" : null; ?></small></h3>
 <!--                <p class="h3-control">
                     <a class="control-but">Смотреть все</a>
                 </p>-->
             </div>
         </div>
+
+        <div id="pagination-box">
+            <?= LinkPager::widget(['pagination' => $pagination, 'hideOnSinglePage' => true]) ?>
+        </div>
+
         <div class="row">
             <!--материалы -->
-<?php foreach($currentCategory->postsFromCategory as $post): ?>
+<?php foreach($posts as $post): ?>
             <!--1-->
             <div class="col-md-24 col-sm-24 col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
                 <div class="row box-block-w100-h100">
@@ -54,4 +60,8 @@ $this->params['breadcrumbs'][] = Html::encode($currentCategory->h1);
 <?php endforeach; ?>
         </div>
     </div>
+</div>
+
+<div id="pagination-box">
+    <?= LinkPager::widget(['pagination' => $pagination, 'hideOnSinglePage' => true]) ?>
 </div>

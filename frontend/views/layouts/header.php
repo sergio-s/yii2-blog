@@ -5,6 +5,7 @@
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
+use common\widgets\subscription\SubscriptionWidget;
 
 AppAsset::register($this);
 ?>
@@ -92,12 +93,13 @@ AppAsset::register($this);
                                         <!--email показывается только гостей-->
                                         <?php if (Yii::$app->user->isGuest): ?>
                                         <div id="email-action-box" class="col-md-10 hidden-sm hidden-xs">
-                                            <form id="search-form" role="form" class="">
+<!--                                            <form id="search-form" role="form" class="">
 
                                                     <input type="email" class="" placeholder="Введите ваш email">
                                                     <button type="submit" class="">Подписаться</button>
 
-                                            </form>
+                                            </form>-->
+                                            <?php echo SubscriptionWidget::widget(['widget_id' => 'SubscriptionHeader', 'modelName' => 'SubscriptionHeader', 'wView' => 'header']) ?>
                                         </div>
 
 

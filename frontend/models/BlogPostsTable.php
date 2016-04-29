@@ -58,10 +58,11 @@ class BlogPostsTable extends \yii\db\ActiveRecord
     public static function getAllPosts($sort = SORT_DESC)
     {
 
-        $obj = self::find()
-                        ->orderBy([
-                                'createdDate'=>$sort,
-                                 ])->all();
+        $obj = self::find()->orderBy([
+                                        'createdDate'=>$sort,
+                                     ]);
+
+        $obj->all();
 
         return $obj;
 

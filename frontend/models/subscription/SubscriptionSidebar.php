@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\subscription;
 
 use Yii;
 
@@ -12,7 +12,7 @@ use Yii;
  * @property string $email
  * @property string $actionDate
  */
-class Subscription extends \yii\db\ActiveRecord
+class SubscriptionSidebar extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -29,11 +29,11 @@ class Subscription extends \yii\db\ActiveRecord
     {
         return [
 
-            ['email', 'unique'],
-            ['email', 'email'],
-            [['id_user'], 'safe'],
-            [['actionDate'], 'safe'],
+
+            [['id_user','actionDate'], 'safe'],
             [['actionDate', 'email'], 'required'],
+            ['email', 'email'],
+            ['email', 'unique', 'message' => 'Этот email уже зарегестрирован'],
 
 
         ];
@@ -51,4 +51,12 @@ class Subscription extends \yii\db\ActiveRecord
             'actionDate' => Yii::t('app', 'Action Date'),
         ];
     }
+
+    public function afterSave($insert, $changedAttributes){
+        parent::afterSave($insert, $changedAttributes);
+
+        //... тут ваш код
+
+    }
+
 }

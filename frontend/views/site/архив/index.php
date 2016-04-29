@@ -5,8 +5,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\BaseStringHelper;
-use rmrevin\yii\ulogin\ULogin;
-use common\widgets\subscription\SubscriptionWidget;
 
 ?>
 
@@ -122,22 +120,11 @@ use common\widgets\subscription\SubscriptionWidget;
             <div class="col-md-24 block-style-1 block-shadow">
 
                 <p class="label-subscribe">Подпишитесь на бесплатную рассылку. Получите в подарок бесплатную версию журнала.</p>
-<!--                <form id="subscribe-form" role="form" class="">
-                                                                        <label for="exampleInput"></label>
+                <form id="subscribe-form" role="form" class="">
+                    <!--                                                    <label for="exampleInput"></label>-->
                     <input type="email" class="" placeholder="Введите ваш email">
                     <button type="submit" class="">Отправить</button>
-                </form>-->
-                <div class="row">
-                    <!--форма подписки-->
-                    <div class="col-md-18 col-sm-20 col-xs-18">
-                        <?php echo SubscriptionWidget::widget(['widget_id' => 'SubscriptionIndex', 'modelName' => 'SubscriptionIndex', 'wView' => 'index']) ?>
-                    </div>
-                    <div id="subscribe-form-soc" class="col-md-6 col-sm-4 col-xs-6">
-                        <!--авторизация по фейсбук и вконтакте-->
-                        <?= $this->render('@app/views/layouts/socloginmedium.php', ['display' => ULogin::D_PANEL]); ?>
-                    </div>
-                </div>
-
+                </form>
             </div>
         </div>
 

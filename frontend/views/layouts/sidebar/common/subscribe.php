@@ -19,8 +19,8 @@ AppAsset::register($this);
             <button type="submit" class="">Отправить</button>
         </form>-->
 
-<?= __LINE__?>
-    <?php echo SubscriptionWidget::widget(['widget_id' => 'Subscription_default']) ?>
+
+    <?php echo SubscriptionWidget::widget(['widget_id' => 'SubscriptionSidebar', 'modelName' => 'SubscriptionSidebar', 'wView' => 'sidebar']) ?>
 
 </div>
 <div id="subscribe-form-soc" class="col-md-6 col-sm-4 col-xs-6">

@@ -1,10 +1,8 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+use yii\helpers\Html;
+use yii\helpers\Url;
+use common\widgets\subscription\SubscriptionWidget;
 ?>
             <footer class="container-fluid">
 
@@ -67,16 +65,17 @@
                             <section id="send-emale" class="block-linkbox-footer">
                                 <div>
                                     <h5 class="h5-block-linkbox-footer">Отправить письмо</h5>
-                                    <form id="email-form" role="form" class="">
+<!--                                    <form id="email-form" role="form" class="">
                                         <input type="email" class="" placeholder="Введите ваш email">
                                         <div id="check-footer-wrap">
                                             <label>
                                                 <input id="check-footer" type="checkbox" name="check" value="check2">
                                                 <span>Если вы согласны с условиями сайта,то нужно отметить поле.Прочитаейте сначала правила - <a href="">правила</a></span>
                                             </label>
-
+                                        </div>
                                             <button type="submit" class=""><i class="sprite sprite-botton-arrow-for-input"></i></button>
-                                    </form>
+                                    </form>-->
+                                    <?php echo SubscriptionWidget::widget(['widget_id' => 'SubscriptionFooter', 'modelName' => 'SubscriptionFooter', 'wView' => 'footer']) ?>
 
                                     <div id="footer-boxsoc-wrap">
                                         <h5 class="h5-block-linkbox-footer">Соц.сети</h5>
