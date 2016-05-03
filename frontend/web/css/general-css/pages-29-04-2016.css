@@ -662,25 +662,6 @@ li{
 a{
     outline: none !important; /* Убираем границу вокруг ссылок  */
 }
-
-/*Убираем рамку вокруг ссылок*/
-:focus {
-	outline: none !important;
-}
-
-/*Убираем рамку вокруг кнопок*/
-button::-moz-focus-inner,
-input[type="reset"]::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
-input[type="file"] > input[type="button"]::-moz-focus-inner {/* */
-	border: none;
-}
-
-
-
-
 /*
 ========================================================================================================
                                                                                         header
@@ -827,23 +808,12 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {/* */
     position: relative;
     padding-right: 96px;
 }
-        /*для переопр. стилей bootstrap*/
-        #email-action-box .form-control{
-            color: #868686 !important;
-            box-shadow: none;
-        }
-        #email-action-box .form-control::-moz-placeholder{
-            color: #b2b2b2 !important;
-        }
-        /*------------------------------*/
 #email-action-box form input{
     float: left;
     width: 100%;
-    text-indent: 6px;
-    font-size: 13px;
-    color: #b2b2b2 !important;
+    text-indent: 10px;
 }
-#email-action-box form button{
+#email-action-box button{
     font-family: 'Conv_Lato-Regular';
     width: 96px;
     position: absolute;
@@ -1221,26 +1191,14 @@ form.subscribe-form button{
     text-align: center;
     padding: 0;
 }
-        /*используется в форме ActiveForm::begin Yii2*/
-        form.subscribe-form .form-control{
-            border-radius: 0;
-            text-indent: 0;
-            padding-left:5px;
+/*используется в форме ActiveForm::begin Yii2*/
+form.subscribe-form .form-control{
+    border-radius: 0;
+    text-indent: 0;
+    padding-left:5px;
 
-        }
-        .subscribe-form .form-control:focus {
-            border-color: #66afe9 !important;
-        }
-
-        .subscribe-form .has-error .form-control {
-            border-color: #a94442 !important;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset !important;
-        }
-        .subscribe-form .has-error .form-control:focus {
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 6px #ce8483 !important;
-        }
-
-        /*используется в форме ActiveForm::begin Yii2*/
+}
+/*используется в форме ActiveForm::begin Yii2*/
 form.subscribe-form .help-block{
     margin: 0;
     font-size: 80%;
@@ -1524,74 +1482,22 @@ form.subscribe-form .help-block{
 }
 /*//////////////////////////////////////////////////////////////////////////////*/
 /*форма в footer*/
-.email-form{
+#email-form{
     position: relative;
     max-width: 240px;
     margin-top: 10px;
 }
 
-        /*стили bootstrap*/
-        .email-form .form-control {
-            border-radius: 0;
-            box-shadow: none;
-            border: 1px #b3b3b3 solid !important;
-            color: #555;
-            display: block;
-            font-family: 'Conv_Lato-Light';
-            font-size: 13px;
-            padding: 6px 12px;
-            transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-            width: 100%;
-
-        }
-
-        .email-form .form-control:focus {
-            border-color: #66afe9 !important;
-        }
-
-        .email-form .has-error .form-control {
-            border-color: #a94442 !important;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset !important;
-        }
-        .email-form .has-error .form-control:focus {
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 6px #ce8483 !important;
-        }
-
-        .email-form .form-group {
-            margin-bottom: 0;
-        }
-        .email-form .help-block{
-            font-size: 13px;
-            margin:0;
-        }
-        .email-form .form-control{
-            color: #868686 !important;
-            box-shadow: none;
-        }
-        .email-form .form-control::-moz-placeholder{
-            color: #b2b2b2 !important;
-        }
-
-        /*конец - стили bootstrap*/
-.email-form  input[type="text"]{
+#email-form  input[type="email"]{
 /*    float: left;*/
     width: 100%;
     height: 35px;
-/*    border: 1px #b3b3b3 solid !important;*/
+    border: 1px #b3b3b3 solid;
+    text-indent: 0;
     padding-right: 36px;
     padding-left: 20px;
-    font-family: 'Conv_Lato-Light';
-    font-size: 13px;
-    color: #868686 !important;
-    border: 1px #d1d1d1 solid;
-    text-indent: 0px;
 }
-.email-form  input[type="text"]::-webkit-input-placeholder {color:#b2b2b2 !important;}
-.email-form  input[type="text"]::-moz-placeholder          {color:#b2b2b2 !important;}/* Firefox 19+ */
-.email-form  input[type="text"]:-moz-placeholder           {color:#b2b2b2 !important;}/* Firefox 18- */
-.email-form  input[type="text"]:-ms-input-placeholder      {color:#b2b2b2 !important;}
-
-.email-form button{
+#email-form button{
     position: absolute;
     right: 13px;
     top:0%;
@@ -1613,7 +1519,7 @@ form.subscribe-form .help-block{
 
 
 
-.email-form button i{
+#email-form button i{
     position: relative;
     top:-5px;
     left:-3px;
@@ -1623,51 +1529,32 @@ form.subscribe-form .help-block{
     overflow: hidden;
     padding-top: 10px;
 }
-#check-footer {
-    float: left;
-    overflow: hidden;
-}
-#check-footer input{
+#check-footer{
     border:none;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
     color: #d1d1d1;
     width: 13px;
     height: 13px;
     padding: 0;
+    margin:0;
+    vertical-align: middle;
     position: relative;
-    top:-2px;
-    overflow: hidden;
+    top: -1px;
+    *overflow: hidden;
     outline: none; /* Убираем границу вокруг ссылок  */
-
 }
-        /*стили bootstrap*/
-        #check-footer-wrap .has-error{
-            width: 100%;
-            display: block;
-        }
 
-        #check-footer-wrap .has-error input{
-            float: left;
-
-        }
-
-        #check-footer .help-block-error{
-            padding-left: 18px;
-        }
-
-/*#check-footer-wrap label{
+#check-footer-wrap label{
     display: block;
     padding-left: 15px;
     text-indent: -15px;
     font-size: 12px;
     line-height: 120%;
-}*/
-#check-footer-wrap #prop{
+}
+#check-footer-wrap label span{
 /*    font-family: Tahoma;*/
-/*    display: block;*/
     font-family: 'Conv_Lato-Light';
     font-size: 11px;
-    padding:0 0 0 18px;
 }
 
 #check-footer-wrap label a{
