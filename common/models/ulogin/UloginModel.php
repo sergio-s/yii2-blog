@@ -3,7 +3,7 @@ namespace common\models\ulogin;
 
 use Yii;
 use yii\base\Model;
-
+use common\models\User;
 /**
  * Login form
  */
@@ -105,6 +105,7 @@ class UloginModel extends Model
             $user->username = $this->uloginUser->first_name.' '.$this->uloginUser->last_name;
             $user->email = $this->uloginUser->email;
             $user->setPassword($this->uloginUser->uid);
+            $user->role = User::ROLE_USER;//из перечня групп в console\controllers\RbacController
             $user->signup_tupe = 'soc';//устанавливаем тип регистрации юзера 'soc', по умолчанию 'site'
             $user->generateAuthKey();
             $user->save();
@@ -115,8 +116,13 @@ class UloginModel extends Model
             $this->uloginUser->	login_soc = '1';//с этой соц.сетью выполнен текущий (последний) логин
             $this->uloginUser->save();
 
+            // добавление роли user для зарегестрировавшегося
+            $auth = Yii::$app->authManager;
+            $userRole = $auth->getRole(User::ROLE_USER);
+            $auth->assign($userRole, $user->getId());
 
-        return Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);
+
+            return Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);
 
 
         }

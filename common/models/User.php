@@ -26,6 +26,12 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
+    const ROLE_ADMIN = 'admin';
+    const ROLE_MODERATOR = 'moderator';
+    const ROLE_USER = 'user';
+
+    const PERMISSION_ADMIN_CRUD = 'adminCrud';
+
     /**
      * @var array EAuth attributes для входа через соцсети
      */
@@ -57,6 +63,20 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+        ];
+    }
+
+    /**
+     * Возвращает массив всех доступных ролей.
+     * @return array
+     * Используется для AuthManager в конфигурации приложения 'defaultRoles' => \common\models\User::roleArray(),
+     */
+    static public function roleArray()
+    {
+        return [
+            self::ROLE_ADMIN,
+            self::ROLE_MODERATOR,
+            self::ROLE_USER,
         ];
     }
 

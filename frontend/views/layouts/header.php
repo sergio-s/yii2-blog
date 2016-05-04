@@ -6,10 +6,21 @@ use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
 use common\widgets\subscription\SubscriptionWidget;
+use common\models\User;
 
 AppAsset::register($this);
 ?>
-
+<?php
+    if (!Yii::$app->user->isGuest){
+        echo \Yii::$app->user->identity->role;
+    }
+    if(\Yii::$app->user->can(User::ROLE_ADMIN)){
+        echo "ROLE_ADMIN";
+    }
+    if(\Yii::$app->user->can(User::ROLE_USER)){
+        echo "ROLE_USER";
+    }
+?>
             <header>
                 <div class="container-fluid">
                     <!--полоса с ссылками соцсетей-->
@@ -55,7 +66,7 @@ AppAsset::register($this);
 
                                                 <?php endif;?>
 
-                                                <?php if(Yii::$app->user->identity->role == 'admin'):?>
+                                                <?php if(Yii::$app->user->identity->role == User::ROLE_ADMIN && Yii::$app->user->can(User::ROLE_ADMIN)):?>
                                                     <a href="<?=Url::to('@web/backend/web');?>"><small>Админ. часть</small></a>
                                                 <?php endif;?>
 
@@ -124,7 +135,7 @@ AppAsset::register($this);
 
                                             <?php endif;?>
 
-                                            <?php if(Yii::$app->user->identity->role == 'admin'):?>
+                                            <?php if(Yii::$app->user->identity->role == User::ROLE_ADMIN && Yii::$app->user->can(User::ROLE_ADMIN)):?>
                                                 <a href="<?=Url::to('@web/backend/web');?>"><small>Админ. часть</small></a> |
                                             <?php endif;?>
 
@@ -172,4 +183,8 @@ AppAsset::register($this);
 //    if (isset($identity->profile)) {
 //        \yii\helpers\VarDumper::dump($identity->profile, 10, true);
 //    }
+
+
+
+
 ?>
