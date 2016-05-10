@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = 'Обновить';
         'model' => $model,
         'categoris_name' => $categoris_name,
         'perent_categoris' => $perent_categoris,
+        'selected' => $selected,
     ]) ?>
 
 </div>

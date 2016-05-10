@@ -12,6 +12,7 @@ use yii\web\IdentityInterface;
  *
  * @property integer $id
  * @property string $username
+ * @property string $avatar
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
@@ -25,12 +26,6 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-
-    const ROLE_ADMIN = 'admin';
-    const ROLE_MODERATOR = 'moderator';
-    const ROLE_USER = 'user';
-
-    const PERMISSION_ADMIN_CRUD = 'adminCrud';
 
     /**
      * @var array EAuth attributes для входа через соцсети
@@ -66,19 +61,7 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    /**
-     * Возвращает массив всех доступных ролей.
-     * @return array
-     * Используется для AuthManager в конфигурации приложения 'defaultRoles' => \common\models\User::roleArray(),
-     */
-    static public function roleArray()
-    {
-        return [
-            self::ROLE_ADMIN,
-            self::ROLE_MODERATOR,
-            self::ROLE_USER,
-        ];
-    }
+
 
     /**
      *
@@ -277,5 +260,18 @@ class User extends ActiveRecord implements IdentityInterface
         return $this-> hasOne(\common\models\ulogin\UloginUser::className(), ['id_user' => 'id'])
                 ->andWhere(['login_soc' => '1']);
     }
+
+    //получаем аккаунт в соц.сетях пользователя, через который он зарегестрировался на сайте, если такой есть. Иначе null
+    public function getUserSignupSocData()
+    {
+        return $this-> hasOne(\common\models\ulogin\UloginUser::className(), ['id_user' => 'id'])
+                ->andWhere(['signup_soc' => '1']);
+    }
+
+//    public function setAvatar($path)
+//    {
+//        return $this-> hasOne(\common\models\ulogin\UloginUser::className(), ['id_user' => 'id'])
+//                ->andWhere(['signup_soc' => '1']);
+//    }
 
 }

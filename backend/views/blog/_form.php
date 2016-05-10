@@ -36,7 +36,16 @@ use dosamigos\tinymce\TinyMce;
                                         ]
                                     ]); ?>
 
-    <?= $form->field($model, 'category_id')->textInput()->dropDownList($categoris_name);// ['prompt' => 'нет',] ?>
+    <?php
+        if(isset($selected) && NULL != $selected)
+        {
+            echo $form->field($model, 'category_id')->textInput()->dropDownList($categoris_name,['options' => [ $selected => ['selected ' => true]]]);// ['prompt' => 'нет',]
+        }
+        else
+        {
+            echo $form->field($model, 'category_id')->textInput()->dropDownList($categoris_name);// ['prompt' => 'нет',]
+        }
+    ?>
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 

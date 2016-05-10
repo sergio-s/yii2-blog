@@ -23,14 +23,14 @@ class GroupRule extends Rule
         if (!Yii::$app->user->isGuest) {
             $role = Yii::$app->user->identity->role;
 
-            if ($item->name === User::ROLE_ADMIN) {
-                return $role == User::ROLE_ADMIN;
+            if ($item->name === rbacRoles::ROLE_ADMIN) {
+                return $role == rbacRoles::ROLE_ADMIN;
             }
-            elseif ($item->name === User::ROLE_MODERATOR) {
-                return $role == User::ROLE_MODERATOR ||  $role == User::ROLE_ADMIN;
+            elseif ($item->name === rbacRoles::ROLE_MODERATOR) {
+                return $role == rbacRoles::ROLE_MODERATOR ||  $role == rbacRoles::ROLE_ADMIN;
             }
-            elseif ($item->name === User::ROLE_USER) {
-                return $role == User::ROLE_USER ||  $role == User::ROLE_ADMIN || $role == User::ROLE_MODERATOR;
+            elseif ($item->name === rbacRoles::ROLE_USER) {
+                return $role == rbacRoles::ROLE_USER ||  $role == rbacRoles::ROLE_ADMIN || $role == rbacRoles::ROLE_MODERATOR;
             }
         }
         return false;

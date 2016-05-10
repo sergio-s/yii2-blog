@@ -26,7 +26,7 @@ echo ULogin::widget([
                     ULogin::P_VKONTAKTE,
                     ULogin::P_FACEBOOK,
 //                    ULogin::P_TWITTER,
-//                    ULogin::P_GOOGLE,
+                    ULogin::P_GOOGLE,
 //                    ULogin::P_ODNOKLASSNIKI
         ],
 

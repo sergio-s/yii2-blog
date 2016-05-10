@@ -4,22 +4,25 @@
 
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
+use frontend\assets\CommentAsset;
 use yii\helpers\Url;
 use common\widgets\subscription\SubscriptionWidget;
 use common\models\User;
+use common\components\rbac\rbacRoles;
 
 AppAsset::register($this);
+CommentAsset::register($this);
 ?>
 <?php
-    if (!Yii::$app->user->isGuest){
-        echo \Yii::$app->user->identity->role;
-    }
-    if(\Yii::$app->user->can(User::ROLE_ADMIN)){
-        echo "ROLE_ADMIN";
-    }
-    if(\Yii::$app->user->can(User::ROLE_USER)){
-        echo "ROLE_USER";
-    }
+//    if (!Yii::$app->user->isGuest){
+//        echo \Yii::$app->user->identity->role;
+//    }
+//    if(\Yii::$app->user->can(rbacRoles::ROLE_ADMIN)){
+//        echo "ROLE_ADMIN";
+//    }
+//    if(\Yii::$app->user->can(rbacRoles::ROLE_USER)){
+//        echo "ROLE_USER";
+//    }
 ?>
             <header>
                 <div class="container-fluid">
@@ -66,7 +69,7 @@ AppAsset::register($this);
 
                                                 <?php endif;?>
 
-                                                <?php if(Yii::$app->user->identity->role == User::ROLE_ADMIN && Yii::$app->user->can(User::ROLE_ADMIN)):?>
+                                                <?php if(Yii::$app->user->identity->role == rbacRoles::ROLE_ADMIN && Yii::$app->user->can(rbacRoles::ROLE_ADMIN)):?>
                                                     <a href="<?=Url::to('@web/backend/web');?>"><small>Админ. часть</small></a>
                                                 <?php endif;?>
 
@@ -135,7 +138,7 @@ AppAsset::register($this);
 
                                             <?php endif;?>
 
-                                            <?php if(Yii::$app->user->identity->role == User::ROLE_ADMIN && Yii::$app->user->can(User::ROLE_ADMIN)):?>
+                                            <?php if(Yii::$app->user->identity->role == rbacRoles::ROLE_ADMIN && Yii::$app->user->can(rbacRoles::ROLE_ADMIN)):?>
                                                 <a href="<?=Url::to('@web/backend/web');?>"><small>Админ. часть</small></a> |
                                             <?php endif;?>
 

@@ -37,7 +37,7 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
             // Роль по умолчанию. Все, кто не админы, модераторы и юзеры — гости.
-            'defaultRoles' => \common\models\User::roleArray(),
+            'defaultRoles' => common\components\rbac\rbacRoles::roleArray(),
         ],
 
     ],

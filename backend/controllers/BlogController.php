@@ -126,7 +126,7 @@ class BlogController extends Controller
 
                     if($model->file->saveAs($pathToBig))
                     {
-                        
+
                         //превью
                         Image::thumbnail($pathToBig, 406, 324)->save($pathToThumb, ['quality' => 100]);
                         sleep(1);
@@ -255,7 +255,8 @@ class BlogController extends Controller
 
             $categoris = \common\models\BlogCategorisTable::getAllCategorisPosts();
 
-//категории,в которых состоит этот пост (можеет быть не одна категория)
+            //категории,в которых состоит этот пост (можеет быть не одна категория)
+            //пока поддерживается одна
             $perent_categoris = $model->parentCategoris;
 
             // $categoris_name = array(0 => 'нет категорий');
@@ -263,11 +264,20 @@ class BlogController extends Controller
             {
                 $categoris_name[$category->id] = $category->title;
             }
+            //выбранная по умолчанию - текущая родительская категория
+            if(isset($model->parentCategoris[0]->id)){
+                $selected = $model->parentCategoris[0]->id;
+            }
+            else{
+                $selected = NULL;
+            }
 
-             return $this->render('update', [
+
+            return $this->render('update', [
                 'model' => $model,
                 'categoris_name' => $categoris_name,
                 'perent_categoris' => $perent_categoris,
+                'selected' => $selected,
             ]);
         }
     }

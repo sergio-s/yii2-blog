@@ -4,6 +4,7 @@ namespace common\models\ulogin;
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use common\components\rbac\rbacRoles;
 /**
  * Login form
  */
@@ -100,13 +101,14 @@ class UloginModel extends Model
         else
         {
 
-            //создаем юзера с данными из соц.сети, о которой зашел юзер вервые
+            //создаем юзера с данными из соц.сети, о которой зашел юзер впервые
             $user = new \common\models\User();
             $user->username = $this->uloginUser->first_name.' '.$this->uloginUser->last_name;
             $user->email = $this->uloginUser->email;
             $user->setPassword($this->uloginUser->uid);
-            $user->role = User::ROLE_USER;//из перечня групп в console\controllers\RbacController
+            $user->role = rbacRoles::ROLE_USER;//из перечня групп в console\controllers\RbacController
             $user->signup_tupe = 'soc';//устанавливаем тип регистрации юзера 'soc', по умолчанию 'site'
+            $user->avatar = $this->uloginUser->photo;//аватар юзера по умолчанию копируется из соц сети, через которую зарегились
             $user->generateAuthKey();
             $user->save();
 
@@ -118,7 +120,7 @@ class UloginModel extends Model
 
             // добавление роли user для зарегестрировавшегося
             $auth = Yii::$app->authManager;
-            $userRole = $auth->getRole(User::ROLE_USER);
+            $userRole = $auth->getRole(rbacRoles::ROLE_USER);
             $auth->assign($userRole, $user->getId());
 
 

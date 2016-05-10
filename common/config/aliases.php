@@ -18,4 +18,9 @@ return [
 //    ПУТИ К ИЗОБРАЖЕНИЯМ КОНТЕНТА
     '@blogImg-web' =>  $baseUrl.'/img/blog',//
     '@blogImg-path' => '@frontend/web/img/blog',
+
+    '@usersImg-web' =>  $baseUrl.'/img/users',//
+    '@usersImg-path' => '@frontend/web/img/users',
+    '@noAvatar' => '@usersImg-web/default.jpg',
+
 ];
