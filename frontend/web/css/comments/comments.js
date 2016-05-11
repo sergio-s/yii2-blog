@@ -12,13 +12,48 @@ jQuery(document).ready(function($){
 //при использовании pjax нужно искать ,начиная с body
         $('body').on( "click",'a.comment-reply', function(event){
 
+
             event.preventDefault();
-            var id = $(this).closest('.comment-reply').data('comment-id');
             var comment = $(this).closest('.comment-content');
+
+            var commentReplyLink = $(this).closest('.comment-reply');
+            var commentNoReplyLink = comment.find('.comment-no-reply');
+
+            var id = commentReplyLink.data('comment-id');
+
+
+
             $('#comment-form').detach().appendTo(comment);
             $('#hiddenInputParentId').attr('value', id);
+
+            $('.comment-reply').show();
+            $('.comment-no-reply').hide();
+
+
+            commentReplyLink.hide();
+            commentNoReplyLink.show();
+
             //alert("Код" + id );
         });
+
+        //при использовании pjax нужно искать ,начиная с body
+        $('body').on( "click",'a.comment-no-reply', function(event){
+
+            event.preventDefault();
+            var commentNoReplyLink = $(this).closest('.comment-no-reply');
+            var commentsList = $('.comments-list');
+
+            $('#comment-form').detach().appendTo(commentsList);
+            $('#hiddenInputParentId').attr('value', null);
+
+            commentNoReplyLink.siblings('.comment-reply').show();
+            commentNoReplyLink.hide();
+
+
+            //alert("Код" + id );
+        });
+
+
 });
 
 //$(document).on('click', '.reply-link', function() {

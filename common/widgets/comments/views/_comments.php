@@ -18,10 +18,12 @@ use common\components\rbac\rbacRoles;
                         <div class="comment-action-buttons">
                             <?php if (Yii::$app->getUser()->can(rbacRoles::ROLE_ADMIN)): ?>
                                 <?php //echo Html::a('<span class="glyphicon glyphicon-trash"></span> Отключить', '#', ['data' => ['action' => 'delete', 'url' => Url::to(['/comment/default/delete', 'id' => $comment->id]), 'comment-id' => $comment->id]]); ?>
-                            <?php endif; ?>
+                                <?php //echo Html::a('<span class="glyphicon glyphicon-trash"></span> Отключить', '#', ['data' => ['method' => 'POST', 'comment-id' => $comment->id]]); ?>
+                                <?php endif; ?>
                             <?php if (!Yii::$app->user->isGuest && ($comment->level < $maxLevel || is_null($maxLevel))): ?>
-                                <?php echo Html::a("<span class='glyphicon glyphicon-share-alt'></span> Ответить", '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $comment->id]]); ?>
-<!--                                <a class="reply" data-id="3080" href="#comment-form">Ответить</a>-->
+                                <?php echo Html::a("<span class='glyphicon glyphicon-share-alt'></span> Ответить", '#',   ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $comment->id]]); ?>
+                                <?php echo Html::a("<span class='glyphicon glyphicon-remove'></span> Не отвечать",'#', ['class' => 'comment-no-reply','style' => 'display: none']); ?>
+
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>

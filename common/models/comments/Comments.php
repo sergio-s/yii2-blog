@@ -126,9 +126,11 @@ class Comments extends \yii\db\ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
                     \yii\db\BaseActiveRecord::EVENT_BEFORE_INSERT => ['createdDate'],
-                    //\yii\db\BaseActiveRecord::EVENT_BEFORE_UPDATE => 'modifyDate',
+                    \yii\db\BaseActiveRecord::EVENT_BEFORE_UPDATE => false,
+
                 ],
                 'value' => new \yii\db\Expression('NOW()'),
+
             ],
             'purify' => [
                 'class' => PurifyBehavior::className(),
@@ -275,6 +277,9 @@ class Comments extends \yii\db\ActiveRecord
     */
     public function getPostedDate($format = 'asDatetime')
     {
+//        var_dump(Yii::$app->formatter->timeZone);die;
+//         var_dump(Yii::$app->formatter->asDatetime($this->createdDate, 'medium'));die;
+        Yii::$app->formatter->timeZone = 'UTC';
         switch ($format) {
 
             case 'asRelativeTime' :
@@ -282,7 +287,7 @@ class Comments extends \yii\db\ActiveRecord
                 break;
 
             case 'asDatetime' :
-                $date = Yii::$app->formatter->asDatetime($this->createdDate, 'medium');
+                $date = Yii::$app->formatter->asDatetime($this->createdDate, 'php:l d F Y - H:i:s');
                 break;
         }
 

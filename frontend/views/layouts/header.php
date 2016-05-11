@@ -23,6 +23,8 @@ CommentAsset::register($this);
 //    if(\Yii::$app->user->can(rbacRoles::ROLE_USER)){
 //        echo "ROLE_USER";
 //    }
+
+
 ?>
             <header>
                 <div class="container-fluid">

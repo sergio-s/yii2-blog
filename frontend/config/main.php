@@ -131,6 +131,7 @@ return [
         'formatter' => [
             'class' => 'yii\i18n\Formatter',
             'locale' => 'ru-RU',
+            'timeZone' => 'Europe/Moscow',
             'dateFormat' => 'd MMMM yyyy',//как месяц
             //'dateFormat' => 'dd.MM.yyyy',// как число
             'datetimeFormat' => 'php:n F Y в H:i',

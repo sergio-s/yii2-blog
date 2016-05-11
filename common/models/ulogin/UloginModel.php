@@ -20,6 +20,7 @@ class UloginModel extends Model
 //    public $uid;
 
     public $uloginUser;
+    private $_user;//зарегестрированный юзер
 
 //    const SCENARIO_LOGIN = 'login';
 //    const SCENARIO_SAVE = 'save_to_db';
@@ -93,8 +94,8 @@ class UloginModel extends Model
 
 
             }
+            //return Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);
 
-            return Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
 
         //если пользователя с таким емейл нет
@@ -123,10 +124,13 @@ class UloginModel extends Model
             $userRole = $auth->getRole(rbacRoles::ROLE_USER);
             $auth->assign($userRole, $user->getId());
 
+            //return Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);
+        }
 
-            return Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);
-
-
+        if($this->setUser($user)){
+            return true;
+        }else{
+            return false;
         }
 
 
@@ -154,6 +158,50 @@ class UloginModel extends Model
         return \common\models\User::findByEmail($email);
 
     }
+
+
+    /**
+     * Logs in a user using the provided username and password.
+     *
+     * @return boolean whether the user is logged in successfully
+     */
+    public function login()
+    {
+        return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+//        if ($this->validate()) {
+//            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+//        } else {
+//            return false;
+//        }
+    }
+
+
+    /**
+     * Finds user by [[username]]
+     *
+     * @return User|null
+     */
+    protected function getUser()
+    {
+        return $this->_user;
+    }
+
+       /**
+     * Finds user by [[username]]
+     *
+     * @return User|null
+     */
+    protected function setUser($user)
+    {
+        if ($user instanceof User){
+            $this->_user = $user;
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
 
 //    /**
 //     * Validates the password.

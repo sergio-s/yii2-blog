@@ -12,6 +12,7 @@ use common\widgets\Alert;
 use yii\helpers\Url;
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

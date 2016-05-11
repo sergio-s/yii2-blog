@@ -13,6 +13,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use rmrevin\yii\ulogin\AuthAction;
+use yii\helpers\Url;
 
 /**
  * Site controller
@@ -72,12 +73,17 @@ class SiteController extends BaseFront
 
 //        print_r(\Yii::$app->user->identity->uloginUser[0]->last_name);die;
 
-        $model = new \common\models\ulogin\UloginModel();
-        if($model->uLogin($attributes))
+        $uLoginModel = new \common\models\ulogin\UloginModel();
+        if($uLoginModel->uLogin($attributes))
         {
             //print_r(\Yii::$app->user->identity->username);
+            //return $this->goHome();
+            if($uLoginModel->login()){
 
-            return $this->goHome();
+                //сессия хранит адрес формы комментариев, из виджета комментариев для редиректа после входа на форму
+                $this->goReferer(Yii::$app->session['goReferer']['comments']['url']);
+
+            }
 
         }
         else
@@ -136,43 +142,6 @@ class SiteController extends BaseFront
 
     public function actionLogin()
     {
-//        $serviceName = Yii::$app->getRequest()->getQueryParam('service');
-//        if (isset($serviceName))
-//        {
-//            /** @var $eauth \nodge\eauth\ServiceBase */
-//            $eauth = Yii::$app->get('eauth')->getIdentity($serviceName);
-//            $eauth->setRedirectUrl(Yii::$app->getUser()->getReturnUrl());
-//            $eauth->setCancelUrl(Yii::$app->getUrlManager()->createAbsoluteUrl('site/login'));
-//
-//            try
-//            {
-//                if ($eauth->authenticate())
-//                {
-////                  var_dump($eauth->getIsAuthenticated(), $eauth->getAttributes()); exit;
-//
-//                    $identity = User::findByEAuth($eauth);
-//                    Yii::$app->getUser()->login($identity);
-//
-//                    // special redirect with closing popup window
-//                    $eauth->redirect();
-//                }
-//                else
-//                {
-//                    // close popup window and redirect to cancelUrl
-//                    $eauth->cancel();
-//                }
-//            }
-//            catch (\nodge\eauth\ErrorException $e)
-//            {
-//                // save error to show it later
-//                Yii::$app->getSession()->setFlash('error', 'EAuthException: ' . $e->getMessage());
-//
-//                // close popup window and redirect to cancelUrl
-////              $eauth->cancel();
-//                $eauth->redirect($eauth->getCancelUrl());
-//            }
-//        }
-
         // встроеннаа авторизация в yii2 по умолчанию размещается ниже
         //передаем тайтл
         Yii::$app->view->title .= ': вход на сайт';
@@ -184,6 +153,10 @@ class SiteController extends BaseFront
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+            //сессия хранит адрес формы комментариев, из виджета комментариев для редиректа после входа на форму
+            $this->goReferer(Yii::$app->session['goReferer']['comments']['url']);
+
             return $this->goBack();
         } else {
             return $this->render('login', [
@@ -320,54 +293,31 @@ class SiteController extends BaseFront
      *@return mixed
      *  обработка формы отправки почты из формы подписки
      */
-    public function actionSubscription()
-    {
+//    public function actionSubscription()
+//    {
+//
+//    $model = new MyModel();
+//    if ($this->modelSubscription->load(Yii::$app->request->post()) && $model->save()) {
+//        if (!Yii::$app->request->isPjax) {
+////            return $this->redirect(['view', 'id' => $model->id]);
+//            return $this->redirect(Yii::$app->request->referrer);
+//        }
+//    }
+//
+//    return $this->render('create', [
+//        'model' => $model,
+//    ]);
+//
+//    }
 
-            $model = new MyModel();
-    if ($this->modelSubscription->load(Yii::$app->request->post()) && $model->save()) {
-        if (!Yii::$app->request->isPjax) {
-//            return $this->redirect(['view', 'id' => $model->id]);
+    private function goReferer($session){
+        if(!empty($session)){
+            return $this->redirect($session);
+        }
+        else
+        {
             return $this->redirect(Yii::$app->request->referrer);
         }
-    }
-
-    return $this->render('create', [
-        'model' => $model,
-    ]);
-//        //передаем тайтл
-//        Yii::$app->view->title .= ': контакты';
-//
-//        $model = new ContactForm();
-//        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-//            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-//                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-//            } else {
-//                Yii::$app->session->setFlash('error', 'There was an error sending email.');
-//            }
-//
-//            return $this->refresh();
-//        } else {
-//            return $this->render('contact', [
-//                'model' => $model,
-//            ]);
-//        }
-
-
-
-//        if (Yii::$app->request->isPost and Yii::$app->request->isPjax ) {
-//               //return //$this->redirect(Yii::$app->request->referrer);
-//               Yii::$app->response->getHeaders()->set('X-PJAX-Url',Yii::$app->request->referrer);
-//
-//$videoId = Yii::$app->request->post('videoId');
-
-//            $videoId = Yii::$app->request->post('videoId');
-//            if($videoId != NULL)
-//            {
-//                $aktiveVideo = Video::findOne($videoId);
-//
-//            }
-//        }
-
     }
 
 

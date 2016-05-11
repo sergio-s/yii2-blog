@@ -4,6 +4,7 @@
     use yii\helpers\Html;
     use yii\helpers\Url;
     use yii\captcha\Captcha;
+    use dosamigos\tinymce\TinyMce;
     //use yii\bootstrap\Progress
 ?>
 
@@ -54,12 +55,33 @@ $js = " $('#{$pjaxContainerId}').on('pjax:end', function() {
     ]); ?>
 
     <?php echo $form->field($commentForm, 'message', ['template' => '{input}{error}'])->textarea(['placeholder' => 'Добавить комментарий', 'data' => ['comment' => 'message'], 'id' => 'message_textarea']) ?>
+
+    <?php
+//    echo $form->field($commentForm, 'message')->widget(TinyMce::className(), [
+//    'options' => ['rows' => 8],
+//    'language' => 'ru',
+//    'clientOptions' => [
+//        'plugins' => [
+//            "advlist autolink lists link charmap print preview anchor",
+//            "searchreplace visualblocks code fullscreen",
+//            "insertdatetime media table contextmenu paste",
+//            "textcolor",
+//            "fullscreen",
+//            //"image",
+//        ],
+//        'menubar'=> false,
+//        'toolbar' => "bold italic | bullist numlist outdent indent  ",
+//
+//    ]
+//    ])
+    ;?>
+
     <?php echo $form->field($commentForm, 'parentId', ['template' => '{input}'])->hiddenInput(['id' => 'hiddenInputParentId']); ?>
     <?php //echo $form->field($commentForm, 'parentId', ['template' => '{input}'])->hiddenInput(['data' => ['comment' => 'parent-id']]); ?>
     <?php //echo $form->field($commentForm, 'captcha')->widget(Captcha::className()) ?>
     <div class="comment-box-partial">
         <div class="button-container show">
-            <?php echo Html::a('Отменить ответ', '#', ['id' => 'cancel-reply', 'class' => 'pull-right', 'data' => ['action' => 'cancel-reply']]); ?>
+            <?php //echo Html::a('Отменить ответ', '#', ['id' => 'cancel-reply', 'class' => 'pull-right', 'data' => ['action' => 'cancel-reply']]); ?>
             <?php echo Html::submitButton('Комментировать', ['class' => 'btn btn-primary comment-submit']); ?>
         </div>
     </div>

@@ -66,6 +66,17 @@ class CommentsWidget extends Widget
         $this->pjaxContainerId = 'comment-pjax-container-' . $this->getId();
 
         $this->registerAssets();
+
+        //запись текущей ссылки с якорем на форму, для переброски на нее после логина для возможности комментировать
+        Yii::$app->session['goReferer'] = [
+            'comments' => [
+                //'url' => Url::to(''). '#'. $this->formId,
+                'url' => Url::to(''),
+                'lifetime' => 3600,
+            ]
+
+        ];
+//        echo $session['comments']['url'];die;
     }
 
     public function run()
