@@ -11,7 +11,6 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
-    'language' => 'ru-RU',//язык нашего сайта по умолчанию
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],

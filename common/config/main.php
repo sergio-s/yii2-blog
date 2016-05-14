@@ -6,6 +6,14 @@ $baseUrl = str_replace('/backend/web', '', $baseUrl);
 return [
     'aliases' => require(__DIR__ . '/aliases.php'),
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'language' => 'ru-RU',//язык нашего сайта по умолчанию
+    'sourceLanguage' => 'ru-RU',
+//    'modules' => [
+//        'comments' => [
+//            'class' => 'app\modules\comments\Module',
+//            // ... other configurations for the module ...
+//        ],
+//    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -40,5 +48,37 @@ return [
             'defaultRoles' => common\components\rbac\rbacRoles::roleArray(),
         ],
 
+        //нужно расширение extension=php_intl.dll для работы перевода (интернационализация)
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@common/messages',
+                    'sourceLanguage' => 'ru-RU',
+                    
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+                //файл перевода для компонента eauth (авторизация через соц.сети)
+                'eauth' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@eauth/messages',
+                ],
+            ],
+        ],
+        
+        //формат даты пример вывода = Yii::$app->formatter->asDate($post->createdDate, 'd MMMM yyyy');
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'locale' => 'ru-RU',
+            'timeZone' => 'Europe/Moscow',
+            'dateFormat' => 'd MMMM yyyy',//как месяц
+            //'dateFormat' => 'dd.MM.yyyy',// как число
+            'datetimeFormat' => 'php:n F Y в H:i',
+            'timeFormat' => 'H:i:s',
+        ],
+        
     ],
 ];

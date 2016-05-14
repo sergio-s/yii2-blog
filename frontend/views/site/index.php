@@ -9,7 +9,10 @@ use rmrevin\yii\ulogin\ULogin;
 use common\widgets\subscription\SubscriptionWidget;
 
 ?>
-
+<?php
+//$module = \Yii::$app->getModule('comments');
+//print_r($module);
+;?>
 <!--///////////////////////////////////секция горизонтальная подборка материалов////////////////////////////////////////////-->
 <div class="row selection">
 

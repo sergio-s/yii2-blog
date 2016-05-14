@@ -36,12 +36,16 @@ class Comments extends \yii\db\ActiveRecord
      */
     public static function getStatusList(){
         return[
-            self::ACTIVE => 'Active',
-            self::DISABLED => 'Disabled'//отключен
+            self::ACTIVE => 'Активен',
+            self::DISABLED => 'Отключен'//отключен
         ];
     }
 
-
+    public static function getMaterialType(){
+        return[
+            self::TYPE_BLOGPOST => 'Статьи блога',
+        ];
+    }
 
 
     protected $_children;
@@ -78,7 +82,7 @@ class Comments extends \yii\db\ActiveRecord
 //            [['message'], 'string'],
 //            [['materialType'], 'string', 'max' => 255],
 
-            [['materialType','materialId','autorId','parentId','level', 'createdDate', 'message', 'status'], 'safe'],
+            [['materialType','materialId','autorId','parentId','level', 'createdDate', 'updatedDate', 'message', 'status'], 'safe'],
         ];
     }
 
@@ -94,6 +98,7 @@ class Comments extends \yii\db\ActiveRecord
             'autorId' => 'id зарегестрированного пользователя из таблицы users или id гостя из таблицы guests, в зависимости от того, какое значение передано в isGuest (1 - гость, 0-зарегестрированный))',
             'parentId' => 'id комментария, на который отвечает данный комментарий',
             'createdDate' => 'Created Date',
+            'updatedDate' => 'Дата обновления',
             'message' => 'message',
             'status' => '1- опубликовано, 0 - не опубликовано',
             'level' => 'уровень вложенности',
@@ -110,7 +115,7 @@ class Comments extends \yii\db\ActiveRecord
     }
 
 
-        /**
+     /**
      * Returns a list of behaviors that this component should behave as.
      * @return array
      */
@@ -126,7 +131,7 @@ class Comments extends \yii\db\ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
                     \yii\db\BaseActiveRecord::EVENT_BEFORE_INSERT => ['createdDate'],
-                    \yii\db\BaseActiveRecord::EVENT_BEFORE_UPDATE => false,
+                    \yii\db\BaseActiveRecord::EVENT_BEFORE_UPDATE => ['updatedDate'],
 
                 ],
                 'value' => new \yii\db\Expression('NOW()'),
@@ -196,11 +201,32 @@ class Comments extends \yii\db\ActiveRecord
     }
 
 
-    public static function getCount($materialType, $materialId, $maxLevel = null)
+    public static function getCount($materialType, $materialId, $status = null, $maxLevel = null)
     {
+        //статуса нет в списке возможных
+        if(NULL != $status and !array_key_exists($status, static::getStatusList())){
+            throw new yii\base\UnknownPropertyException('In :'.__CLASS__.' Invalid status: ' . $status);
+        }
+
         $query = self::find()->where(['materialType' => $materialType,'materialId' => $materialId]);
 
         if ($maxLevel > 0) {
+            $query->andWhere(['<=', 'level', $maxLevel]);
+        }
+
+        switch($status){
+            case NULL: break;
+
+            case static::ACTIVE :
+                $query->active();
+                break;
+
+            case static::DISABLED :
+                $query->disabled();
+                break;
+        }
+
+        if ($status === static::DISABLED) {
             $query->andWhere(['<=', 'level', $maxLevel]);
         }
 
@@ -299,9 +325,9 @@ class Comments extends \yii\db\ActiveRecord
      * @param string $deletedCommentText
      * @return string
      */
-    public function getMessage($disabledCommentText = 'Комментарий отключен.')
+    public function getMessage($disabledCommentText = 'Комментарий отключен .')
     {
-        return $this->isDisabled ? $deletedCommentText : Yii::$app->formatter->asNtext($this->message);
+        return $this->isDisabled ? $disabledCommentText : Yii::$app->formatter->asNtext($this->message);
     }
 
     /**

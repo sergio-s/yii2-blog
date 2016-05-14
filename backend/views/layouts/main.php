@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use common\components\rbac\rbacRoles;
 
 AppAsset::register($this);
 ?>
@@ -34,7 +35,6 @@ AppAsset::register($this);
 
 <body>
 <?php $this->beginBody() ?>
-
 <div class="wrap padding-top">
     <?php
     NavBar::begin([
@@ -45,9 +45,10 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Первая', 'url' => ['/site/index']],
+        ['label' => 'Главная (админки)', 'url' => ['/site/index']],
+        //['label' => 'На сайт', 'url' => ['/site/index']],
     ];
-    if (Yii::$app->user->isGuest) {
+    if (Yii::$app->user->isGuest || !Yii::$app->user->can(rbacRoles::ROLE_ADMIN)) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'

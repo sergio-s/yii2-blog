@@ -153,10 +153,6 @@ class SiteController extends BaseFront
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
-            //сессия хранит адрес формы комментариев, из виджета комментариев для редиректа после входа на форму
-            $this->goReferer(Yii::$app->session['goReferer']['comments']['url']);
-
             return $this->goBack();
         } else {
             return $this->render('login', [

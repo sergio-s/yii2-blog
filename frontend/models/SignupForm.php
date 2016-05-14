@@ -4,6 +4,7 @@ namespace frontend\models;
 use common\models\User;
 use yii\base\Model;
 use Yii;
+use common\components\rbac\rbacRoles;
 
 /**
  * Signup form
@@ -48,13 +49,13 @@ class SignupForm extends Model
             $user->username = $this->username;
             $user->email = $this->email;
             $user->setPassword($this->password);
-            $user->role = User::ROLE_USER;//из перечня групп в console\controllers\RbacController
+            $user->role = rbacRoles::ROLE_USER;//из перечня групп в console\controllers\RbacController
             $user->generateAuthKey();
             $user->save(false);
 
             // добавление роли user для зарегестрировавшегося
             $auth = Yii::$app->authManager;
-            $userRole = $auth->getRole(User::ROLE_USER);
+            $userRole = $auth->getRole(rbacRoles::ROLE_USER);
             $auth->assign($userRole, $user->getId());
 
             return $user;

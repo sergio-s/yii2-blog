@@ -11,21 +11,8 @@ use common\models\User;
 use common\components\rbac\rbacRoles;
 
 AppAsset::register($this);
-CommentAsset::register($this);
 ?>
-<?php
-//    if (!Yii::$app->user->isGuest){
-//        echo \Yii::$app->user->identity->role;
-//    }
-//    if(\Yii::$app->user->can(rbacRoles::ROLE_ADMIN)){
-//        echo "ROLE_ADMIN";
-//    }
-//    if(\Yii::$app->user->can(rbacRoles::ROLE_USER)){
-//        echo "ROLE_USER";
-//    }
 
-
-?>
             <header>
                 <div class="container-fluid">
                     <!--полоса с ссылками соцсетей-->

@@ -30,7 +30,6 @@ return [
     'id' => 'app-frontend',
     'name' => 'Сайт',
     'aliases' => require(__DIR__ . '/aliases.php'),
-    'language' => 'ru-RU',//язык нашего сайта по умолчанию
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
@@ -44,8 +43,6 @@ return [
             'enableAutoLogin' => true,
         ],
 
-        //авторизация через соц.сети
-//        'eauth' => require(__DIR__ . '/eauth.php'),
 
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -83,25 +80,7 @@ return [
 
             ],
         ],
-        //нужно расширение extension=php_intl.dll для работы перевода (интернационализация)
-        'i18n' => [
-            'translations' => [
-                'app*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-//                    'basePath' => '@app/messages',
-//                    'sourceLanguage' => 'ru-RU',
-                    'fileMap' => [
-                        'app' => 'app.php',
-                        'app/error' => 'error.php',
-                    ],
-                ],
-                //файл перевода для компонента eauth (авторизация через соц.сети)
-                'eauth' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@eauth/messages',
-                ],
-            ],
-        ],
+
 
         'assetManager' => [
             'bundles' => [

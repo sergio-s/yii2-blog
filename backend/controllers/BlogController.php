@@ -18,7 +18,7 @@ use yii\helpers\FileHelper;
 /**
  * BlogController implements the CRUD actions for BlogPostsTable model.
  */
-class BlogController extends Controller
+class BlogController extends BaseAdmin
 {
 
 
@@ -36,6 +36,7 @@ class BlogController extends Controller
 
     public function beforeAction()
     {
+        
         if ($this->action->id == 'create') {
             Yii::$app->controller->enableCsrfValidation = false;
         }

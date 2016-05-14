@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * BlogCategorisController implements the CRUD actions for BlogCategorisTable model.
  */
-class BlogCategorisController extends Controller
+class BlogCategorisController extends BaseAdmin
 {
     /**
      * @inheritdoc

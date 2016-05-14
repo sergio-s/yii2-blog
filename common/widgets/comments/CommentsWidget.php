@@ -115,7 +115,7 @@ class CommentsWidget extends Widget
         $comments = $commentModelClass::getTree($this->materialType, $this->materialId);
         //$clone = clone $comments;//клон всех комментов
         //$totalCount = $clone->count();//кол-во всех комментов
-        $totalCount = $commentModelClass::getCount($this->materialType, $this->materialId);
+        $totalCount = $commentModelClass::getCount($this->materialType, $this->materialId, Comments::ACTIVE);
 
         return $this->render('index', [
                                         'formId' => $this->formId,
