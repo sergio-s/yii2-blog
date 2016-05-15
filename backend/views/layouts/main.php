@@ -33,7 +33,7 @@ AppAsset::register($this);
 </style>
 </head>
 
-<body>
+<body><?php //echo Yii::$app->getHomeUrl();?>
 <?php $this->beginBody() ?>
 <div class="wrap padding-top">
     <?php
@@ -46,7 +46,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Главная (админки)', 'url' => ['/site/index']],
-        //['label' => 'На сайт', 'url' => ['/site/index']],
+        ['label' => 'На сайт', 'url' => Yii::$app->urlManagerFrontend->createUrl(['/'])],
     ];
     if (Yii::$app->user->isGuest || !Yii::$app->user->can(rbacRoles::ROLE_ADMIN)) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -67,7 +67,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container-fluid">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -88,3 +88,4 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
+<?php //echo Yii::$app->getHomeUrl();?>

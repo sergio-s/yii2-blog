@@ -10,7 +10,7 @@ use yii\helpers\HtmlPurifier;
 <?php Pjax::begin([
     'enablePushState' => false,
     'timeout' => 10000,
-    'id' => $pjaxContainerId
+    'id' => $pjaxContainerId,
 ]); ?>
 
 <hr>

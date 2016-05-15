@@ -1,4 +1,4 @@
-SetEnv TZ Europe/Kiev
+#SetEnv TZ Europe/Kiev
 AddDefaultCharset UTF-8
 RewriteEngine on
 

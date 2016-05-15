@@ -1,6 +1,7 @@
 <?php
 
-//$baseUrl = str_replace('/backend/web', '', (new Request)->getBaseUrl());
+use \yii\web\Request;
+$baseUrl = str_replace('/backend/web', '', (new Request)->getBaseUrl());
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
@@ -30,21 +31,29 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'error/error',//контроллер и экшэн обработки ошибок
         ],
 
         'urlManager' => [
+
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
+            'baseUrl' => $baseUrl.'/backend/web',
             'rules' => [
+                '<controller>/<action>' => '<controller>/<action>',
+                '<controller>/<action><id:\d+>' => '<controller>/<action>',
+                '/' => 'site/index',
             ],
         ],
-//        'urlManagerFrontend' => [
-//            'class' => 'yii\web\UrlManager',
-//            'baseUrl' => $baseUrl.'/frontend/web',
-//            'enablePrettyUrl' => true,
-//            'showScriptName' => false,
-//        ],
+
+
+        'urlManagerFrontend' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => $baseUrl,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
 
     ],
     'params' => $params,

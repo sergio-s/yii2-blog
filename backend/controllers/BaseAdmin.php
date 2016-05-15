@@ -12,24 +12,25 @@ use yii\web\ForbiddenHttpException;
 
 class BaseAdmin extends Controller
 {
+
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-//                        'roles' => ['?'],
-                    ],
-                    [
-                        
-                        'allow' => true,
-                        'roles' => [rbacRoles::ROLE_ADMIN],
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'rules' => [
+//                    [
+//                        'actions' => ['login', 'error'],
+//                        'allow' => true,
+////                        'roles' => ['?'],
+//                    ],
+//                    [
+//
+//                        'allow' => true,
+//                        'roles' => [rbacRoles::ROLE_ADMIN],
+//                    ],
+//                ],
+//            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -38,7 +39,7 @@ class BaseAdmin extends Controller
             ],
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -50,20 +51,28 @@ class BaseAdmin extends Controller
             ],
         ];
     }
-    
-    
-//    public function beforeAction($action)
-//    {
-//        if (parent::beforeAction($action)) {
-//            if (\Yii::$app->user->can(rbacRoles::ROLE_ADMIN)) {
-//                throw new ForbiddenHttpException('Access denied');
-//            }
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-    
-    
+
+
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            if(Yii::$app->user->isGuest){
+                return Yii::$app->getResponse()->redirect(Yii::$app->urlManagerFrontend->createUrl(['/site/login']));
+            }
+            else{
+                if (!\Yii::$app->user->can(rbacRoles::ROLE_ADMIN)) {
+                    $message = 'Доступ запрещен. Вернитесь на ';
+                    $message .= "<a href='".Yii::$app->urlManagerFrontend->createUrl(['/'])."'>сайт</a>";
+                    throw new ForbiddenHttpException($message);
+                }
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }
 

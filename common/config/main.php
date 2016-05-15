@@ -55,20 +55,16 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/messages',
                     'sourceLanguage' => 'ru-RU',
-                    
+
                     'fileMap' => [
                         'app' => 'app.php',
                         'app/error' => 'error.php',
                     ],
                 ],
-                //файл перевода для компонента eauth (авторизация через соц.сети)
-                'eauth' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@eauth/messages',
-                ],
+                
             ],
         ],
-        
+
         //формат даты пример вывода = Yii::$app->formatter->asDate($post->createdDate, 'd MMMM yyyy');
         'formatter' => [
             'class' => 'yii\i18n\Formatter',
@@ -79,6 +75,6 @@ return [
             'datetimeFormat' => 'php:n F Y в H:i',
             'timeFormat' => 'H:i:s',
         ],
-        
+
     ],
 ];

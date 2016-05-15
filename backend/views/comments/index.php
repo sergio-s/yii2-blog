@@ -14,6 +14,7 @@ use backend\models\comments\Comments;
 $this->params['breadcrumbs'][] = $this->title;
 
 Yii::$app->formatter->timeZone = 'UTC';
+
 ?>
 <div class="comments-index">
 
@@ -23,7 +24,13 @@ Yii::$app->formatter->timeZone = 'UTC';
     <p>
         <?php //echo Html::a('Create Comments', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin([
+    'enablePushState' => false,
+    'timeout' => 10000,
+    'id' => 'comments-index',
+]); ?>
+
+<?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -86,14 +93,14 @@ Yii::$app->formatter->timeZone = 'UTC';
                 'attribute' => 'createdDate',
                 'format' => 'raw',
                 'value' => function ($model) {
-                        return Yii::$app->formatter->asDatetime($model->createdDate, 'php:l d F Y - H:i:s');
+                        return Yii::$app->formatter->asDatetime($model->createdDate, 'php:d F Y - H:i:s');
                 },
             ],
             [
                 'attribute' => 'updatedDate',
                 'format' => 'raw',
                 'value' => function ($model) {
-                        return (!NULL == $updatedDate = Yii::$app->formatter->asDatetime($model->updatedDate, 'php:l d F Y - H:i:s'))? $updatedDate : 'не обновлялось';
+                        return (!NULL == $updatedDate = Yii::$app->formatter->asDatetime($model->updatedDate, 'php:d F Y - H:i:s'))? $updatedDate : 'не обновлялось';
                 },
             ],
             // 'message:ntext',

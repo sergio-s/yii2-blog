@@ -113,7 +113,7 @@ class CommentsController extends BaseAdmin
      */
     public function actionDelete($id)
     {
-
+//Yii::$app->controller->enableCsrfValidation = false;
         $this->findModel($id)->delete();
 //        $dotherComments = Comments::find()->where(['parentId'=> $id]);
 
@@ -126,9 +126,9 @@ class CommentsController extends BaseAdmin
             $comment->save();
         }
 
-
-
-        return $this->redirect(['index']);
+        //return \yii\web\Response::redirect(['index'] , 302 , false);
+        return Yii::$app->getResponse()->redirect(['comments/index'], 302, false);
+        //return $this->redirect(['index']);
     }
 
     /**

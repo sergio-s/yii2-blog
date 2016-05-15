@@ -8,30 +8,30 @@
     //use yii\bootstrap\Progress
 ?>
 
-<?php if(Yii::$app->session->hasFlash($formId) ): ?>
+<?php //if(Yii::$app->session->hasFlash($formId) ): ?>
 <!--<div id="mes" style="color:green;">
     <?php //echo Yii::$app->session->getFlash($formId); ?>
 </div>-->
 
-<div id="mes" class="alert alert-success">
-  <?php echo Yii::$app->session->getFlash($formId); ?>
-</div>
+<!--<div id="mes" class="alert alert-success">
+  <?php //echo Yii::$app->session->getFlash($formId); ?>
+</div>-->
 
-<?php endif;?>
+<?php //endif;?>
 
 <?php
-$js = " $('#{$pjaxContainerId}').on('pjax:end', function() {
-    $('#mes').css('display', 'none');
-    $('#mes').fadeIn(1000);
-
-
-        $('textarea').focus(function() {
-            $('#mes').fadeOut(1000);
-        });
-
-    })";
-
-  $this->registerJs($js, $this::POS_READY);
+//$js = " $('#{$pjaxContainerId}').on('pjax:end', function() {
+//    $('#mes').css('display', 'none');
+//    $('#mes').fadeIn(1000);
+//
+//
+//        $('textarea').focus(function() {
+//            $('#mes').fadeOut(1000);
+//        });
+//
+//    })";
+//
+//  $this->registerJs($js, $this::POS_READY);
 ?>
 
 
@@ -77,6 +77,7 @@ $js = " $('#{$pjaxContainerId}').on('pjax:end', function() {
     ;?>
 
     <?php echo $form->field($commentForm, 'parentId', ['template' => '{input}'])->hiddenInput(['id' => 'hiddenInputParentId']); ?>
+<!--    <input type="hidden" name="_csrf" value="<?php //echo Yii::$app->request->getCsrfToken()?>" />-->
     <?php //echo $form->field($commentForm, 'parentId', ['template' => '{input}'])->hiddenInput(['data' => ['comment' => 'parent-id']]); ?>
     <?php //echo $form->field($commentForm, 'captcha')->widget(Captcha::className()) ?>
     <div class="comment-box-partial">

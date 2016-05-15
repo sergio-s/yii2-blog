@@ -34,15 +34,16 @@ class BlogController extends BaseAdmin
         ];
     }
 
-    public function beforeAction()
+    public function beforeAction($action)
     {
-        
-        if ($this->action->id == 'create') {
-            Yii::$app->controller->enableCsrfValidation = false;
+        if (parent::beforeAction($action)) {
+            if ($this->action->id == 'create') {
+                Yii::$app->controller->enableCsrfValidation = false;
+            }
+
+            return true;
         }
-
-        return true;
-
+        return false;
     }
 
     /**
