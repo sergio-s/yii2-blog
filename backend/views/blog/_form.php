@@ -5,13 +5,16 @@ use yii\widgets\ActiveForm;
 use yii\web\UploadedFile;
 //для загрузки картинок
 use kartik\file\FileInput;
-use dosamigos\tinymce\TinyMce;
+use vova07\imperavi\Widget;
+use yii\helpers\Url;
+
+
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\BlogPostsTable */
 /* @var $form yii\widgets\ActiveForm */
 
-//echo  Yii::getAlias('@blogImg-web');
+//echo  Yii::getAlias('@web');
 //Html::img('@blogImg-web/index.jpg', ['alt'=>'', 'class'=>'img-selection-horizontal']);
 
 ?>
@@ -86,24 +89,28 @@ use dosamigos\tinymce\TinyMce;
 
     <?php //echo $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'content')->widget(TinyMce::className(), [
-    'options' => ['rows' => 16],
-    'language' => 'ru',
-    'clientOptions' => [
+<!--    ТЕКСТОВЫЙ РЕДАКТОР С ЗАГРУЗКОЙ КАРТИНОК-->
+<?php
+echo $form->field($model, 'content')->widget(Widget::className(), [
+    'settings' => [
+        'lang' => 'ru',
+        'minHeight' => 200,
+        'imageManagerJson' => Url::to(['/blog/redactor-images-get']),
+        'imageUpload' => Url::to(['/blog/redactor-image-upload']),
         'plugins' => [
-            "advlist autolink lists link charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table contextmenu paste",
-            "textcolor",
-            "fullscreen",
-            //"image",
-        ],
-        'menubar'=> "insert",
-        'toolbar' => "image |undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor | fullscreen ",
-
+            'imagemanager',
+            'clips',
+            'fullscreen',
+            'fontcolor',
+            'fontfamily',
+            'fontsize',
+            'video',
+            'blockwrap',
+         ]
     ]
-    ]);?>
-
+]);
+?>
+  <!-- ###   ТЕКСТОВЫЙ РЕДАКТОР С ЗАГРУЗКОЙ КАРТИНОК  ### -->
 
     <?php //echo $form->field($model, 'createdDate')->textInput() ?>
 

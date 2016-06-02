@@ -1,4 +1,8 @@
 <?php
+////////////////////////////////////////////////////////////////////////////////////////
+//                              frontend
+////////////////////////////////////////////////////////////////////////////////////////
+
 //изменения в php.ini
 //memory_limit = 128M поменял на (256M переставил обратно)
 //
@@ -14,9 +18,9 @@
 //max_input_time = 100
 //
 //а также тут \\\Secure FTP\_Quick Connection\etc\php5\cli\
-use \yii\web\Request;
+//use \yii\web\Request;
 
-$baseUrl = str_replace('/frontend/web', '', (new Request)->getBaseUrl());
+//$baseUrl = str_replace('/frontend/web', '', (new Request)->getBaseUrl());
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
@@ -28,7 +32,7 @@ $params = array_merge(
 //нужно расширение extension=php_intl.dll для работы перевода (интернационализация)
 return [
     'id' => 'app-frontend',
-    'name' => 'Сайт',
+    'name' => 'Я беременна',
     'aliases' => require(__DIR__ . '/aliases.php'),
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -57,29 +61,7 @@ return [
             'errorAction' => 'error/error',//контроллер и экшэн обработки ошибок
         ],
 //'urlManagerBackend' => require('../../backend/config/main.php'),
-        'urlManager' => [
-
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'enableStrictParsing' => true,
-            'rules' => [
-
-                '/' => 'site/index',
-                'site/<action>' => 'site/<action>',
-
-                /**
-                 *  правила роутинга для блога .
-                 * В представлении используем для вывода ссыок хелпер вида
-                 * Url::toRoute(['/blog/category', 'alias' => $category->alias])
-                 */
-                'articles/category/<alias:[\w_-]+>/<pageNum:\d+>' => 'blog/category',//категория по алиасу с цифрой страницы пагинации(articles/category/cat1/2)
-                'articles/<action:[\w-]+>/<alias:[\w_-]+>' => 'blog/<action>',//пост по алиасу(articles/post/cdscdsc), категория по алиасу(articles/category/cat1)
-                'articles/<pageNum:\d+>' => 'blog/index',//пагинация блога
-                'articles' => 'blog/index',
-
-
-            ],
-        ],
+        'urlManager' => require(__DIR__ . '/urlmanager.php'),
 
 
         'assetManager' => [

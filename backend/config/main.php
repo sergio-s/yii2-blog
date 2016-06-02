@@ -1,7 +1,9 @@
 <?php
-
-use \yii\web\Request;
-$baseUrl = str_replace('/backend/web', '', (new Request)->getBaseUrl());
+////////////////////////////////////////////////////////////////////////////////////////
+//                              backend
+////////////////////////////////////////////////////////////////////////////////////////
+//use \yii\web\Request;
+//$baseUrl = str_replace('/backend/web', '', (new Request)->getBaseUrl());
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
@@ -15,7 +17,19 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+
+    'controllerMap' => [
+        'geo-cities' =>[
+                'class' =>'backend\controllers\geo\GeoCitiesController'
+        ],
+        'geo-institutions' =>[
+                'class' =>'backend\controllers\geo\GeoInstitutionsController'
+        ],
+    ],
+
+    'modules' => [
+
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -34,26 +48,8 @@ return [
             'errorAction' => 'error/error',//контроллер и экшэн обработки ошибок
         ],
 
-        'urlManager' => [
-
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'enableStrictParsing' => true,
-            'baseUrl' => $baseUrl.'/backend/web',
-            'rules' => [
-                '<controller>/<action>' => '<controller>/<action>',
-                '<controller>/<action><id:\d+>' => '<controller>/<action>',
-                '/' => 'site/index',
-            ],
-        ],
-
-
-        'urlManagerFrontend' => [
-            'class' => 'yii\web\UrlManager',
-            'baseUrl' => $baseUrl,
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-        ],
+        'urlManager' => require(__DIR__ . '/urlmanager.php'),
+        //'urlManagerFrontend' => require(dirname(dirname (__DIR__ )).'/frontend/config/urlmanager.php'),
 
     ],
     'params' => $params,

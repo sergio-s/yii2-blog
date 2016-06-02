@@ -127,8 +127,8 @@ class CommentsController extends BaseAdmin
         }
 
         //return \yii\web\Response::redirect(['index'] , 302 , false);
-        return Yii::$app->getResponse()->redirect(['comments/index'], 302, false);
-        //return $this->redirect(['index']);
+        //return Yii::$app->getResponse()->redirect(['comments/index'], 302, false);
+        return $this->redirect(['index']);
     }
 
     /**

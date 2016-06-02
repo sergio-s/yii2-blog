@@ -165,10 +165,14 @@ class Comments extends \yii\db\ActiveRecord
         return new CommentsQuery(get_called_class());
     }
 
+    //получаем связанный материал по виду materialType
     public function getMaterial()
     {
         if($this->materialType == \common\models\comments\Comments::TYPE_BLOGPOST){
             return $this->hasOne(\common\models\BlogPostsTable::className(), ['id' => 'materialId']);
+        }
+        elseif($this->materialType == \common\models\comments\Comments::TYPE_GEOINSTITUTIONS){
+            return $this->hasOne(\backend\models\geo\GeoInstitutions::className(), ['id' => 'materialId']);
         }
         return false;
     }

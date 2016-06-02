@@ -36,14 +36,36 @@ class BlogController extends BaseAdmin
 
     public function beforeAction($action)
     {
-        if (parent::beforeAction($action)) {
-            if ($this->action->id == 'create') {
-                Yii::$app->controller->enableCsrfValidation = false;
-            }
+//        if (parent::beforeAction($action)) {
+//            if ($this->action->id == 'create') {
+//                Yii::$app->controller->enableCsrfValidation = false;
+//            }
+//
+//            return true;
+//        }
+//        return false;
+        $this->enableCsrfValidation = false;
 
-            return true;
-        }
-        return false;
+	return parent :: beforeAction($action);
+    }
+
+        // для загрузки картинок из визуального редактора текста
+    public function actions()
+    {
+        return [
+            'redactor-images-get' => [
+                'class' => 'vova07\imperavi\actions\GetAction',
+                'url' => Yii::getAlias('@blogImg-web/textpics/'), // Directory URL address, where files are stored.
+                'path' => Yii::getAlias('@blogImg-path/textpics'), // Or absolute path to directory where files are stored.
+                'type' => \vova07\imperavi\actions\GetAction::TYPE_IMAGES,
+            ],
+            'redactor-image-upload' => [
+                'class' => 'vova07\imperavi\actions\UploadAction',
+                'url' => Yii::getAlias('@blogImg-web/textpics/'), // Directory URL address, where files are stored.
+                'path' => Yii::getAlias('@blogImg-path/textpics') // Or absolute path to directory where files are stored.
+            ],
+
+        ];
     }
 
     /**
@@ -180,6 +202,7 @@ class BlogController extends BaseAdmin
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
@@ -188,7 +211,7 @@ class BlogController extends BaseAdmin
 
             if ($file && $file->tempName) {
                 $model->file = $file;
-
+                
 
                     //имя файла
                     $fileName = $model->file->baseName . '.' . $model->file->extension;

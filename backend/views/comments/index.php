@@ -24,11 +24,13 @@ Yii::$app->formatter->timeZone = 'UTC';
     <p>
         <?php //echo Html::a('Create Comments', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin([
-    'enablePushState' => false,
-    'timeout' => 10000,
-    'id' => 'comments-index',
-]); ?>
+<?php
+//Pjax::begin([
+//    'enablePushState' => false,
+//    'timeout' => 10000,
+//    'id' => 'comments-index',
+//]);
+?>
 
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -66,8 +68,16 @@ Yii::$app->formatter->timeZone = 'UTC';
                 'attribute' => 'materialId',
                 'format' => 'raw',
                 'value' => function ($model) {
-                        if ( null !== $model->material->title) {
-                            return "<span title='". $model->material->title ."' style='cursor: pointer;' >{$model->materialId}</span>";
+                        if($model->materialType === \common\models\comments\Comments::TYPE_BLOGPOST){
+                            if (isset($model->material->title) && (null !== $model->material->title)) {
+                                return "<span title='". $model->material->title ."' style='cursor: pointer;' >{$model->materialId}</span>";
+                            }
+
+                        }
+                        if($model->materialType === \common\models\comments\Comments::TYPE_GEOINSTITUTIONS){
+                            if (isset($model->material->name) && (null !== $model->material->name)) {
+                                return "<span title='". $model->material->name ."' style='cursor: pointer;' >{$model->materialId}</span>";
+                            }
                         }
 
                 },
@@ -114,7 +124,21 @@ Yii::$app->formatter->timeZone = 'UTC';
             ],
 
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+
+
+                ['class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'delete' => function ($url, $model, $key) {
+                        return  Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                                    'title' => Yii::t('yii', 'Delete'),
+                                    'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                    'data-method' => 'post',
+                                ]);
+                        },
+                    ],
+                ],
+            ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+<?php
+//Pjax::end();
+?></div>

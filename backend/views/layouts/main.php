@@ -24,7 +24,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 
 <style>
-    .blog-posts-table-index .grid-view td {
+    .grid-view td {
         white-space: normal;
     }
 /*    .padding-top{

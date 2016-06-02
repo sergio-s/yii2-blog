@@ -64,6 +64,7 @@ class CommentsSearch extends Comments
             return $dataProvider;
         }
 
+//возвращаем название статуса место цифры
 if($status = array_search($this->status, \common\models\comments\Comments::getStatusList())){
     $this->status = $status;
 }

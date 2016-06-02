@@ -16,8 +16,13 @@ return [
 
 
 //    ПУТИ К ИЗОБРАЖЕНИЯМ КОНТЕНТА
+
     '@blogImg-web' =>  $baseUrl.'/img/blog',//
     '@blogImg-path' => '@frontend/web/img/blog',
+
+    '@geoImg-web' =>  $baseUrl.'/img/geo',
+    '@geoImg-path' => '@frontend/web/img/geo',
+
 
     '@usersImg-web' =>  $baseUrl.'/img/users',//
     '@usersImg-path' => '@frontend/web/img/users',

@@ -49,6 +49,7 @@ class BaseAdmin extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            
         ];
     }
 
@@ -61,7 +62,8 @@ class BaseAdmin extends Controller
             }
             else{
                 if (!\Yii::$app->user->can(rbacRoles::ROLE_ADMIN)) {
-                    $message = 'Доступ запрещен. Вернитесь на ';
+                    $message = 'Вход только для администратора сайта. ';
+                    $message .= 'Вам в доступе отказано. Вернитесь на ';
                     $message .= "<a href='".Yii::$app->urlManagerFrontend->createUrl(['/'])."'>сайт</a>";
                     throw new ForbiddenHttpException($message);
                 }

@@ -106,7 +106,7 @@ class CommentsWidget extends Widget
                 $commentModelClass = new Comments(); //reset model
                 $commentForm = new CommentForm();
 //var_dump($commentModelClass->materialId);die;
-                //Yii::$app->session->setFlash($this->formId, 'Комментарий опубликован');
+                Yii::$app->session->setFlash($this->formId, 'Комментарий опубликован');
             }
 
 

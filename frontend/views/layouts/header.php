@@ -78,7 +78,7 @@ AppAsset::register($this);
                                 <div  id="header-logo" class="col-lg-9 col-lg-offset-1 col-md-10 col-sm-24 col-xs-24">
                                     <a href="">
                                         <span class="sprite sprite-logo hidden-xs"></span>
-                                        <img class="logo-img-xs visible-xs" src="css/img/logo.jpg" alt="...">
+                                        <img class="logo-img-xs visible-xs" src="<?=Yii::getAlias('@web/css/img/logo.jpg');?>" alt="...">
                                     </a>
                                 </div>
 

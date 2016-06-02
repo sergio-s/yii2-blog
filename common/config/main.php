@@ -1,13 +1,19 @@
 <?php
+////////////////////////////////////////////////////////////////////////////////////////
+//                             common
+////////////////////////////////////////////////////////////////////////////////////////
+
 use \yii\web\Request;
 $baseUrl = str_replace('/frontend/web', '', (new Request)->getBaseUrl());
 $baseUrl = str_replace('/backend/web', '', $baseUrl);
+
 
 return [
     'aliases' => require(__DIR__ . '/aliases.php'),
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language' => 'ru-RU',//язык нашего сайта по умолчанию
     'sourceLanguage' => 'ru-RU',
+    
 //    'modules' => [
 //        'comments' => [
 //            'class' => 'app\modules\comments\Module',
@@ -18,28 +24,9 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-//        'urlManager' => [
-//
-//            'enablePrettyUrl' => true,
-//            'showScriptName' => false,
-//            'enableStrictParsing' => true,
-//            'rules' => [
-//
-//             ],
-//        ],
-
-        'urlManagerBackend' => [
-            'class' => 'yii\web\UrlManager',
-            'baseUrl' => $baseUrl.'/backend',
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-//$backendUrl = \Yii::$app->urlManagerBackend->createUrl(['admin'])
-                'admin' => 'site/index',
-
-            ],
-
-        ],
+        //для ссылок в админки во фронт и на оборот
+        'urlManagerFrontend' => require(dirname(dirname (__DIR__ )).'/frontend/config/urlmanager.php'),
+        'urlManagerBackend' =>  require(dirname(dirname (__DIR__ )).'/backend/config/urlmanager.php'),
 
         //роли и авторизация
         'authManager' => [
@@ -61,7 +48,7 @@ return [
                         'app/error' => 'error.php',
                     ],
                 ],
-                
+
             ],
         ],
 

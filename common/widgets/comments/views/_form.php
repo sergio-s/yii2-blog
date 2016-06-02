@@ -4,34 +4,32 @@
     use yii\helpers\Html;
     use yii\helpers\Url;
     use yii\captcha\Captcha;
-    use dosamigos\tinymce\TinyMce;
-    //use yii\bootstrap\Progress
 ?>
 
-<?php //if(Yii::$app->session->hasFlash($formId) ): ?>
+<?php if(Yii::$app->session->hasFlash($formId) ): ?>
 <!--<div id="mes" style="color:green;">
     <?php //echo Yii::$app->session->getFlash($formId); ?>
 </div>-->
 
-<!--<div id="mes" class="alert alert-success">
-  <?php //echo Yii::$app->session->getFlash($formId); ?>
-</div>-->
+<div id="mes" class="alert alert-success">
+  <?php echo Yii::$app->session->getFlash($formId); ?>
+</div>
 
-<?php //endif;?>
+<?php endif;?>
 
 <?php
-//$js = " $('#{$pjaxContainerId}').on('pjax:end', function() {
-//    $('#mes').css('display', 'none');
-//    $('#mes').fadeIn(1000);
-//
-//
-//        $('textarea').focus(function() {
-//            $('#mes').fadeOut(1000);
-//        });
-//
-//    })";
-//
-//  $this->registerJs($js, $this::POS_READY);
+$js = " $('#{$pjaxContainerId}').on('pjax:end', function() {
+    $('#mes').css('display', 'none');
+    $('#mes').fadeIn(1000);
+
+
+        $('textarea').focus(function() {
+            $('#mes').fadeOut(1000);
+        });
+
+    })";
+
+  $this->registerJs($js, $this::POS_READY);
 ?>
 
 
@@ -55,26 +53,6 @@
     ]); ?>
 
     <?php echo $form->field($commentForm, 'message', ['template' => '{input}{error}'])->textarea(['placeholder' => 'Добавить комментарий', 'data' => ['comment' => 'message'], 'id' => 'message_textarea']) ?>
-
-    <?php
-//    echo $form->field($commentForm, 'message')->widget(TinyMce::className(), [
-//    'options' => ['rows' => 8],
-//    'language' => 'ru',
-//    'clientOptions' => [
-//        'plugins' => [
-//            "advlist autolink lists link charmap print preview anchor",
-//            "searchreplace visualblocks code fullscreen",
-//            "insertdatetime media table contextmenu paste",
-//            "textcolor",
-//            "fullscreen",
-//            //"image",
-//        ],
-//        'menubar'=> false,
-//        'toolbar' => "bold italic | bullist numlist outdent indent  ",
-//
-//    ]
-//    ])
-    ;?>
 
     <?php echo $form->field($commentForm, 'parentId', ['template' => '{input}'])->hiddenInput(['id' => 'hiddenInputParentId']); ?>
 <!--    <input type="hidden" name="_csrf" value="<?php //echo Yii::$app->request->getCsrfToken()?>" />-->
