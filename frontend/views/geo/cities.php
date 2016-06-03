@@ -8,6 +8,7 @@ use common\widgets\googlemap\GoogleMapWidget;
 use common\models\comments\Comments;
 
 \frontend\assets\GeoAsset::register($this);
+\frontend\assets\GoogleMapAsset::register($this);
 
 $this->params['breadcrumbs'][] = array('label'=> 'Рейтинг роддомов', 'url'=> Url::toRoute('/geo/index'));
 $this->params['breadcrumbs'][] = Html::encode($this->context->h1);
@@ -25,7 +26,7 @@ $this->params['breadcrumbs'][] = Html::encode($this->context->h1);
                                                         'zoom' => '10',
                                                         'center' => ['lat' => $city->lat, 'lng' => $city->lng],
                                                 ],
-                                                'marker' =>  $markerMap,
+                                                'marker' =>  $markerMap,//контент infowindow устанавливается в контроллере
 //                                                'marker' =>   [
 //                                                        ['title' => 'россия','lat' => $country->lat,'lng' => $country->lng, 'infowindow' => ['content' => 'россия']],
 //                                                        ['title' => 'москва','lat' => '55.755826','lng' => '37.6173', 'infowindow' => ['content' => 'москва']],

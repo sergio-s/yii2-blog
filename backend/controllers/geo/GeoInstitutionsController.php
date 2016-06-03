@@ -8,6 +8,7 @@ use backend\models\geo\GeoInstitutions;
 use backend\models\geo\GeoInstitutionsSearch;
 use backend\models\geo\GeoInstitutionsPhotos;
 use backend\models\geo\GeoInstitutionsPhones;
+use common\models\likes\Likes;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -232,6 +233,14 @@ class GeoInstitutionsController extends BaseAdmin
      */
     public function actionDelete($id)
     {
+        self::deleteInstitution($id);
+
+        return $this->redirect(['index']);
+    }
+
+    //удаление по id института
+    public static function deleteInstitution($id)
+    {
         //удаляем старые телефоны
         GeoInstitutionsPhones::deleteAll(['institution_id' => $id]);
 
@@ -242,10 +251,12 @@ class GeoInstitutionsController extends BaseAdmin
         $dir = Yii::getAlias('@geoImg-path/institution-'.$id.'/');
         FileHelper::removeDirectory($dir);
 
-        $this->findModel($id)->delete();
+        //удаляем лайки , если есть
+        Likes::deleteAll(['materialType' => Likes::TYPE_GEOINSTITUTIONS, 'materialId' => $id]);
 
+        static::findModelInstitution($id)->delete();
 
-        return $this->redirect(['index']);
+        return;
     }
 
     /**
@@ -256,6 +267,15 @@ class GeoInstitutionsController extends BaseAdmin
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
+    {
+        if (($model = GeoInstitutions::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    //то же функция, что и findModel($id) ,только статическая
+    protected static function findModelInstitution($id)
     {
         if (($model = GeoInstitutions::findOne($id)) !== null) {
             return $model;

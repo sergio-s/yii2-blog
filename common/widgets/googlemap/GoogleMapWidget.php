@@ -66,11 +66,11 @@ class GoogleMapWidget extends Widget
     protected function registerClientScript($position = View::POS_END)
     {
         $view = $this->getView();
-        $bundleName = GoogleMapAsset::className();
-        $bundle = new $bundleName;
-        $bundle->css = ['css/google.maps.css',];
-        //var_dump($bundle);die;
-        $bundle::register($view);
+//        $bundleName = GoogleMapAsset::className();
+//        $bundle = new $bundleName;
+//        $bundle->css = ['css/google.maps.css',];
+//        //var_dump($bundle);die;
+//        $bundle::register($view);
 
 
         $view->registerJs($this->getJs(), $position);

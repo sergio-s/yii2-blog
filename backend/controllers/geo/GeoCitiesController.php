@@ -7,6 +7,7 @@ use backend\controllers\BaseAdmin;
 use backend\models\geo\GeoCountries;
 use backend\models\geo\GeoCities;
 use backend\models\geo\GeoCitiesSearch;
+use backend\models\geo\GeoInstitutions;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -120,6 +121,18 @@ class GeoCitiesController extends BaseAdmin
      */
     public function actionDelete($id)
     {
+
+        //извлекаем массив id учреждений данного города
+        $institutionsId = GeoInstitutions::find()
+                                            ->where(['city_id' => $id])
+                                            ->select('id')
+                                            ->all();
+
+        //удаляем все учреждения этого города и связанные с ними данные(фото, лайки, телефоны)
+        foreach($institutionsId as $institutionId){
+            GeoInstitutionsController::deleteInstitution($institutionId->id);
+        }
+        //удаляем город из БД
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

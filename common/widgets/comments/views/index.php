@@ -17,7 +17,7 @@ use yii\helpers\HtmlPurifier;
 <div class="comments row" data-last-insert-id="<?=$lastInsertID;?>">
     <div class="col-md-24 col-xs-24">
         <div class="title-block clearfix">
-            <h3 class="h3-body-title">Комментарии <small>(<?=$totalCount;?>)</small></h3>
+            <h3 class="h3-body-title"><?=$title;?> <small>(<?=$totalCount;?>)</small></h3>
             <div class="title-separator"></div>
         </div>
         <ol class="comments-list">

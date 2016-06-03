@@ -77,3 +77,16 @@ ul.institution_info > li strong{
     font-weight: bold;
     color:green;
 }
+#ratingBlock{
+    box-shadow:rgba(0, 0, 0, 0.247059) 0 1px 3px 0;
+    border-radius:1px;
+    padding:15px;
+}
+#ratingBlockInfo strong{
+    color:#000;
+}
+#ratingBlockInfo small:first-child strong{
+    color:green;
+    font-weight: bold;
+    font-size: 17px;
+}

@@ -14,12 +14,15 @@ use Yii;
  * @property string $lat
  * @property string $lng
  * @property string $description
- *
+ * rating
+ * ratingVotes
  * @property GeoCities $city
  * @property GeoInstitutionsPhones[] $geoInstitutionsPhones
  */
 class GeoInstitutions extends \yii\db\ActiveRecord
 {
+    const RATING_UPDATE = 'rating';
+
     /**
      * @inheritdoc
      */
@@ -40,6 +43,8 @@ class GeoInstitutions extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['name', 'address'], 'string', 'max' => 255],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => GeoCities::className(), 'targetAttribute' => ['city_id' => 'id']],
+
+            [['rating', 'ratingVotes'], 'safe'],
         ];
     }
 
@@ -56,7 +61,20 @@ class GeoInstitutions extends \yii\db\ActiveRecord
             'lat' => 'широта',
             'lng' => 'долгота',
             'description' => 'краткое описание',
+            'rating' => 'суммарный рейтинг',
+            'ratingVotes' => 'суммарное количество проголосовавших',
         ];
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+
+        $scenarios[self::RATING_UPDATE] = [
+                                        'rating',
+                                        'ratingVotes',
+                                    ];
+        return $scenarios;
     }
 
     /**
@@ -83,7 +101,7 @@ class GeoInstitutions extends \yii\db\ActiveRecord
         return $this->hasMany(GeoInstitutionsPhotos::className(), ['institution_id' => 'id']);
     }
 
-    
+
     /**
      * @inheritdoc
      * @return GeoInstitutionsQuery the active query used by this AR class.

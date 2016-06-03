@@ -14,10 +14,11 @@
  *
  */
 
-namespace common\widgets\googlemap;
+//namespace common\widgets\googlemap;
+namespace frontend\assets;
 
 use yii\web\AssetBundle;
-
+use yii\web\View;
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -29,7 +30,7 @@ class GoogleMapAsset extends AssetBundle
 
     //public $sourcePath = '@common/widgets/googlemap/assets';
 
-    public $css = [
+   public $css = [
         'css/google.maps.css',
     ];
 
@@ -52,16 +53,7 @@ class GoogleMapAsset extends AssetBundle
 
     public function init()
     {
-//        $js_copy_protect = 'js/copy-protect.js';//защита от ручного копипаста контента
-//
-//        //если не админ,то подключаем скрипт
-//        if (!\Yii::$app->user->can('adminCrud'))
-//        {
-//            array_push($this->js, $js_copy_protect);
-//        }
-//
-//        unset($js_copy_protect);
-
+        $this->jsOptions['position'] = View::POS_END;
         parent::init();
     }
 }

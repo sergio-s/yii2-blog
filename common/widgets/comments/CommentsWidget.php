@@ -24,6 +24,7 @@ class CommentsWidget extends Widget
      */
     public $formId = 'comment-form';
 
+    public $title = 'Комментарии';//загаловок перед формой комментариев
     /**
      * @var string|null
      */
@@ -125,6 +126,7 @@ class CommentsWidget extends Widget
                                         'maxLevel' => $this->maxLevel,
                                         'totalCount' => $totalCount,
                                         'lastInsertID' => $this->lastInsertID,
+                                        'title' => $this->title,
 
         ]);
 

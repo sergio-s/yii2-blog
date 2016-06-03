@@ -7,6 +7,7 @@ use yii\helpers\BaseStringHelper;
 use common\widgets\googlemap\GoogleMapWidget;
 
 \frontend\assets\GeoAsset::register($this);
+\frontend\assets\GoogleMapAsset::register($this);
 
 $this->params['breadcrumbs'][] = $this->context->h1;
 ?>
