@@ -39,36 +39,40 @@ $this->params['breadcrumbs'][] = Html::encode($this->context->h1);
     </div>
 
     <br>
-    <?php if(isset($city->geoInstitutions) && NULL != $city->geoInstitutions):?>
-        <table class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th>Роддом</th>
-                <th>Адресс</th>
-                <th>Телефон</th>
-                <th>Рейтинг</th>
-                <th>Отзывов</th>
-            </tr>
-            </thead>
-            <tbody>
+    <div class="row">
+        <div class="col-md-24" style="overflow: hidden;">
+            <?php if(isset($city->geoInstitutions) && NULL != $city->geoInstitutions):?>
+                <table class="table table-bordered table-striped" id="ratingTable">
+                    <thead>
+                    <tr>
+                        <th>Роддом</th>
+                        <th>Адресс</th>
+                        <th>Телефон</th>
+                        <th>Рейтинг</th>
+                        <th>Отзывов</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-            <?php foreach($city->geoInstitutions as $institution):?>
-                <tr>
-                    <th><a href="<?=Url::toRoute(['/geo/institutions', 'instId' => $institution->id]);?>"><?=Html::encode($institution->name);?></a></th>
-                    <th><?=Html::encode($institution->address);?></th>
-                    <?php if(NULL != $institution->geoInstitutionsPhones):?>
-                        <th>
-                            <?php foreach($institution->geoInstitutionsPhones as $phone):?>
-                                <p><small><?=$phone->phone_char;?></small></p>
-                            <?php endforeach;?>
-                        </th>
-                    <?php endif;?>
-                    <th><?=$institution->rating;?></th>
-                    <th><?=Comments::getCount(Comments::TYPE_GEOINSTITUTIONS, $institution->id, Comments::ACTIVE);?></th>
-                </tr>
-            <?php endforeach;?>
+                    <?php foreach($city->geoInstitutions as $institution):?>
+                        <tr>
+                            <td><a href="<?=Url::toRoute(['/geo/institutions', 'instId' => $institution->id]);?>"><?=Html::encode($institution->name);?></a></td>
+                            <td><?=Html::encode($institution->address);?></td>
+                            <?php if(NULL != $institution->geoInstitutionsPhones):?>
+                                <td>
+                                    <?php foreach($institution->geoInstitutionsPhones as $phone):?>
+                                        <p><small><?=$phone->phone_char;?></small></p>
+                                    <?php endforeach;?>
+                                </td>
+                            <?php endif;?>
+                            <td><?=$institution->rating;?></td>
+                            <td><?=Comments::getCount(Comments::TYPE_GEOINSTITUTIONS, $institution->id, Comments::ACTIVE);?></td>
+                        </tr>
+                    <?php endforeach;?>
 
-            </tbody>
-        </table>
-    <?php endif;?>
+                    </tbody>
+                </table>
+            <?php endif;?>
+        </div>
+    </div>
 </div>

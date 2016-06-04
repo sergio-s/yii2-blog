@@ -182,15 +182,15 @@ $this->params['breadcrumbs'][] = Html::encode($this->context->h1);
 
     <?php if(isset($institution->geoInstitutionsPhotos) && NULL != $institution->geoInstitutionsPhotos):?>
     <div class="row">
-        <div class="col-md-20 col-md-offset-2">
+        <div class="col-xs-20 col-xs-offset-2">
             <div class="row" id="geo_institutions_photos">
 
                 <?php $i = 1;?>
                 <?php foreach($institution->geoInstitutionsPhotos as $photo):?>
                     <?php if($i === 1): ?>
-                        <div class="col-md-24 institutions_big_photo"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
+                        <div class="col-xs-24 institutions_big_photo"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
                     <?php else: ?>
-                        <div class="col-md-8"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
+                        <div class="col-xs-8"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
                     <?php endif;?>
                 <?php $i++;?>
                 <?php endforeach;?>

@@ -99,7 +99,7 @@ class GeoController extends BaseFront
                 $markerMap[$i]['title'] = $institution->name;
                 $markerMap[$i]['lat'] = $institution->lat;
                 $markerMap[$i]['lng'] = $institution->lng;
-                $markerMap[$i]['infowindow']['content']   = $this->renderPartial('infowindow',['institution' => $institution,]);
+                $markerMap[$i]['infowindow']['content']   = $this->renderPartial('infowindowCities',['institution' => $institution,]);
 
                 $i++;
            }

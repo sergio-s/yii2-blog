@@ -38,7 +38,9 @@ AppAsset::register($this);
             <script src="js/html5shiv.min.js"></script>
             <script src="js/respond.min.js"></script>
         <![endif]-->
+
     </head>
+
     <?php $this->beginBody() ?>
     <body>
         <div id="all">
