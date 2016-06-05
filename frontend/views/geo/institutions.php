@@ -13,6 +13,7 @@ use kartik\rating\StarRating;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Modal;
 
+
 \frontend\assets\GeoAsset::register($this);
 \frontend\assets\ColorboxAsset::register($this);
 \frontend\assets\GoogleMapAsset::register($this);
@@ -23,9 +24,9 @@ $this->params['breadcrumbs'][] = Html::encode($this->context->h1);
 ?>
 <h1><?=Html::encode($this->context->h1);?></h1>
 
-<!--<script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8"></script>
-<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,whatsapp"></div>-->
+<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,whatsapp"></div>
 
 
 <?php echo LikesWidget::widget(['materialType'=> Likes::TYPE_GEOINSTITUTIONS, 'materialId'=> $institution->id]); ?>
@@ -79,6 +80,36 @@ $this->params['breadcrumbs'][] = Html::encode($this->context->h1);
 
     </ul>
 
+
+    <?php if(isset($institution->geoInstitutionsPhotos) && NULL != $institution->geoInstitutionsPhotos):?>
+    <div class="row">
+        <div class="col-xs-20 col-xs-offset-2">
+            <div class="row" id="geo_institutions_photos">
+
+                <?php $i = 1;?>
+                <?php foreach($institution->geoInstitutionsPhotos as $photo):?>
+                    <?php if($i === 1): ?>
+                        <div class="col-xs-24 institutions_big_photo"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
+                    <?php else: ?>
+                        <div class="col-xs-8"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
+                    <?php endif;?>
+                <?php $i++;?>
+                <?php endforeach;?>
+
+             </div>
+        </div>
+    </div>
+    <?php endif;?>
+
+
+
+
+</div>
+
+<?php echo CommentsWidget::widget(['title' => 'Оставьте ваш отзыв по роддому', 'materialType'=> Comments::TYPE_GEOINSTITUTIONS, 'materialId'=> $institution->id]); ?>
+
+
+
 <?php
 
        Modal::begin(['id' => 'myModal-geo','header' => '<h2>Сообщение для Вас!</h2>',]);
@@ -93,7 +124,7 @@ $this->params['breadcrumbs'][] = Html::encode($this->context->h1);
 //        $this->registerJs($js);
 ?>
 
-    <div id="ratingBlock">
+    <div id="ratingBlock" style="margin-top: -24px;">
         <div class="row">
             <p class="col-md-5" id="ratingBlockInfo">
                 <small>Рейтинг: <strong id="numRait"><?=$institution->rating;?></strong></small><br>
@@ -144,11 +175,11 @@ $this->params['breadcrumbs'][] = Html::encode($this->context->h1);
 
                                 $.ajax({
                                     type: 'POST',
-                                    url: '".Url::to()."',
-                                    data: {'rait': value},
+                                    url: '".Url::to()."',//адрес контроллера и экшена. Так как вид вызван из того же экшена, что и обработка этого запроса, тооставляем пустым или пишем - controller/action
+                                    data: {'rait': value},// value - число выбранных звезд
                                     cache: false,
                                     success: function(data) {
-                                        var data = jQuery.parseJSON(data);
+                                        var data = jQuery.parseJSON(data);//конвертируем json обьект, что передаем из php  в обьект jquery
                                         var inputRating = $('#geoinstitutions-rating');
 
                                         if (typeof data.message !== 'undefined') {
@@ -180,29 +211,9 @@ $this->params['breadcrumbs'][] = Html::encode($this->context->h1);
         </div>
     </div>
 
-    <?php if(isset($institution->geoInstitutionsPhotos) && NULL != $institution->geoInstitutionsPhotos):?>
-    <div class="row">
-        <div class="col-xs-20 col-xs-offset-2">
-            <div class="row" id="geo_institutions_photos">
+<br>
 
-                <?php $i = 1;?>
-                <?php foreach($institution->geoInstitutionsPhotos as $photo):?>
-                    <?php if($i === 1): ?>
-                        <div class="col-xs-24 institutions_big_photo"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
-                    <?php else: ?>
-                        <div class="col-xs-8"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
-                    <?php endif;?>
-                <?php $i++;?>
-                <?php endforeach;?>
 
-             </div>
-        </div>
-    </div>
-    <?php endif;?>
-</div>
-
-<?php echo CommentsWidget::widget(['title' => 'Оставьте ваш отзыв по роддому', 'materialType'=> Comments::TYPE_GEOINSTITUTIONS, 'materialId'=> $institution->id]); ?>
-
-<!--<script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8"></script>
-<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,whatsapp"></div>-->
+<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,whatsapp"></div>

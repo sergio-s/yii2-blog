@@ -31,7 +31,7 @@ use yii\bootstrap\Modal;
     //$widgetId - имя сессии
     if(Yii::$app->session->hasFlash($widgetId) != null)
     {
-        Modal::begin(['id' => 'myModal-header','header' => '<h2>Сообщение !</h2>',]);
+        Modal::begin(['id' => 'myModal-likes','header' => '<h2>Сообщение !</h2>',]);
             echo "<h2 style='color:green;'>";
                 echo "<strong>";
                     echo Yii::$app->session->getFlash($widgetId);
@@ -39,7 +39,7 @@ use yii\bootstrap\Modal;
             echo "</h2>";
         Modal::end();
         //вызываем модальное окно в этом блоке
-        $js = "$('#myModal-header').modal()";
+        $js = "$('#myModal-likes').modal()";
         $this->registerJs($js);
 
     }

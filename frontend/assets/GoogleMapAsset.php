@@ -18,7 +18,7 @@
 namespace frontend\assets;
 
 use yii\web\AssetBundle;
-use yii\web\View;
+//use yii\web\View;
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -42,18 +42,21 @@ class GoogleMapAsset extends AssetBundle
     public $jsOptions = [
         'async' => 'async',
         'defer' => 'defer',
+        //'position' => \yii\web\View::POS_END,//не выставлять
+        'forceCopy' => true,
     ];
 
 
-    public $depends = [
+
+//    public function init()
+//    {
+//        $this->jsOptions['position'] = View::POS_END;
+//        parent::init();
+//    }
+
+      public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
 
-
-    public function init()
-    {
-        $this->jsOptions['position'] = View::POS_END;
-        parent::init();
-    }
 }

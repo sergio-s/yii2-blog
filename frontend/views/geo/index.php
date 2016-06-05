@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use yii\helpers\BaseStringHelper;
 use common\widgets\googlemap\GoogleMapWidget;
 
+
 \frontend\assets\GeoAsset::register($this);
 \frontend\assets\GoogleMapAsset::register($this);
 

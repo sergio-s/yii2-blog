@@ -65,6 +65,8 @@ return [
 
 
         'assetManager' => [
+            'class' => 'yii\web\AssetManager',
+            //'forceCopy' => YII_DEBUG, //true - перезаписывает не используя кеш, YII_DEBUG - только в разработке
             'bundles' => [
                 //регестрируем свой bootstrap за место встроенного
                 'yii\bootstrap\BootstrapAsset' => [

@@ -27,7 +27,16 @@ AppAsset::register($this);
                                         <!--контент-->
                                         <div class="row">
                                             <div class="col-md-24 block-style-1 block-shadow">
-                                                <p class="label-subscribe">Подпишитесь на бесплатную рассылку. Получите в подарок бесплатную версию журнала.</p>
+
+
+                                                <p class="label-subscribe">
+                                                    Подпишитесь на бесплатную рассылку. <br>Получите в подарок <span class="vazhnoe">бесплатную версию журнала</span> "Я БЕРЕМЕННА".</p>
+
+                                                <div style="margin-bottom: 10px; text-align: center; ">
+<!--                                                    <img src="/css/img/oblojka2.jpg" style="width: 50%; ">-->
+                                                    <?= Html::img('@web/css/img/oblojka2.jpg', ['style'=>['width' => '50%']]);?>
+                                                </div>
+
                                                 <div class="row">
                                                     <?=$this->render('@app/views/layouts/sidebar/common/subscribe.php'); ?>
                                                 </div>
@@ -46,10 +55,10 @@ AppAsset::register($this);
                                                 <span class="sprite sprite-circle-bell"></span>
                                                 <h3 class="h3-selection b-dash-light-yellow">
                                                     <!--Новости-->
-                                                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Новости'; ?>
+                                                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Другие статьи'; ?>
                                                 </h3>
                                                 <p class="h3-control">
-                                                    <a class="control-but">Все</a>
+                                                    <a href="/articles" class="control-but">Все</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -135,16 +144,16 @@ AppAsset::register($this);
                                 </div>
 
                                 <!--секция - блок иконок и категорий-->
-                                <div id="iconslinks-aside" class="row selection">
+                                <!-- <div id="iconslinks-aside" class="row selection">
                                     <div class="col-md-24">
-                                        <!--заголовок-->
+
                                         <div class="row">
                                             <div class="h3-box-selection">
                                                 <span class="sprite sprite-circle-women"></span>
                                                 <h3 class="h3-selection b-dash-light-purple">Удобная беременность</h3>
                                             </div>
                                         </div>
-                                        <!--контент-->
+
                                         <div class="row">
                                             <div class="col-md-24 block-style-1 block-shadow">
                                                 <div class="row iconslinks-aside-box">
@@ -253,34 +262,162 @@ AppAsset::register($this);
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> -->
+
+    <div class="row selection">
+
+        <script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
+
+        <!-- VK Widget -->
+        <div id="vk_groups" style="margin: auto; "></div>
+        <script type="text/javascript">
+            VK.Widgets.Group("vk_groups", {
+                mode: 0,
+                width: "400",
+                height: "400",
+                color1: 'FFFFFF',
+                color2: '2B587A',
+                color3: '5B7FA6'
+            }, 121676155);
+        </script>
+
+    </div>
+
 
                                 <!--секция - блок слайдер-->
+<?php
+    $this->registerCssFile('@web/css/owl.carousel.css',  ['position' => yii\web\View::POS_HEAD]);
+    $this->registerCssFile('@web/css/owl.theme.default.min.css',  ['position' => yii\web\View::POS_HEAD]);
+
+    $this->registerJsFile('@web/js/owl.carousel.min.js',  ['position' => yii\web\View::POS_END]);
+?>
+<!--    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <script src="/js/owl.carousel.min.js"></script>-->
+
+    <script>
+        $(document).ready(function(){
+            $("#daypregnant").owlCarousel({
+                items : 1,
+                loop : true,
+                autoplay : true,
+                autoplayTimeout : 4000
+            });
+        });
+    </script>
+
+    <style>
+        #slider-aside .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+            background: #CCBBA2;
+        }
+    </style>
+
                                 <div id="slider-aside" class="row selection">
                                     <div class="col-md-24">
-                                        <!--заголовок-->
+
                                         <div class="row">
                                             <div class="h3-box-selection">
                                                 <span class="sprite sprite-circle-ey"></span>
                                                 <h3 class="h3-selection b-dash-light-brown">Новый день</h3>
-                                                <p class="h3-control">
+                                                <p class="h3-control" style="display: none; ">
                                                     <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
                                                     <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
                                                 </p>
                                             </div>
                                         </div>
-                                        <!--контент-->
+
                                         <div class="row">
-                                            <div class="col-md-24 block-style-1 block-shadow">
+                                            <div id="daypregnant" class="col-md-24 block-style-1 block-shadow">
                                                 <div class="aside-block-slider">
                                                     <div id="aside-slider-box">
-                                                        <?= Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?>
-                                                        <span id="l-b-aside-slider-box" class="sprite sprite-left-arrow-medium"></span>
-                                                        <span id="r-b-aside-slider-box" class="sprite sprite-rigth-arrow-medium"></span>
+<!--                                                        <img class="" src="/css/img/slider1.jpg" alt="">-->
+                                                        <?= Html::img('@web/css/img/slider1.jpg', ['alt'=>'', 'class'=>'']);?>
                                                     </div>
 
                                                     <div class="aside-caption-slider">
-                                                        <a href="#" class="">Какой-то текст (описание).Какой-то текст (описание).Какой-то текст.</a>
+                                                        <a href="#" class="">Любовь</a>
+                                                    </div>
+                                                </div>
+                                                <div class="aside-block-slider">
+                                                    <div id="aside-slider-box">
+<!--                                                        <img class="" src="/css/img/slider2.jpg" alt="">-->
+                                                        <?= Html::img('@web/css/img/slider2.jpg', ['style'=>'']);?>
+                                                    </div>
+
+                                                    <div class="aside-caption-slider">
+                                                        <a href="#" class="">Долгожданное</a>
+                                                    </div>
+                                                </div>
+                                                <div class="aside-block-slider">
+                                                    <div id="aside-slider-box">
+                                                        <?= Html::img('@web/css/img/slider3.jpg', ['alt'=>'', 'class'=>'']);?>
+                                                    </div>
+
+                                                    <div class="aside-caption-slider">
+                                                        <a href="#" class="">Привет, это я</a>
+                                                    </div>
+                                                </div>
+                                                <div class="aside-block-slider">
+                                                    <div id="aside-slider-box">
+                                                        <?= Html::img('@web/css/img/slider4.jpg', ['alt'=>'', 'class'=>'']);?>
+                                                    </div>
+
+                                                    <div class="aside-caption-slider">
+                                                        <a href="#" class="">Счастье</a>
+                                                    </div>
+                                                </div>
+                                                <div class="aside-block-slider">
+                                                    <div id="aside-slider-box">
+                                                        <?= Html::img('@web/css/img/slider5.jpg', ['alt'=>'', 'class'=>'']);?>
+                                                    </div>
+
+                                                    <div class="aside-caption-slider">
+                                                        <a href="#" class="">Как дела</a>
+                                                    </div>
+                                                </div>
+                                                <div class="aside-block-slider">
+                                                    <div id="aside-slider-box">
+                                                        <?= Html::img('@web/css/img/slider6.jpg', ['alt'=>'', 'class'=>'']);?>
+                                                    </div>
+
+                                                    <div class="aside-caption-slider">
+                                                        <a href="#" class="">Папа, мама, я</a>
+                                                    </div>
+                                                </div>
+                                                <div class="aside-block-slider">
+                                                    <div id="aside-slider-box">
+                                                        <?= Html::img('@web/css/img/slider7.jpg', ['alt'=>'', 'class'=>'']);?>
+                                                    </div>
+
+                                                    <div class="aside-caption-slider">
+                                                        <a href="#" class="">Мгновение</a>
+                                                    </div>
+                                                </div>
+                                                <div class="aside-block-slider">
+                                                    <div id="aside-slider-box">
+                                                        <?= Html::img('@web/css/img/slider8.jpg', ['alt'=>'', 'class'=>'']);?>
+                                                    </div>
+
+                                                    <div class="aside-caption-slider">
+                                                        <a href="#" class="">Очень скоро</a>
+                                                    </div>
+                                                </div>
+                                                <div class="aside-block-slider">
+                                                    <div id="aside-slider-box">
+                                                        <?= Html::img('@web/css/img/slider9.jpg', ['alt'=>'', 'class'=>'']);?>
+                                                    </div>
+
+                                                    <div class="aside-caption-slider">
+                                                        <a href="#" class="">Новые открытия</a>
+                                                    </div>
+                                                </div>
+                                                <div class="aside-block-slider">
+                                                    <div id="aside-slider-box">
+                                                        <?= Html::img('@web/css/img/slider10.jpg', ['alt'=>'', 'class'=>'']);?>
+                                                    </div>
+
+                                                    <div class="aside-caption-slider">
+                                                        <a href="#" class="">Ты и я</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -290,6 +427,28 @@ AppAsset::register($this);
                                 </div>
 
                                 <!--секция - цитаты-->
+
+    <script>
+        $(document).ready(function(){
+            $("#citati").owlCarousel({
+                items : 1,
+                loop : true,
+                autoplay : true,
+                autoplayTimeout : 6000
+            });
+        });
+    </script>
+    <style>
+        .owl-theme .owl-controls {
+            margin-top: 0px;
+        }
+        #quote-aside .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+            background: #EFA4C9;
+        }
+    </style>
+
+
+
                                 <div id="quote-aside" class="row selection">
                                     <div class="col-md-24">
                                         <!--заголовок-->
@@ -297,27 +456,122 @@ AppAsset::register($this);
                                             <div class="h3-box-selection">
                                                 <span class="sprite sprite-circle-bulb-rose"></span>
                                                 <h3 class="h3-selection b-dash-light-rose-2">Цитатник</h3>
-                                                <p class="h3-control">
-                                                    <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
-                                                    <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
-                                                </p>
                                             </div>
                                         </div>
                                         <!--контент-->
                                         <div class="row">
-                                            <div class="col-md-24 block-style-1 block-shadow">
+                                            <div id="citati" class="col-md-24 block-style-1 block-shadow">
                                                 <div id="quote-box-aside">
-                                                    <?= Html::img('@web/css/img/index.jpg', ['alt'=>'', 'class'=>'']);?>
                                                     <div id="blockquote-wrap">
                                                         <blockquote>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                                                            Если больному после разговора с врачом не стало легче, то это не врач.
                                                         </blockquote>
                                                         <div id="blockquote-footer">
-                                                            <cite title="Source Title">Эдуард Эствил</cite>
-                                                            <p>Доктор</p>
+                                                            <cite title="Source Title">Владимир Бехтерев</cite>
+                                                            <p>Психолог</p>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div id="quote-box-aside">
+                                                    <div id="blockquote-wrap">
+                                                        <blockquote>
+                                                            Воспитывать... самая трудная вещь. Думаешь: ну, все теперь кончилось! Не тут-то было: только начинается!
+                                                        </blockquote>
+                                                        <div id="blockquote-footer">
+                                                            <cite title="Source Title">Лермонтов М. Ю.</cite>
+                                                            <p>Поэт</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div id="quote-box-aside">
+                                                    <div id="blockquote-wrap">
+                                                        <blockquote>
+                                                            Все в женщине – загадка, и все в женщине имеет одну разгадку: она называется беременностью.
+                                                            Мужчина для женщины средство; целью бывает всегда ребенок.
+                                                        </blockquote>
+                                                        <div id="blockquote-footer">
+                                                            <cite title="Source Title">Фридрих Вильгельм Ницше.</cite>
+                                                            <p>Так говорил Заратустра</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="quote-box-aside">
+                                                    <div id="blockquote-wrap">
+                                                        <blockquote>
+                                                            Акушерство так же непредсказуемо, как поведение породистого жеребца. Сейчас он — само спокойствие, а через две минуты может, испугавшись ёжика, подняться в галоп.
+                                                        </blockquote>
+                                                        <div id="blockquote-footer">
+                                                            <cite title="Source Title">Татьяна Соломатина.</cite>
+                                                            <p>Акушер</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="quote-box-aside">
+                                                    <div id="blockquote-wrap">
+                                                        <blockquote>
+                                                            Женщина — всегда женщина. Даже с огромным животом в предбаннике операционной. Если рядом, конечно, есть мужчина.
+                                                        </blockquote>
+                                                        <div id="blockquote-footer">
+                                                            <cite title="Source Title">Татьяна Соломатина.</cite>
+                                                            <p>Акушер</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="quote-box-aside">
+                                                    <div id="blockquote-wrap">
+                                                        <blockquote>
+                                                            Когда Господь посылает женщине такое Чудо, как беременность, Он дает ей шанс сделать этот мир лучше, светлее, чище. Но то, как распорядится женщина этим даром, зависит только от неё самой.
+                                                        </blockquote>
+                                                        <div id="blockquote-footer">
+                                                            <cite title="Source Title">Екатерина Сиванова</cite>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="quote-box-aside">
+                                                    <div id="blockquote-wrap">
+                                                        <blockquote>
+                                                            Присмотритесь как-нибудь к беременной женщине: вам кажется, что она переходит улицу, или работает, или даже говорит с вами. Ничего подобного. Она думает о своем ребенке.
+                                                        </blockquote>
+                                                        <div id="blockquote-footer">
+                                                            <cite title="Source Title">Анна Гавальда</cite>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="quote-box-aside">
+                                                    <div id="blockquote-wrap">
+                                                        <blockquote>
+                                                            Хорошенькая женщина после первого ребёнка оказывается в очень уязвимом положении. Ей надо увериться, что всё так же пленительна. И только преданное поклонение какого-нибудь нового мужчины может доказать ей, что ничего не изменилось.
+                                                        </blockquote>
+                                                        <div id="blockquote-footer">
+                                                            <cite title="Source Title">Фрэнсис Скотт Фицджеральд</cite>
+                                                            <p>Писатель</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="quote-box-aside">
+                                                    <div id="blockquote-wrap">
+                                                        <blockquote>
+                                                            Когда женщина собирается рожать, природа с нею что-то делает, окружает её какой-то аурой, придаёт ей особую привлекательность...
+                                                        </blockquote>
+                                                        <div id="blockquote-footer">
+                                                            <cite title="Source Title">Джин Плейди</cite>
+                                                            <p>Писатель</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="quote-box-aside">
+                                                    <div id="blockquote-wrap">
+                                                        <blockquote>
+                                                            Внутри меня — человек. Это чудо. Это невероятное чудо. Почему об этом не кричат на каждом углу? Почему появление нового айфона — несусветное событие, а появление из ничего нового человека — обыденность?
+                                                        </blockquote>
+                                                        <div id="blockquote-footer">
+                                                            <cite title="Source Title">Тамара Лисицкая</cite>
+                                                            <p>Писатель</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
 
@@ -342,20 +596,20 @@ AppAsset::register($this);
                                             <div class="col-md-24 block-style-1 block-shadow">
                                                 <ul id="topics-box-aside">
 
-                                                    <li><a style="font-size:100%" href="#">надпись</a></li>
-                                                    <li><a style="font-size:125%" href="#">слово тег2</a></li>
-                                                    <li><a style="font-size:75%" href="#">название статьи</a></li>
-                                                    <li><a style="font-size:125%" href="#">фраза тег4</a></li>
-                                                    <li><a style="font-size:175%" href="#">название тег5</a></li>
-                                                    <li><a style="font-size:75%" href="#">тег6</a></li>
-                                                    <li><a style="font-size:100%" href="#">слово тег6</a></li>
-                                                    <li><a style="font-size:225%" href="#">тег7</a></li>
-                                                    <li><a style="font-size:100%" href="#">какой-то тег8</a></li>
-                                                    <li><a style="font-size:75%" href="#">тег10</a></li>
-                                                    <li><a style="font-size:175%" href="#">надпись тег11</a></li>
-                                                    <li><a style="font-size:100%" href="#">тег12</a></li>
-                                                    <li><a style="font-size:250%" href="#">название статьи</a></li>
-                                                    <li><a style="font-size:100%" href="#">какой-то тег8</a></li>
+                                                    <li><a style="font-size:100%" href="/articles/category/plan">планирование</a></li>
+                                                    <li><a style="font-size:125%" href="/articles/post/coffee-pri-beremennosti">кофе</a></li>
+                                                    <li><a style="font-size:75%" href="/articles/post/toksikoz-pri-beremennosti">токсикоз</a></li>
+                                                    <li><a style="font-size:125%" href="#">форум</a></li>
+                                                    <li><a style="font-size:175%" href="/articles/category/baby">ребенок</a></li>
+                                                    <li><a style="font-size:75%" href="/articles/post/orvi-opasnost-dlya-beremennoi">орви</a></li>
+                                                    <li><a style="font-size:100%" href="/articles/post/4secrets-podguzniki">подгузники</a></li>
+                                                    <li><a style="font-size:225%" href="/articles/post/simptomi-beremennosti">симптомы беременности</a></li>
+                                                    <li><a style="font-size:100%" href="/articles/post/beremennost-i-fiz-nagruzki">физические нагрузки</a></li>
+                                                    <li><a style="font-size:75%" href="/articles/category/rodi">роды</a></li>
+                                                    <li><a style="font-size:175%" href="/articles/post/prinyatie-vanni-pri-beremennosti">принятие ванны</a></li>
+                                                    <li><a style="font-size:100%" href="/articles/category/posle-vupiski">после выписки</a></li>
+                                                    <li><a style="font-size:250%" href="/articles/category/pregnancy">беременность</a></li>
+                                                    <li><a style="font-size:100%" href="/articles/post/izmenenie-vkusa">изменение вкуса</a></li>
                                                 </ul>
                                             </div>
                                         </div>

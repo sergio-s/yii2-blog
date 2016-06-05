@@ -63,7 +63,12 @@ class GoogleMapWidget extends Widget
 //        CommentAsset::register($view);
 //    }
 
-    protected function registerClientScript($position = View::POS_END)
+    /**
+     *
+     * Скрипт должен быть подключен до того, как выводится ссылка на гугл апи. Поэтому тут устанавливаем View::POS_HEAD
+     * А на ссылку апи View::POS_END в assets (по умолчанию там размещается и так в подвале )
+     */
+    protected function registerClientScript($position = View::POS_HEAD)
     {
         $view = $this->getView();
 //        $bundleName = GoogleMapAsset::className();
@@ -82,12 +87,16 @@ class GoogleMapWidget extends Widget
         $mapOpt = $this->getMapOptions();
         return  <<< JS
             var placeId;
-            function initMap() {
+            window.initMap = function() {// устанавливаем window.initMap, чтобы функция была доступна глобально и карта сразу грузилась
 
                     var mapOptions = {$mapOpt};
 
 
                     {$this->mapId} = new google.maps.Map(document.getElementById('{$this->mapId}'),mapOptions);
+
+//                      setTimeout(function() {
+//                        google.maps.event.trigger({$this->mapId}, "resize");
+//                      }, 3000);
 
                     //создание маркера на карте
                     {$this->getMarkers()}

@@ -156,7 +156,7 @@ class GeoController extends BaseFront
 
         $idModalWidget = Raits::TYPE_GEOINSTITUTIONS.$instId;//id для виджета модального окна в виде
         //обработка звездного рейтинга
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax){
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax && Yii::$app->request->post('rait')){
             $rait = Yii::$app->request->post('rait');//оценка пользователя
             $res = [];
             if(!Yii::$app->user->isGuest){
@@ -195,12 +195,12 @@ class GeoController extends BaseFront
                 $inst = GeoInstitutions::findOne($instId);
                     $inst->scenario = GeoInstitutions::RATING_UPDATE;
                     $inst->rating = $totalRating;
-                    $inst->ratingVotes = $totalRating;
+                    $inst->ratingVotes = $allUsers;
                     $inst->save();
 
                 //возвращаем новый рейтинг в вид
                 $res['rating'] = $inst->rating;//передаем вычесленный рейтинг по материалу
-                $res['ratingVotes'] = $allUsers;//передаем сумму всех голосов по материалу
+                $res['ratingVotes'] = $inst->ratingVotes;//передаем сумму всех голосов по материалу
 
                 return json_encode($res, JSON_NUMERIC_CHECK);
             }

@@ -7,6 +7,7 @@ use yii\helpers\BaseStringHelper;
 use common\widgets\googlemap\GoogleMapWidget;
 use common\models\comments\Comments;
 
+
 \frontend\assets\GeoAsset::register($this);
 \frontend\assets\GoogleMapAsset::register($this);
 
