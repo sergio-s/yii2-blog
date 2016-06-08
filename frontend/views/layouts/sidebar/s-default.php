@@ -33,8 +33,7 @@ AppAsset::register($this);
                                                     Подпишитесь на бесплатную рассылку. <br>Получите в подарок <span class="vazhnoe">бесплатную версию журнала</span> "Я БЕРЕМЕННА".</p>
 
                                                 <div style="margin-bottom: 10px; text-align: center; ">
-<!--                                                    <img src="/css/img/oblojka2.jpg" style="width: 50%; ">-->
-                                                    <?= Html::img('@web/css/img/oblojka2.jpg', ['style'=>['width' => '50%']]);?>
+                                                    <img src="/css/img/oblojka2.jpg" style="width: 50%; ">
                                                 </div>
 
                                                 <div class="row">
@@ -285,16 +284,19 @@ AppAsset::register($this);
 
 
                                 <!--секция - блок слайдер-->
+
 <?php
-    $this->registerCssFile('@web/css/owl.carousel.css',  ['position' => yii\web\View::POS_HEAD]);
+    // ! так подключаем скрипты и стили внутри кода
+	$this->registerCssFile('@web/css/owl.carousel.css',  ['position' => yii\web\View::POS_HEAD]);
     $this->registerCssFile('@web/css/owl.theme.default.min.css',  ['position' => yii\web\View::POS_HEAD]);
 
     $this->registerJsFile('@web/js/owl.carousel.min.js',  ['position' => yii\web\View::POS_END]);
 ?>
+
 <!--    <link rel="stylesheet" href="/css/owl.carousel.css">
     <link rel="stylesheet" href="/css/owl.theme.default.min.css">
     <script src="/js/owl.carousel.min.js"></script>-->
-
+	
     <script>
         $(document).ready(function(){
             $("#daypregnant").owlCarousel({
@@ -330,8 +332,7 @@ AppAsset::register($this);
                                             <div id="daypregnant" class="col-md-24 block-style-1 block-shadow">
                                                 <div class="aside-block-slider">
                                                     <div id="aside-slider-box">
-<!--                                                        <img class="" src="/css/img/slider1.jpg" alt="">-->
-                                                        <?= Html::img('@web/css/img/slider1.jpg', ['alt'=>'', 'class'=>'']);?>
+                                                        <img class="" src="/css/img/slider1.jpg" alt="">
                                                     </div>
 
                                                     <div class="aside-caption-slider">
@@ -340,8 +341,7 @@ AppAsset::register($this);
                                                 </div>
                                                 <div class="aside-block-slider">
                                                     <div id="aside-slider-box">
-<!--                                                        <img class="" src="/css/img/slider2.jpg" alt="">-->
-                                                        <?= Html::img('@web/css/img/slider2.jpg', ['style'=>'']);?>
+                                                        <img class="" src="/css/img/slider2.jpg" alt="">
                                                     </div>
 
                                                     <div class="aside-caption-slider">

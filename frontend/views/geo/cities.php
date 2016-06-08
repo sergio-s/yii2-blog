@@ -10,6 +10,7 @@ use common\models\comments\Comments;
 
 \frontend\assets\GeoAsset::register($this);
 \frontend\assets\GoogleMapAsset::register($this);
+\frontend\assets\GoogleMapClusterAsset::register($this);
 
 $this->params['breadcrumbs'][] = array('label'=> 'Рейтинг роддомов', 'url'=> Url::toRoute('/geo/index'));
 $this->params['breadcrumbs'][] = Html::encode($this->context->h1);

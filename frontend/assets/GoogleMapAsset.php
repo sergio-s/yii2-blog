@@ -36,23 +36,17 @@ class GoogleMapAsset extends AssetBundle
 
     public $js = [
         'https://maps.googleapis.com/maps/api/js?key=AIzaSyBRQ5xGQGpHg59uHsJzlrxnXhgMI5KmbsA&callback=initMap&libraries=places',
-
+        'js-marker-clusterer-gh-pages/src/markerclusterer.js',
+        //'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js',
     ];
 
     public $jsOptions = [
         'async' => 'async',
         'defer' => 'defer',
         //'position' => \yii\web\View::POS_END,//не выставлять
-        'forceCopy' => true,
+        //'forceCopy' => true,
+
     ];
-
-
-
-//    public function init()
-//    {
-//        $this->jsOptions['position'] = View::POS_END;
-//        parent::init();
-//    }
 
       public $depends = [
         'yii\web\YiiAsset',

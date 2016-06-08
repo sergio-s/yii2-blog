@@ -25,10 +25,11 @@ class BaseFront extends Controller
 
     //временные данные одной категории для вывода в блоках сайдбара и центрального блока
     public $oneCatBlog;
+    public $oneCatBlog1;
+    public $oneCatBlog2;
+    public $oneCatBlog3;
+    public $oneCatBlog4;
     public $dbBlogCatTitlte = false;//во временных блоках заголовок из бд, иначе - что в верстке
-
-
-
 
     /**
      * @inheritdoc
@@ -93,13 +94,14 @@ class BaseFront extends Controller
 
         //временное сохранение данных категории для заполнения сайдбара и центральных блоков данными 1 категории блога
         $this->oneCatBlog = \app\models\BlogCategorisTable::find()->where(['id' => 1])->one();
-
+        $this->oneCatBlog1 = \app\models\BlogCategorisTable::find()->where(['id' => 2])->one();
+        $this->oneCatBlog2 = \app\models\BlogCategorisTable::find()->where(['id' => 3])->one();
+        $this->oneCatBlog3 = \app\models\BlogCategorisTable::find()->where(['id' => 4])->one();
+        $this->oneCatBlog4 = \app\models\BlogCategorisTable::find()->where(['id' => 5])->one();
 
 
       return parent::beforeAction($action);
     }
-
-
 
 }
 

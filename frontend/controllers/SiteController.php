@@ -106,7 +106,7 @@ class SiteController extends BaseFront
     public function actionIndex()
     {
         //передаем тайтл
-        Yii::$app->view->title .= ': Главная страница';
+        Yii::$app->view->title .= '- интернет журнал';
         $this->slider = true;//включаем слайдер
 
         return $this->render('index',[

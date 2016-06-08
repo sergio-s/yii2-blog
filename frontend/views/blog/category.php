@@ -8,7 +8,7 @@ use yii\widgets\LinkPager;//для пагинации
 use common\models\comments\Comments;
 
 //$this->title = 'Страницы сайта';
-$this->params['breadcrumbs'][] = array('label'=> 'Все посты', 'url'=>Url::toRoute('/blog/index'));
+$this->params['breadcrumbs'][] = array('label'=> 'Статьи', 'url'=>Url::toRoute('/blog/index'));
 $this->params['breadcrumbs'][] = Html::encode($h1);
 ?>
 <!---------------------------------Секция вертикальная подборка материалов---------------------------------------------->
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = Html::encode($h1);
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-ph"></span>
-                <h3 class="h3-selection b-dash-light-red">Категория: "<?= Html::encode($h1) ?>"<small><?=($pageNum) ? " ( стр.-{$pageNum} )" : null; ?></small></h3>
+                <h1 class="h3-selection b-dash-light-red"><?= Html::encode($h1) ?><small><?=($pageNum) ? " ( стр.-{$pageNum} )" : null; ?></small></h1>
 <!--                <p class="h3-control">
                     <a class="control-but">Смотреть все</a>
                 </p>-->
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = Html::encode($h1);
                 </div>
                 <ul class="icon-box">
                     <li><a href=""><span class="sprite sprite-ico-arrow"></span><small>0</small></a></li>
-                    <li><a href=""><span class="sprite sprite-ico-heart"></span><small>0</small></a></li>
+                    <li><a href=""><span class="sprite sprite-ico-heart"></span><small>15</small></a></li>
                     <li><a href=""><span class="sprite sprite-ico-comment"></span><small><?=Comments::getCount(Comments::TYPE_BLOGPOST, $post->id);?></small></a></li>
                 </ul>
             </div>

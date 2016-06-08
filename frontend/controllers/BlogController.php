@@ -36,9 +36,9 @@ class BlogController extends BaseFront
     public function actionIndex($pageNum = null)
     {
         //передаем тайтл
-        Yii::$app->view->title .= ': главная блога';
+        Yii::$app->view->title .= '- все статьи';
         Yii::$app->view->title .= (isset($pageNum) && NULL != $pageNum) ? ' - страница '.$pageNum : '';
-        $h1 = "Главная блога";
+        $h1 = "Все статьи";
 
         $query = BlogPostsTable::getAllPosts();
 
@@ -124,7 +124,7 @@ class BlogController extends BaseFront
         //передаем тайтл
         if($currentCategory->title)
         {
-            Yii::$app->view->title .= " - '$currentCategory->title' ";
+            Yii::$app->view->title .= " - $currentCategory->title ";
             Yii::$app->view->title .= (isset($pageNum) && NULL != $pageNum) ? ' - страница '.$pageNum : '';
         }
         $h1 = $currentCategory->h1;
@@ -160,7 +160,7 @@ class BlogController extends BaseFront
         //передаем тайтл
         if($post->title)
         {
-            Yii::$app->view->title .= ': '.$post->title;
+            Yii::$app->view->title .= '- '.$post->title;
         }
 
 

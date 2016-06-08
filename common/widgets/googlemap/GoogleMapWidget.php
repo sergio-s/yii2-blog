@@ -9,9 +9,11 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\helpers\ArrayHelper;
 use common\widgets\googlemap\GoogleMapAsset;
-
+use frontend\assets\GoogleMapClusterAsset;
 /**
- * Виджет комментариев
+ * Ассеты, которые использует виджет
+ * GoogleMapAsset
+ * GoogleMapClusterAsset
  */
 
 class GoogleMapWidget extends Widget
@@ -29,11 +31,19 @@ class GoogleMapWidget extends Widget
 
     public $marker = [];
 
+    public $clustererDir;//где лежит библиотека для обработки класторизации на карте гугл
+
     public $panorama = [];
 
     public function init()
     {
         parent::init();
+
+        if($bundleName = GoogleMapClusterAsset::className()){
+            $bundle = new $bundleName;
+            $this->clustererDir = $bundle->baseUrl;//берем базовый путь из asset класса, где библиотека подклюается
+
+        }
 
         //$this->marker
         $this->setMapOptions($this->mapOptions);
@@ -101,7 +111,7 @@ class GoogleMapWidget extends Widget
                     //создание маркера на карте
                     {$this->getMarkers()}
 
-                    //формирование панорамы
+////////////////////////формирование панорамы////////////////////////////////
                     {$this->getPano()}
 
                     var geocoder = new google.maps.Geocoder;
@@ -114,7 +124,7 @@ class GoogleMapWidget extends Widget
                         service.getDetails(request, callback);
 
                     });
-
+////////////////////////формирование панорамы////////////////////////////////
 
             }//end initMap
 
@@ -191,6 +201,8 @@ $js = <<< JS
 
             var markersArr = {$markersArr};
 
+            var markers = [];
+
             for (var i = 0; i < markersArr.length; i++) {
                 var plase = markersArr[i];
                 //console.log(markersArr);
@@ -203,10 +215,18 @@ $js = <<< JS
                   title: plase.title,
                 });
 
+                 markers.push(marker);
 
                  bindInfoWindow(marker, {$this->mapId}, infowindow, plase.infowindow.content);
 
             }
+
+            var options = {
+                imagePath: '{$this->clustererDir}/js-marker-clusterer-gh-pages/images/m'
+            };
+
+            var markerCluster = new MarkerClusterer({$this->mapId}, markers, options);
+
 
             function bindInfoWindow(marker, map, infowindow, description) {
                 marker.addListener('click', function() {

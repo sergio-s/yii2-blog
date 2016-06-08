@@ -8,7 +8,7 @@ use common\widgets\comments\CommentsWidget;
 use common\models\comments\Comments;
 
 //$this->title = 'Страницы сайта';
-$this->params['breadcrumbs'][] = array('label'=> 'Все посты', 'url'=> Url::toRoute('/blog/index'));
+$this->params['breadcrumbs'][] = array('label'=> 'Статьи', 'url'=> Url::toRoute('/blog/index'));
 $this->params['breadcrumbs'][] = Html::encode($post->h1);
 ?>
 
@@ -24,6 +24,10 @@ $this->params['breadcrumbs'][] = Html::encode($post->h1);
         </p>
     <?php endif;?>
 
+    <script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8"></script>
+    <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,whatsapp"></div>
+
     <?php //echo Html::img('@blogImg-web/'.$model->id.'/thumb/'.$model->img, ['alt'=>'', 'class'=>'gen-img-blogPost']);?>
 
     <?php if(isset($post->img)): ?>
@@ -31,12 +35,14 @@ $this->params['breadcrumbs'][] = Html::encode($post->h1);
     <?php endif;?>
 
 <!--    <blockquote><p><?php //echo Html::encode($post->description);?></p></blockquote>-->
-    <div>
+    <div class="blogpagecontent">
         <?php echo HtmlPurifier::process($post->content);//чистим контент перед выводом от XSS элементов?>
     </div>
     <hr>
-    <small>Дата публикации: <?=Yii::$app->formatter->asDate($post->createdDate, 'd MMMM yyyy');?></small>
-
+    <!-- <small>Дата публикации: <?=Yii::$app->formatter->asDate($post->createdDate, 'd MMMM yyyy');?></small> -->
+    <script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8"></script>
+    <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,whatsapp"></div>
 
 </div>
 

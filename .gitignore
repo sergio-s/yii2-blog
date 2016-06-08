@@ -28,3 +28,10 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
+
+# dumpDb dir
+/dumpDb
+
+.jpg
+.png
+.gif

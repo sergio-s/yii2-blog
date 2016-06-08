@@ -7,7 +7,6 @@ use yii\helpers\BaseStringHelper;
 use yii\widgets\LinkPager;//для пагинации
 use common\models\comments\Comments;
 
-
 //$this->title = 'Страницы сайта';
 $this->params['breadcrumbs'][] = $h1;
 ?>
@@ -56,7 +55,7 @@ $this->params['breadcrumbs'][] = $h1;
                 </div>
                 <ul class="icon-box">
                     <li><a href=""><span class="sprite sprite-ico-arrow"></span><small>0</small></a></li>
-                    <li><a href=""><span class="sprite sprite-ico-heart"></span><small>0</small></a></li>
+                    <li><a href=""><span class="sprite sprite-ico-heart"></span><small>15</small></a></li>
                     <li><a href=""><span class="sprite sprite-ico-comment"></span><small><?=Comments::getCount(Comments::TYPE_BLOGPOST, $post->id);?></small></a></li>
                 </ul>
             </div>

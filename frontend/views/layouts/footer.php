@@ -12,59 +12,59 @@ use common\widgets\subscription\SubscriptionWidget;
                         <div class="linkbox-footerblock">
                             <section class="block-linkbox-footer">
                                 <div>
-                                <h5 class="h5-block-linkbox-footer">Название</h5>
+                                <h5 class="h5-block-linkbox-footer">Беременность</h5>
                                 <ul>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
+                                    <li><a href="/articles/post/Kak-spat-pri-beremennosti">Как спать при беременности</a></li>
+                                    <li><a href="/articles/post/coffee-pri-beremennosti">Кофе при беременности</a></li>
+                                    <li><a href="/articles/post/beremennost-i-fiz-nagruzki">Беременность и физические нагрузки</a></li>
+                                    <li><a href="/articles/post/Massaj-pri-beremennosti">Массаж при беременности</a></li>
+                                    <li><a href="/articles/post/Psihologicheskie-zanyatiya">Психологические занятия при беременности</a></li>
                                 </ul>
                                 </div>
                             </section>
 
                             <section class="block-linkbox-footer">
                                 <div>
-                                <h5 class="h5-block-linkbox-footer">Название</h5>
+                                <h5 class="h5-block-linkbox-footer">Планирование</h5>
                                 <ul>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
+                                    <li><a href="/articles/post/prichini-krovyanistih">Причины появления кровянистых выделений</a></li>
+                                    <li><a href="/articles/post/kak-izbavitsya-ot-rastyajek">Как избавится от растяжек после родов</a></li>
+                                    <li><a href="/articles/post/koliki-y-novorozjdennih">Колики у новорожденного</a></li>
+                                    <li><a href="/articles/post/chem-grozit-alkogol">Чем грозит алкоголь беременной?</a></li>
+                                    <li><a href="/articles/post/razvod-vo-vremya-beremennosti">Развод во время беременности</a></li>
                                 </ul>
                                 </div>
                             </section>
 
                             <section class="block-linkbox-footer">
                                 <div>
-                                <h5 class="h5-block-linkbox-footer">Название</h5>
+                                <h5 class="h5-block-linkbox-footer">Роды</h5>
                                 <ul>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
+                                    <li><a href="/articles/post/prinyatie-vanni-pri-beremennosti">Принятие ванны при беременности</a></li>
+                                    <li><a href="/articles/post/4secrets-podguzniki">4 секрета подбора подгузников</a></li>
+                                    <li><a href="/articles/post/orvi-opasnost-dlya-beremennoi">ОРВИ – большая опасность</a></li>
+                                    <li><a href="/articles/post/pereleti-vo-vremya-beremennosti">Авиаперелеты во время беременности</a></li>
+                                    <li><a href="/articles/post/vsya-pravda-ob-uzi">Вся правда об УЗИ</a></li>
                                 </ul>
                                 </div>
                             </section>
 
                             <section class="block-linkbox-footer">
                                 <div>
-                                <h5 class="h5-block-linkbox-footer">Название</h5>
+                                <h5 class="h5-block-linkbox-footer">После выписки</h5>
                                 <ul>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
-                                    <li><a href="">Тема материала</a></li>
+                                    <li><a href="/articles/post/raschet-sroka-beremennosti">Расчет срока беременности</a></li>
+                                    <li><a href="/articles/post/obezbolivanie-v-rodah">Обезболивание в родах</a></li>
+                                    <li><a href="/articles/post/5-somnenii-stoit-li-prisutstvovat">Стоит ли мужчине присутствовать при родах?</a></li>
+                                    <li><a href="/articles/post/toksikoz-pri-beremennosti">Токсикоз во время беременности</a></li>
+                                    <li><a href="/articles/post/bassein-vo-vremya-beremennosti">Занятия в бассейне при беременности</a></li>
                                 </ul>
                                 </div>
                             </section>
 
                             <section id="send-emale" class="block-linkbox-footer">
                                 <div>
-                                    <h5 class="h5-block-linkbox-footer">Отправить письмо</h5>
+                                    <h5 class="h5-block-linkbox-footer">Подписаться</h5>
 <!--                                    <form id="email-form" role="form" class="">
                                         <input type="email" class="" placeholder="Введите ваш email">
                                         <div id="check-footer-wrap">
@@ -78,13 +78,13 @@ use common\widgets\subscription\SubscriptionWidget;
                                     <?php echo SubscriptionWidget::widget(['widget_id' => 'SubscriptionFooter', 'modelName' => 'SubscriptionFooter', 'wView' => 'footer']) ?>
 
                                     <div id="footer-boxsoc-wrap">
-                                        <h5 class="h5-block-linkbox-footer">Соц.сети</h5>
+                                        <h5 class="h5-block-linkbox-footer">Мы в соц.сетях</h5>
                                         <ul id="footer-boxsoc">
-                                            <li id="soc-ico-1"><a href=""><span class="sprite sprite-soc-bottons-content"></span></a></li>
-                                            <li id="soc-ico-2"><a href=""><span class="sprite sprite-soc-bottons-content"></span></a></li>
-                                            <li id="soc-ico-3"><a href=""><span class="sprite sprite-soc-bottons-content"></span></a></li>
+                                            <li id="soc-ico-1"><a href="https://www.facebook.com/groups/1126272094061703/"><span class="sprite sprite-soc-bottons-content"></span></a></li>
+                                            <li id="soc-ico-2"><a href="mailto:info@impregnant.ru"><span class="sprite sprite-soc-bottons-content"></span></a></li>
+                                            <!-- <li id="soc-ico-3"><a href=""><span class="sprite sprite-soc-bottons-content"></span></a></li>
                                             <li id="soc-ico-4"><a href=""><span class="sprite sprite-soc-bottons-content"></span></a></li>
-                                            <li id="soc-ico-5"><a href=""><span class="sprite sprite-soc-bottons-content"></span></a></li>
+                                            <li id="soc-ico-5"><a href=""><span class="sprite sprite-soc-bottons-content"></span></a></li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -104,11 +104,11 @@ use common\widgets\subscription\SubscriptionWidget;
                             <!--hidden-xs-->
                             <li class="col-sm-4 hidden-xs">
                                 <ul id="footer-boxsoc-min">
-                                    <li id="soc-ico-1-min"><a href=""><span class="sprite-soc-bottons-min"></span></a></li>
-                                    <li id="soc-ico-2-min"><a href=""><span class="sprite-soc-bottons-min"></span></a></li>
-                                    <li id="soc-ico-3-min"><a href=""><span class="sprite-soc-bottons-min"></span></a></li>
+                                    <li id="soc-ico-1-min"><a href="https://www.facebook.com/groups/1126272094061703/"><span class="sprite-soc-bottons-min"></span></a></li>
+                                    <li id="soc-ico-2-min"><a href="mailto:info@impregnant.ru"><span class="sprite-soc-bottons-min"></span></a></li>
+                                    <!-- <li id="soc-ico-3-min"><a href=""><span class="sprite-soc-bottons-min"></span></a></li>
                                     <li id="soc-ico-4-min"><a href=""><span class="sprite-soc-bottons-min"></span></a></li>
-                                    <li id="soc-ico-5-min"><a href=""><span class="sprite-soc-bottons-min"></span></a></li>
+                                    <li id="soc-ico-5-min"><a href=""><span class="sprite-soc-bottons-min"></span></a></li> -->
                                 </ul>
                             </li>
                         </ul>
@@ -116,8 +116,39 @@ use common\widgets\subscription\SubscriptionWidget;
 
 
                     <div id="copyright" class="col-md-24">
-                        <p>&copy; Copyright 2011-2016 Все права защищены. <a href="">О сайте</a> | <a href="">Контакты</a></p>
+                        <p>&copy; Copyright 2016 Все права защищены.
                     </div>
                 </div>
 
             </footer>
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter37114495 = new Ya.Metrika({
+                    id:37114495,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/37114495" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->

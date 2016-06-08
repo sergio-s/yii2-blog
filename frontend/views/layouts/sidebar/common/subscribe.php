@@ -12,7 +12,7 @@ use common\widgets\subscription\SubscriptionWidget;
 AppAsset::register($this);
 ?>
 <!--форма подписки-->
-<div class="col-md-18 col-sm-20 col-xs-18">
+<div style="width: 100%; ">
     <!-- <form id="subscribe-form" role="form" class="">
             <label for="exampleInput"></label>
             <input type="email" class="" placeholder="Введите ваш email">
@@ -23,8 +23,12 @@ AppAsset::register($this);
     <?php echo SubscriptionWidget::widget(['widget_id' => 'SubscriptionSidebar', 'modelName' => 'SubscriptionSidebar', 'wView' => 'sidebar']) ?>
 
 </div>
-<div id="subscribe-form-soc" class="col-md-6 col-sm-4 col-xs-6">
+
+<div style="width: 80%; margin: auto; ">Чтобы подписаться просто нажмите на иконку соц сети</div>
+
+<div id="subscribe-form-soc">
     <!--авторизация по фейсбук и вконтакте-->
+
     <?= $this->render('@app/views/layouts/socloginmedium.php', ['display' => ULogin::D_PANEL]); ?>
 </div>
 

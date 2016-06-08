@@ -9,6 +9,7 @@ use app\models\geo\GeoCities;
 use app\models\geo\GeoInstitutions;
 use yii\data\ActiveDataProvider;
 use common\models\raits\Raits;
+use common\models\comments\Comments;
 
 class GeoController extends BaseFront
 {
@@ -57,13 +58,24 @@ class GeoController extends BaseFront
            }
         }
 
+        $countAllComments = Comments::find()->where(['materialType' => Comments::TYPE_GEOINSTITUTIONS])->count();
 
+        $lastComments = Comments::find()->where(['materialType' => Comments::TYPE_GEOINSTITUTIONS])
+                                        ->orderBy(['createdDate' => SORT_DESC])
+                                        ->limit(4)
+                                        ->all();
+
+//        foreach($lastComments as $com){
+//
+//        }
 
         return $this->render('index',[
                                         'country'           => $country,
                                         'markerMap'         => $markerMap,
                                         'cityCount'         => $cityCount,
-                                        'institutionCount' => $institutionCount,
+                                        'institutionCount'  => $institutionCount,
+                                        'countAllComments'  => $countAllComments,
+                                        'lastComments'      => $lastComments,
 
                                     ]);
     }

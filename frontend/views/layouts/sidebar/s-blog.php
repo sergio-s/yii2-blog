@@ -60,8 +60,7 @@ AppAsset::register($this);
                                                     Подпишитесь на бесплатную рассылку. <br>Получите в подарок <span class="vazhnoe">бесплатную версию журнала</span> "Я БЕРЕМЕННА".</p>
 
                                                 <div style="margin-bottom: 10px; text-align: center; ">
-<!--                                                    <img src="/css/img/oblojka2.jpg" style="width: 50%; ">-->
-                                                    <?= Html::img('@web/css/img/oblojka2.jpg', ['style'=>['width' => '50%']]);?>
+                                                    <img src="/css/img/oblojka2.jpg" style="width: 50%; ">
                                                 </div>
                                                 <div class="row">
                                                     <?php echo $this->render('@app/views/layouts/sidebar/common/subscribe.php'); ?>
@@ -278,21 +277,21 @@ AppAsset::register($this);
                                 </div> -->
 
     <!--секция - блок слайдер-->
-<?php
 
+    <?php
+    // ! так подключаем скрипты и стили внутри кода
+	$this->registerCssFile('@web/css/owl.carousel.css',  ['position' => yii\web\View::POS_HEAD]);
+    $this->registerCssFile('@web/css/owl.theme.default.min.css',  ['position' => yii\web\View::POS_HEAD]);
 
-$this->registerCssFile('@web/css/owl.carousel.css',  ['position' => yii\web\View::POS_HEAD]);
-$this->registerCssFile('@web/css/owl.theme.default.min.css',  ['position' => yii\web\View::POS_HEAD]);
-
-$this->registerJsFile('@web/js/owl.carousel.min.js',  ['position' => yii\web\View::POS_END]);
-
+    $this->registerJsFile('@web/js/owl.carousel.min.js',  ['position' => yii\web\View::POS_END]);
 ?>
 <!--    <link rel="stylesheet" href="/css/owl.carousel.css">
     <link rel="stylesheet" href="/css/owl.theme.default.min.css">
     <script src="/js/owl.carousel.min.js"></script>-->
+    
 
     <script>
-        jQuery(document).ready(function(){
+        $(document).ready(function(){
             $("#daypregnant").owlCarousel({
                 items : 1,
                 loop : true,
@@ -421,9 +420,9 @@ $this->registerJsFile('@web/js/owl.carousel.min.js',  ['position' => yii\web\Vie
     </div>
 
     <!--секция - цитаты-->
-<!--    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/owl.carousel.css">
     <link rel="stylesheet" href="/css/owl.theme.default.min.css">
-    <script src="/js/owl.carousel.min.js"></script>-->
+    <script src="/js/owl.carousel.min.js"></script>
 
     <script>
         $(document).ready(function(){

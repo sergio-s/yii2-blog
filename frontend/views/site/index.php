@@ -9,10 +9,7 @@ use rmrevin\yii\ulogin\ULogin;
 use common\widgets\subscription\SubscriptionWidget;
 
 ?>
-<?php
-//$module = \Yii::$app->getModule('comments');
-//print_r($module);
-;?>
+
 <!--///////////////////////////////////секция горизонтальная подборка материалов////////////////////////////////////////////-->
 <div class="row selection">
 
@@ -23,11 +20,10 @@ use common\widgets\subscription\SubscriptionWidget;
                 <span class="sprite sprite-circle-f"></span>
                 <h3 class="h3-selection b-dash-light-green">
                     <!--Беременность-->
-                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Беременность'; ?>
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Планирование'; ?>
                 </h3>
                 <p class="h3-control">
-                    <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
-                    <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
+                    <a href="/articles/category/plan" class="control-but">Смотреть все</a>
                 </p>
             </div>
         </div>
@@ -124,6 +120,8 @@ use common\widgets\subscription\SubscriptionWidget;
         <div class="row">
             <div class="col-md-24 block-style-1 block-shadow">
 
+                <img src="/css/img/oblojka2.jpg" style="width: 50%; ">
+
                 <p class="label-subscribe">Подпишитесь на бесплатную рассылку. Получите в подарок бесплатную версию журнала.</p>
 <!--                <form id="subscribe-form" role="form" class="">
                                                                         <label for="exampleInput"></label>
@@ -156,17 +154,17 @@ use common\widgets\subscription\SubscriptionWidget;
                 <span class="sprite sprite-circle-bell"></span>
                 <h3 class="h3-selection b-dash-light-yellow">
 <!--                    Новости-->
-                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Новости'; ?>
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Другие статьи'; ?>
                 </h3>
                 <p class="h3-control">
-                    <a class="control-but">Все</a>
+                    <a href="/articles" class="control-but">Все</a>
                 </p>
             </div>
         </div>
         <!--контент-->
         <div class="row">
             <!--1-->
-            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '4') as $post):?>
+            <?php foreach(\Yii::$app->controller->oneCatBlog1->getPostsFromCategory($limit = '4') as $post):?>
             <div class="col-sm-12 block-style-1 block-shadow m-b-10 hover-horder">
 
                 <div class="news-aside-content">
@@ -245,16 +243,16 @@ use common\widgets\subscription\SubscriptionWidget;
 </div>
 
 <!-- visible-sm visible-xs...................................секция - блок иконок и категорий........................-->
-<div id="iconslinks-aside" class="row selection visible-sm visible-xs">
+<!-- <div id="iconslinks-aside" class="row selection visible-sm visible-xs">
     <div class="col-xs-24">
-        <!--заголовок-->
+
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-women"></span>
                 <h3 class="h3-selection b-dash-light-purple">Удобная беременность</h3>
             </div>
         </div>
-        <!--контент-->
+
         <div class="row">
             <div class="col-md-24 block-style-1 block-shadow">
                 <div class="row iconslinks-aside-box">
@@ -368,7 +366,7 @@ use common\widgets\subscription\SubscriptionWidget;
         </div>
 
     </div>
-</div>
+</div> -->
 
 
 
@@ -381,15 +379,15 @@ use common\widgets\subscription\SubscriptionWidget;
                 <span class="sprite sprite-circle-ph"></span>
                 <h3 class="h3-selection b-dash-light-red">
 <!--                    Питание-->
-                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Питание'; ?>
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Беременность'; ?>
                 </h3>
                 <p class="h3-control">
-                    <a class="control-but">Смотреть все</a>
+                    <a href="/articles/category/pregnancy" class="control-but">Смотреть все</a>
                 </p>
             </div>
         </div>
         <div class="row">
-            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '3') as $post):?>
+            <?php foreach(\Yii::$app->controller->oneCatBlog1->getPostsFromCategory($limit = '3') as $post):?>
             <div class="col-md-24 col-sm-24 col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
                 <div class="row row box-block-w100-h100">
                     <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="block-w100-h100"></a>
@@ -496,11 +494,10 @@ use common\widgets\subscription\SubscriptionWidget;
                 <span class="sprite sprite-circle"></span>
                 <h3 class="h3-selection b-dash-light-grey">
 <!--                    Психология-->
-                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Психология'; ?>
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Ребенок'; ?>
                 </h3>
                 <p class="h3-control">
-                    <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
-                    <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
+                    <a href="/articles/category/baby" class="control-but">Смотреть все</a>
                 </p>
             </div>
         </div>
@@ -508,7 +505,7 @@ use common\widgets\subscription\SubscriptionWidget;
             <!--картинки-->
             <!--1-->
             <?php $j=0;?>
-            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '4') as $post):?>
+            <?php foreach(\Yii::$app->controller->oneCatBlog4->getPostsFromCategory($limit = '4') as $post):?>
             <?php $j++;?>
             <div class="col-md-6 col-sm-6 col-xs-12 <?= ($j>2)?'hidden-xs':'';?>">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -588,20 +585,15 @@ use common\widgets\subscription\SubscriptionWidget;
 
 
 <!--visible-sm visible-xs...................................секция - блок слайдер....................................-->
-<div id="slider-aside" class="row selection visible-sm visible-xs">
+<!-- <div id="slider-aside" class="row selection visible-sm visible-xs">
     <div class="col-xs-24">
-        <!--заголовок-->
         <div class="row">
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-ey"></span>
                 <h3 class="h3-selection b-dash-light-brown">Новый день</h3>
-                <p class="h3-control">
-                    <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
-                    <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
-                </p>
             </div>
         </div>
-        <!--контент-->
+
         <div class="row">
             <div class="col-sm-24 block-style-1 block-shadow">
                 <div class="aside-block-slider">
@@ -619,7 +611,7 @@ use common\widgets\subscription\SubscriptionWidget;
         </div>
 
     </div>
-</div>
+</div> -->
 
 <!--visible-sm visible-xs...................................секция - цитаты ....hidden-xs............................................-->
 <div id="quote-aside" class="row selection visible-sm">
@@ -629,10 +621,6 @@ use common\widgets\subscription\SubscriptionWidget;
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-bulb-rose"></span>
                 <h3 class="h3-selection b-dash-light-rose-2">Цитатник</h3>
-                <p class="h3-control">
-                    <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
-                    <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
-                </p>
             </div>
         </div>
         <!--контент-->
@@ -642,11 +630,11 @@ use common\widgets\subscription\SubscriptionWidget;
                     <img class="img-circle" src="css/img/index.jpg" alt="...">
                     <div id="blockquote-wrap">
                         <blockquote>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                            Если больному после разговора с врачом не стало легче, то это не врач.
                         </blockquote>
                         <div id="blockquote-footer">
-                            <cite title="Source Title">Эдуард Эствил</cite>
-                            <p>Доктор</p>
+                            <cite title="Source Title">Владимир Бехтерев</cite>
+                            <p>Психолог</p>
                         </div>
                     </div>
                 </div>
@@ -669,14 +657,14 @@ use common\widgets\subscription\SubscriptionWidget;
                     <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Роды'; ?>
                 </h3>
                 <p class="h3-control">
-                    <a class="control-but">Смотреть все</a>
+                    <a href="/articles/category/rodi" class="control-but">Смотреть все</a>
                 </p>
             </div>
         </div>
 
         <div class="row">
             <!--материалы -->
-            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '3') as $post):?>
+            <?php foreach(\Yii::$app->controller->oneCatBlog2->getPostsFromCategory($limit = '3') as $post):?>
             <div class="col-md-24 col-sm-24 col-xs-24 selection-vertical-content  block-style-1 block-shadow hover-horder">
                 <div class="row row box-block-w100-h100">
                     <a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>" class="block-w100-h100"></a>
@@ -781,9 +769,6 @@ use common\widgets\subscription\SubscriptionWidget;
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-bulb-green"></span>
                 <h3 class="h3-selection b-dash-light-brightgreen">Темы</h3>
-                <p class="h3-control">
-                    <a class="control-but">Все</a>
-                </p>
             </div>
         </div>
         <!--контент-->
@@ -791,20 +776,20 @@ use common\widgets\subscription\SubscriptionWidget;
             <div class="col-sm-24 block-style-1 block-shadow">
                 <ul id="topics-box-aside">
 
-                    <li><a style="font-size:100%" href="#">надпись</a></li>
-                    <li><a style="font-size:125%" href="#">слово тег2</a></li>
-                    <li><a style="font-size:75%" href="#">название статьи</a></li>
-                    <li><a style="font-size:125%" href="#">фраза тег4</a></li>
-                    <li><a style="font-size:175%" href="#">название тег5</a></li>
-                    <li><a style="font-size:75%" href="#">тег6</a></li>
-                    <li><a style="font-size:100%" href="#">слово тег6</a></li>
-                    <li><a style="font-size:225%" href="#">тег7</a></li>
-                    <li><a style="font-size:100%" href="#">какой-то тег8</a></li>
-                    <li><a style="font-size:75%" href="#">тег10</a></li>
-                    <li><a style="font-size:175%" href="#">надпись тег11</a></li>
-                    <li><a style="font-size:100%" href="#">тег12</a></li>
-                    <li><a style="font-size:250%" href="#">название статьи</a></li>
-                    <li><a style="font-size:100%" href="#">какой-то тег8</a></li>
+                    <li><a style="font-size:100%" href="/articles/category/plan">планирование</a></li>
+                    <li><a style="font-size:125%" href="/articles/post/coffee-pri-beremennosti">кофе</a></li>
+                    <li><a style="font-size:75%" href="/articles/post/toksikoz-pri-beremennosti">токсикоз</a></li>
+                    <li><a style="font-size:125%" href="#">форум</a></li>
+                    <li><a style="font-size:175%" href="/articles/category/baby">ребенок</a></li>
+                    <li><a style="font-size:75%" href="/articles/post/orvi-opasnost-dlya-beremennoi">орви</a></li>
+                    <li><a style="font-size:100%" href="/articles/post/4secrets-podguzniki">подгузники</a></li>
+                    <li><a style="font-size:225%" href="/articles/post/simptomi-beremennosti">симптомы беременности</a></li>
+                    <li><a style="font-size:100%" href="/articles/post/beremennost-i-fiz-nagruzki">физические нагрузки</a></li>
+                    <li><a style="font-size:75%" href="/articles/category/rodi">роды</a></li>
+                    <li><a style="font-size:175%" href="/articles/post/prinyatie-vanni-pri-beremennosti">принятие ванны</a></li>
+                    <li><a style="font-size:100%" href="/articles/category/posle-vupiski">после выписки</a></li>
+                    <li><a style="font-size:250%" href="/articles/category/pregnancy">беременность</a></li>
+                    <li><a style="font-size:100%" href="/articles/post/izmenenie-vkusa">изменение вкуса</a></li>
                 </ul>
             </div>
         </div>
@@ -823,18 +808,17 @@ use common\widgets\subscription\SubscriptionWidget;
                 <span class="sprite sprite-circle-pfb"></span>
                 <h3 class="h3-selection b-dash-light-rose">
 <!--                    Новорожденный-->
-                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'Новорожденный'; ?>
+                    <?php echo ($this->context->dbBlogCatTitlte)? Html::encode(\Yii::$app->controller->oneCatBlog->title): 'После выписки'; ?>
                 </h3>
                 <p class="h3-control">
-                    <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
-                    <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
+                    <a href="/articles/category/posle-vupiski" class="control-but">Смотреть все</a>
                 </p>
             </div>
         </div>
         <div class="row">
             <!--картинки-->
             <?php $k=0;?>
-            <?php foreach(\Yii::$app->controller->oneCatBlog->getPostsFromCategory($limit = '4') as $post):?>
+            <?php foreach(\Yii::$app->controller->oneCatBlog3->getPostsFromCategory($limit = '4') as $post):?>
             <?php $k++;?>
             <div class="col-md-6 col-sm-6 col-xs-12 <?= ($k>2)?'hidden-xs':'';?>">
                 <div class="block-shadow hover-horder box-block-w100-h100">
@@ -915,6 +899,16 @@ use common\widgets\subscription\SubscriptionWidget;
     </div>
 </div>
 
+<div class="row selection">
+
+    <div id="selection-horizontal-3" class="col-xs-24 selection-horizontal">
+
+        <div class="row">
+<h1 class="h3-selection b-dash-light-rose">Интернет журнал по беременности и родам</h1>
+        </div>
+    </div>
+</div>
+
 
 <!--visible-xs...................................секция - темы.  visible-xs................................................-->
 <div id="topics-aside" class="row selection visible-xs">
@@ -924,9 +918,6 @@ use common\widgets\subscription\SubscriptionWidget;
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-bulb-green"></span>
                 <h3 class="h3-selection b-dash-light-brightgreen">Темы</h3>
-                <p class="h3-control">
-                    <a class="control-but">Все</a>
-                </p>
             </div>
         </div>
         <!--контент-->
@@ -943,11 +934,11 @@ use common\widgets\subscription\SubscriptionWidget;
                     <li><a style="font-size:100%" href="#">слово тег6</a></li>
                     <li><a style="font-size:225%" href="#">тег7</a></li>
                     <li><a style="font-size:100%" href="#">какой-то тег8</a></li>
-                    <li><a style="font-size:75%" href="#">тег10</a></li>
-                    <li><a style="font-size:175%" href="#">надпись тег11</a></li>
-                    <li><a style="font-size:100%" href="#">тег12</a></li>
-                    <li><a style="font-size:250%" href="#">название статьи</a></li>
-                    <li><a style="font-size:100%" href="#">какой-то тег8</a></li>
+                    <li><a style="font-size:75%" href="/articles/category/rodi">роды</a></li>
+                    <li><a style="font-size:175%" href="/articles/post/prinyatie-vanni-pri-beremennosti">принятие ванны</a></li>
+                    <li><a style="font-size:100%" href="/articles/category/posle-vupiski">после выписки</a></li>
+                    <li><a style="font-size:250%" href="/articles/category/pregnancy">беременность</a></li>
+                    <li><a style="font-size:100%" href="/articles/post/izmenenie-vkusa">изменение вкуса</a></li>
                 </ul>
             </div>
         </div>
@@ -963,10 +954,6 @@ use common\widgets\subscription\SubscriptionWidget;
             <div class="h3-box-selection">
                 <span class="sprite sprite-circle-bulb-rose"></span>
                 <h3 class="h3-selection b-dash-light-rose-2">Цитатник</h3>
-                <p class="h3-control">
-                    <a  class="control-arrow" href=""><span class="sprite sprite-left-smoll-button"></span></a>
-                    <a  class="control-arrow" href=""><span class="sprite sprite-rigth-smoll-button"></span></a>
-                </p>
             </div>
         </div>
         <!--контент-->
@@ -976,11 +963,11 @@ use common\widgets\subscription\SubscriptionWidget;
                     <img class="img-circle" src="css/img/index.jpg" alt="...">
                     <div id="blockquote-wrap">
                         <blockquote>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                            Если больному после разговора с врачом не стало легче, то это не врач.
                         </blockquote>
                         <div id="blockquote-footer">
-                            <cite title="Source Title">Эдуард Эствил</cite>
-                            <p>Доктор</p>
+                            <cite title="Source Title">Владимир Бехтерев</cite>
+                            <p>Психолог</p>
                         </div>
                     </div>
                 </div>

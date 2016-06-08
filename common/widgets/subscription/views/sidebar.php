@@ -16,7 +16,7 @@ use yii\bootstrap\Modal;
                                         'options' => ['class'=> 'subscribe-form','style' => '', 'autocomplete' => 'off', 'data-pjax' => true,'enctype' => 'multipart/form-data']
                                     ]);?>
         <?= $form->field($model, 'email')->textInput(['placeholder' => 'Введите ваш email'])->label(false);?>
-        <?= Html::submitButton('Отправить', ['class' => '']);?>
+        <?= Html::submitButton('Подписаться', ['class' => '']);?>
     <?php ActiveForm::end();?>
 
 
