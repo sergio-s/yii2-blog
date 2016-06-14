@@ -4,13 +4,30 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use common\widgets\subscription\SubscriptionWidget;
 ?>
-            <footer class="container-fluid">
+
+<?php $this->context->footerCatsAndPosts();?>
+    <footer class="container-fluid">
 
                 <div class="row">
 <!--                виден только на visible-lg visible-md-->
                     <div id="wrap-linkbox-footer" class="col-md-24 visible-lg visible-md">
                         <div class="linkbox-footerblock">
-                            <section class="block-linkbox-footer">
+                            <?php foreach($this->context->footerCatsAndPosts() as $block):?>
+
+                                <section class="block-linkbox-footer">
+                                    <div>
+                                    <h5 class="h5-block-linkbox-footer"><?php echo $block['category']->title ;?></h5>
+                                    <ul>
+                                        <?php foreach($block['posts'] as $post):?>
+                                            <li><a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->blogPost->alias]);?>"><?php echo $post->blogPost->title ;?></a></li>
+                                        <?php endforeach;?>
+                                    </ul>
+                                    </div>
+                                </section>
+
+                            <?php endforeach;?>
+
+<!--                            <section class="block-linkbox-footer">
                                 <div>
                                 <h5 class="h5-block-linkbox-footer">Беременность</h5>
                                 <ul>
@@ -60,7 +77,7 @@ use common\widgets\subscription\SubscriptionWidget;
                                     <li><a href="/articles/post/bassein-vo-vremya-beremennosti">Занятия в бассейне при беременности</a></li>
                                 </ul>
                                 </div>
-                            </section>
+                            </section>-->
 
                             <section id="send-emale" class="block-linkbox-footer">
                                 <div>
@@ -122,33 +139,5 @@ use common\widgets\subscription\SubscriptionWidget;
 
             </footer>
 
+<?php //echo $this->render('metrics') ?>
 
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter37114495 = new Ya.Metrika({
-                    id:37114495,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true
-                });
-            } catch(e) { }
-        });
-
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/37114495" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->

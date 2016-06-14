@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\BlogPostsTable */
@@ -24,6 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Посмотреть', Yii::$app->urlManagerFrontend->createUrl(['articles/post/'.$model->alias]), ['class' => 'btn btn-info', 'onclick' => "return !window.open(this.href)"]) ?>
+
+
     </p>
 
     <div>
@@ -50,6 +54,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'h1',
             'content:ntext',
             'createdDate',
+            'updatedDate',
+            
+            [
+                'label'  => $model->attributeLabels()['autorId'],
+                'value'  => ($userName = User::findByUserId($model->autorId))? $userName->username : 'не известен',
+
+            ],
+            [
+                'label'  => $model->attributeLabels()['updaterId'],
+                'value'  => ($userName = User::findByUserId($model->updaterId))? $userName->username : 'не известен',
+
+            ],
+
         ],
     ]) ?>
 

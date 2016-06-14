@@ -64,6 +64,7 @@ class GeoInstitutionsController extends BaseAdmin
      */
     public function actionView($id)
     {
+        //static::chengeAllWatermarks();//перезапись ватермарков
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -99,16 +100,30 @@ class GeoInstitutionsController extends BaseAdmin
                     $modelPhones->phone_char = $phone;
                     $modelPhones->save();
                 }
-
+                //РАБОТА С ФАЙЛАМИ
                 //забиваем и сохраняем данные в связанную таблицу фото, если загружены
                 if(NULL != $model->file){
                     $dir = Yii::getAlias('@geoImg-path/institution-'.$new_id.'/');
+                    //$dirWatermark = $dir.'watermark/';//тут будут храниться большие фото с ватермаркой
+
                     FileHelper::createDirectory($dir);
+                    //FileHelper::createDirectory($dirWatermark);
+
+                    //$watermark = Yii::getAlias(Yii::$app->params['watermark']);
 
                     foreach ($model->file as $file) {
                         //имя файла
                         $fileName = $file->baseName . '.' . $file->extension;
-                        Image::thumbnail($file->tempName, 700, 500)->save($dir.$fileName, ['quality' => 90]);
+
+                        //сохраняем картинки
+                        Image::thumbnail($file->tempName, 1084, 864)->save($dir.$fileName, ['quality' => 90]);
+
+                        //сохранение картинки с водяным знаком
+                        //$dir.$fileName - что копируем,$watermark - водяной знак,$dirWatermark.$fileName - куда копируем
+                        //Image::watermark($dir.$fileName, $watermark, [600,600])//x и y
+                        //        ->save($dirWatermark.$fileName);
+
+                        //записываем данные о картинках в бд
                         if(file_exists($dir.$fileName)){
                             $modelPhotos = new GeoInstitutionsPhotos();
                             $modelPhotos->scenario = GeoInstitutionsPhotos::SCENARIO_CREATE;
@@ -172,20 +187,33 @@ class GeoInstitutionsController extends BaseAdmin
                 //забиваем и сохраняем данные в связанную таблицу фото, если загружены
                 if(NULL != $model->file){
                     $dir = Yii::getAlias('@geoImg-path/institution-'.$new_id.'/');
+                    //$dirWatermark = $dir.'watermark/';//тут будут храниться большие фото с ватермаркой
 
-                    //удаляем дирректорию со старыми картинками
+                    //удаляем дирректорию со старыми картинками и папкой водяных знаков
                     FileHelper::removeDirectory($dir);
 
-                    //создаем дирректорию занова
+                    //создаем дирректории занова
                     FileHelper::createDirectory($dir);
+                    //FileHelper::createDirectory($dirWatermark);
 
-                    //удаляем старые фото
+                    //удаляем старые фото из бд
                     GeoInstitutionsPhotos::deleteAll(['institution_id' => $new_id]);
+
+                    //путь к файлу картинки - водяного знака
+                    //$watermark = Yii::getAlias(Yii::$app->params['watermark']);
 
                     foreach ($model->file as $file) {
                         //имя файла
                         $fileName = $file->baseName . '.' . $file->extension;
-                        Image::thumbnail($file->tempName, 700, 500)->save($dir.$fileName, ['quality' => 90]);
+
+                        //сохраняем картинки
+                        Image::thumbnail($file->tempName, 1084, 864)->save($dir.$fileName, ['quality' => 90]);
+
+                        //сохранение картинки с водяным знаком
+                        //$dir.$fileName - что копируем,$watermark - водяной знак,$dirWatermark.$fileName - куда копируем
+                        //Image::watermark($dir.$fileName, $watermark, [600,600])//x и y
+                        //        ->save($dirWatermark.$fileName);
+
                         if(file_exists($dir.$fileName)){
                             $modelPhotos = new GeoInstitutionsPhotos();
                             $modelPhotos->scenario = GeoInstitutionsPhotos::SCENARIO_CREATE;
@@ -283,4 +311,64 @@ class GeoInstitutionsController extends BaseAdmin
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+
+
+    //пакетная замена водяных знаков
+    public static function chengeAllWatermarks()
+    {
+        $arrayImg = [];
+        $watermark = Yii::getAlias(Yii::$app->params['watermark']);
+        $path = opendir(Yii::getAlias('@geoImg-path/'));
+        // перебираем папку
+        while (($dir = readdir($path )) !== false){ // перебираем пока есть файлы
+
+            if(is_dir(Yii::getAlias('@geoImg-path/'.$dir)) && $dir != '.' && $dir != '..'){ // если это не папка
+                $curDir = Yii::getAlias('@geoImg-path/'.$dir);
+                $scan = scandir($curDir);
+                foreach($scan as $elem) {
+                    //находим картинки внутри папки одного материала
+                    if(is_file($curDir.'/'.$elem)){
+                        if((exif_imagetype($curDir.'/'.$elem) === IMAGETYPE_JPEG) || (exif_imagetype($curDir.'/'.$elem) === IMAGETYPE_PNG) || (exif_imagetype($curDir.'/'.$elem) === IMAGETYPE_GIF)){
+                            $img = $curDir.'/'.$elem;
+                            //сохраняем все полный пути к картинкам в массив
+                            $arrayImg[] = $img;
+                        }
+
+                    }
+                }
+
+            }
+        }
+        // закрываем папку
+        closedir($path);
+
+        $dirWatermark = '/watermark/';
+        $dirFlag = [];// записываем в массив вновь созданную папку для проверки и исключния перетирания
+        foreach($arrayImg as $imgpath) {
+            $newDir = dirname($imgpath).$dirWatermark;//путь к дирректории из пути картинки+название новой папки
+            $newFile = basename($imgpath);//только имя и расширение картинки
+            $newPath = $newDir.$newFile;
+
+            //если папка еще не обробатывалась
+            if(!in_array($newDir, $dirFlag)){
+                //записываем новую дирректорию в массив
+                $dirFlag[] = $newDir;
+
+                //чистим старую папку, если есть и создаем новую
+                FileHelper::removeDirectory($newDir);
+                FileHelper::createDirectory($newDir);
+            }
+
+
+            Image::watermark($imgpath, $watermark, [600,600])->save($newPath);
+
+        }
+
+
+        return;
+    }
+
+
+
 }

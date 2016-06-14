@@ -57,17 +57,12 @@ class BlogCategorisTable extends \yii\db\ActiveRecord
     public static function getAllCategorisPosts($sort = SORT_ASC)
     {
 
-        $obj = self::find()
-                        ->orderBy([
-                                'id'=>$sort,
-                                 ])->all();
-
-        return $obj;
+        return self::find()->orderBy(['id'=>$sort])->all();
 
     }
 
     //получаем все посты данной категории. Вызов $obj->PostsFromCategory
-    public function getPostsFromCategory($limit = false,$offset = false, $orderBy = ['createdDate'=> SORT_DESC] )//от новых к старым
+    public function getPostsFromCategory($limit = false,$offset = false, $orderBy = ['createdDate'=> SORT_DESC, 'id' => SORT_DESC] )//от новых к старым, id - используется при одинаковых датах
     {
          $res = $this->hasMany(BlogPostsTable::className(), ['id' => 'id_post'])
                 ->viaTable('blog_categoris_posts_table', ['id_category' => 'id'])
@@ -91,6 +86,19 @@ class BlogCategorisTable extends \yii\db\ActiveRecord
     public function getCategorisPosts()
     {
         return $this->hasMany(BlogCategorisPostsTable::className(), ['id_category' => 'id']);
+    }
+
+    //получаем связанные посты
+    public function getPosts()
+    {
+        return $this->hasMany(BlogPostsTable::className(), ['id' => 'id_post'])
+                ->viaTable('blog_categoris_posts_table', ['id_category' => 'id']);
+    }
+
+    //получаем связанные посты
+    public function getPostsLimit()
+    {
+        return $this->getPosts()->limit(5);
     }
 
     //получаем данные одной категории.

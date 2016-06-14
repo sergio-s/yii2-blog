@@ -92,19 +92,40 @@ $this->params['breadcrumbs'][] = Html::encode($this->context->h1);
 
                 <?php $i = 1;?>
                 <?php foreach($institution->geoInstitutionsPhotos as $photo):?>
-                    <?php if($i === 1): ?>
-                        <div class="col-xs-24 institutions_big_photo"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
-                    <?php else: ?>
-                        <div class="col-xs-8"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@web/img/geo/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
+
+                    <!--включены ли водяные знаки-->
+                    <?php if(file_exists(Yii::getAlias('@geoImg-path/institution-'.$institution->id.'/watermark/'.$photo->img)) && true === Yii::getAlias(Yii::$app->params['watermarkOn'])): ?>
+                    <!--с наложением водяного знака-->
+
+
+                        <?php if($i === 1): ?>
+                            <div class="col-xs-24 institutions_big_photo"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@geoImg-web/institution-'.$institution->id.'/watermark/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@geoImg-web/institution-'.$institution->id.'/watermark/'.$photo->img);?>"></a></div>
+                        <?php else: ?>
+                            <div class="col-xs-8"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@geoImg-web/institution-'.$institution->id.'/watermark/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@geoImg-web/institution-'.$institution->id.'/watermark/'.$photo->img);?>"></a></div>
+                        <?php endif;?>
+
+
+                    <?php else:?>
+                    <!--без наложения водяного знака-->
+
+
+                        <?php if($i === 1): ?>
+                            <div class="col-xs-24 institutions_big_photo"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@geoImg-web/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@geoImg-web/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
+                        <?php else: ?>
+                            <div class="col-xs-8"><a rel="group1" title="<?=$photo->title;?>" href="<?=Yii::getAlias('@geoImg-web/institution-'.$institution->id.'/'.$photo->img);?>" class="imgColorBox"><img title="<?=$photo->title;?>" src="<?=Yii::getAlias('@geoImg-web/institution-'.$institution->id.'/'.$photo->img);?>"></a></div>
+                        <?php endif;?>
+
+
                     <?php endif;?>
+
                 <?php $i++;?>
                 <?php endforeach;?>
 
-             </div>
+            </div>
         </div>
     </div>
     <?php endif;?>
-
+<!--конец блока - ФОТО УЧРЕЖДЕНИЯ-->
 
 
 

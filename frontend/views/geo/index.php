@@ -26,6 +26,9 @@ $this->params['breadcrumbs'][] = $this->context->h1;
                                                         'center' => ['lat' => $country->lat, 'lng' => $country->lng],
                                                 ],
                                                 'marker' =>  $markerMap,
+                                                'clustererMaxZoom' =>  5,
+                                                'clustererGridSize' =>  20,
+                                                'clustererMinimumClusterSize' =>  4,
 //                                                'marker' =>   [
 //                                                        ['title' => 'россия','lat' => $country->lat,'lng' => $country->lng, 'infowindow' => ['content' => 'россия']],
 //                                                        ['title' => 'москва','lat' => '55.755826','lng' => '37.6173', 'infowindow' => ['content' => 'москва']],
@@ -39,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->context->h1;
             <li><small>Всего городов в базе: <?= isset($cityCount)? $cityCount: '0';?></small></li>
             <li><small>Всего роддомов в базе: <?= isset($institutionCount)? $institutionCount: '0';?></small></li>
             <li><small>Всего отзывов: <?=$countAllComments; ?></small></li>
-            
+
         </ul>
     </div>
     <?php if(isset($country->geoCities) && NULL != $country->geoCities):?>

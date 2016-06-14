@@ -12,7 +12,8 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use app\models\BlogCategorisTable;
+use app\models\BlogCategorisPostsTable;
 /**
  * Site controller
  */
@@ -101,6 +102,40 @@ class BaseFront extends Controller
 
 
       return parent::beforeAction($action);
+    }
+
+    public function footerCatsAndPosts($catsId = ['1', '2', '3', '5'], $postsLimit = 5){
+        //$catsId = ['2', '1', '3', '4'];
+        //сортировка по оприделенным полям как прописано $catsId
+        //SELECT * FROM  table WHERE  id IN ( 5, 1, 4, 2 ) ORDER BY FIELD( id, 5, 1, 4, 2 )
+        $cats = BlogCategorisTable::find()  ->select(['id', 'title', 'alias'])
+                                            ->andWhere(['blog_categoris_table.id' => $catsId])
+                                            ->orderBy([new \yii\db\Expression('FIELD (id, ' . implode(',', $catsId) . ')')])
+                                            ->indexBy('id')
+                                            ->all();
+        $resArr = [];
+
+        foreach($cats as $catId => $catVal){
+
+            $resArr[$catId]['category'] = $catVal;
+
+            $posts = BlogCategorisPostsTable::find()
+                    ->andWhere(['id_category' => $catId])
+                    ->joinWith(['blogPost' => function(\yii\db\ActiveQuery $q){return $q->select(['id', 'title', 'alias', 'createdDate']);}])
+                    ->limit($postsLimit)
+                    ->orderBy([ 'blog_posts_table.createdDate' => SORT_DESC,
+                                'blog_posts_table.id' => SORT_DESC,
+                            ])//от последних до старых
+                    ->all();
+
+            $resArr[$catId]['posts'] = $posts;
+
+
+        }
+
+        //var_dump($resArr[3]['posts'][0]->blogPost);
+        //var_dump($resArr[3]['posts']);
+        return $resArr;
     }
 
 }

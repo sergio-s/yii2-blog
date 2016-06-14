@@ -49,7 +49,7 @@ class BlogController extends BaseAdmin
 	return parent :: beforeAction($action);
     }
 
-        // для загрузки картинок из визуального редактора текста
+    // для загрузки картинок из визуального редактора текста
     public function actions()
     {
         return [
@@ -62,10 +62,37 @@ class BlogController extends BaseAdmin
             'redactor-image-upload' => [
                 'class' => 'vova07\imperavi\actions\UploadAction',
                 'url' => Yii::getAlias('@blogImg-web/textpics/'), // Directory URL address, where files are stored.
-                'path' => Yii::getAlias('@blogImg-path/textpics') // Or absolute path to directory where files are stored.
+                'path' => Yii::getAlias('@blogImg-path/textpics'), // Or absolute path to directory where files are stored.
+                'validatorOptions' => [
+                    'maxWidth' => 10000,
+                    'maxHeight' => 10000,
+                    'maxSize' => 40000000//40мегабайт
+                ],
+                'successCallback' => [$this, 'uploadCallback'],
             ],
 
         ];
+    }
+    //данные из текстового редактора vova07\imperavi\actions\UploadAction
+    //приходят сюда в виде $result в виде массива пути к картинке в веб и в файловой системе
+    public function uploadCallback($result)
+    {
+
+        if(isset($result['filelink']) && isset($result['filepath'])){
+            $mime = FileHelper::getMimeType($result['filepath']);
+            if($mime === 'image/jpeg' || $mime === 'image/png' || $mime === 'image/gif'){
+                //print_r($result['filepath']);
+                //ресайз большой картинки
+//                var_dump(is_file($result['filepath']));
+                $imgPath = $result['filepath'];
+
+                Image::thumbnail($imgPath, 1084, 864)->save($imgPath, ['quality' => 80]);
+
+            }
+
+        }
+
+        return $result;
     }
 
     /**
@@ -90,6 +117,8 @@ class BlogController extends BaseAdmin
      */
     public function actionView($id)
     {
+        //static::chengeAllWatermarks();//перезапись ватермарков
+
         $model = $this->findModel($id);
         $perent_categoris = $model->parentCategoris;
 
@@ -139,14 +168,17 @@ class BlogController extends BaseAdmin
                     //путь к папке для сохранения изображения текущей записи
                     $dir = Yii::getAlias('@blogImg-path/'.$new_id.'/');
                     $dirThumb = Yii::getAlias('@blogImg-path/'.$new_id.'/thumb/');
+                    $dirWatermark = Yii::getAlias('@blogImg-path/'.$new_id.'/watermark/');//тут будут храниться большие фото с ватермаркой
 
                     //создаем папку, если не существует
                     FileHelper::createDirectory($dir);
                     FileHelper::createDirectory($dirThumb);
+                    FileHelper::createDirectory($dirWatermark);
 
                     //сохраняем картинку в созданную папку
                     $pathToBig = $dir.$fileName;
                     $pathToThumb = $dirThumb.$fileName;
+                    $pathToBigWatermark = $dirWatermark.$fileName;
 
                     if($model->file->saveAs($pathToBig))
                     {
@@ -158,6 +190,15 @@ class BlogController extends BaseAdmin
                         //ресайз большой картинки
                         Image::thumbnail($pathToBig, 1084, 864)->save($pathToBig, ['quality' => 90]);
                         sleep(1);
+
+                        $watermark = Yii::getAlias(Yii::$app->params['watermark']);
+                        if(file_exists($watermark))//есть водяной знак
+                        {
+                            //добавляем ватермарку к картинке
+                            Image::watermark($pathToBig, $watermark, [600,600])//x и y
+                                    ->save($pathToBigWatermark);
+                            sleep(1);
+                        }
 
                         return $this->redirect(['view', 'id' => $model->id]);
                     }
@@ -179,6 +220,7 @@ class BlogController extends BaseAdmin
         {
 
             $categoris = \common\models\BlogCategorisTable::getAllCategorisPosts();
+
 
 
             //$categoris_name = array(0 => 'нет категорий');
@@ -211,7 +253,7 @@ class BlogController extends BaseAdmin
 
             if ($file && $file->tempName) {
                 $model->file = $file;
-                
+
 
                     //имя файла
                     $fileName = $model->file->baseName . '.' . $model->file->extension;
@@ -231,20 +273,24 @@ class BlogController extends BaseAdmin
                         $new_id = $model->id;
 
                         //путь к папке для сохранения изображения текущей записи
-                        $dir = Yii::getAlias('@blogImg-path').DIRECTORY_SEPARATOR.$new_id;
-                        $dirThumb = Yii::getAlias('@blogImg-path').DIRECTORY_SEPARATOR.$new_id.DIRECTORY_SEPARATOR.'thumb';
+                        $dir = Yii::getAlias('@blogImg-path/'.$new_id.'/');
+                        $dirThumb = Yii::getAlias('@blogImg-path/'.$new_id.'/thumb/');
+                        $dirWatermark = Yii::getAlias('@blogImg-path/'.$new_id.'/watermark/');//тут будут храниться большие фото с ватермаркой
+
 
                         //удаляем папку картинок с id статьи блога и все ее картинки для создания вновь
-
                         FileHelper::removeDirectory($dir);
 
                         //создаем папку, если не существует
                         FileHelper::createDirectory($dir);
                         FileHelper::createDirectory($dirThumb);
+                        FileHelper::createDirectory($dirWatermark);
+
 
                         //сохраняем картинку в созданную папку
-                        $pathToBig = $dir.DIRECTORY_SEPARATOR.$fileName;
-                        $pathToThumb = $dirThumb.DIRECTORY_SEPARATOR.$fileName;
+                        $pathToBig = $dir.$fileName;
+                        $pathToThumb = $dirThumb.$fileName;
+                        $pathToBigWatermark = $dirWatermark.$fileName;
 
                         if($model->file->saveAs($pathToBig))
                         {
@@ -256,6 +302,15 @@ class BlogController extends BaseAdmin
                             //ресайз большой картинки
                             Image::thumbnail($pathToBig, 1084, 864)->save($pathToBig, ['quality' => 90]);
                             sleep(1);
+
+                            $watermark = Yii::getAlias(Yii::$app->params['watermark']);
+                            if(file_exists($watermark))//есть водяной знак
+                            {
+                                //добавляем ватермарку к картинке
+                                Image::watermark($pathToBig, $watermark, [600,600])//x и y
+                                        ->save($pathToBigWatermark);
+                                sleep(1);
+                            }
 
                             return $this->redirect(['view', 'id' => $model->id]);
                         }
@@ -371,5 +426,51 @@ class BlogController extends BaseAdmin
 
     }
 
+    //пакетная замена водяных знаков
+    public static function chengeAllWatermarks()
+    {
+        $arrayImg = [];
+        $watermark = Yii::getAlias(Yii::$app->params['watermark']);
+        $path = opendir(Yii::getAlias('@blogImg-path/'));
+        // перебираем папку
+        while (($dir = readdir($path )) !== false){ // перебираем пока есть файлы
+
+            if(is_dir(Yii::getAlias('@blogImg-path/'.$dir)) && $dir != 'textpics' && $dir != '.' && $dir != '..'){ // если это не папка
+                $curDir = Yii::getAlias('@blogImg-path/'.$dir);
+                $scan = scandir($curDir);
+                foreach($scan as $elem) {
+                    //var_dump($curDir.'/'.$elem);
+                    if(is_file($curDir.'/'.$elem)){
+                        if((exif_imagetype($curDir.'/'.$elem) === IMAGETYPE_JPEG) || (exif_imagetype($curDir.'/'.$elem) === IMAGETYPE_PNG) || (exif_imagetype($curDir.'/'.$elem) === IMAGETYPE_GIF)){
+                            $img = $curDir.'/'.$elem;
+                            $arrayImg[] = $img;
+                            //var_dump(dirname($img));
+
+                        }
+
+                    }
+                }
+
+            }
+        }
+        // закрываем папку
+        closedir($path);
+
+        $dirWatermark = '/watermark/';
+        foreach($arrayImg as $imgpath) {
+            $newDir = dirname($imgpath).$dirWatermark;
+            $newFile = basename($imgpath);
+            $newPath = $newDir.$newFile;
+
+            FileHelper::removeDirectory($newDir);
+            FileHelper::createDirectory($newDir);
+
+            Image::watermark($imgpath, $watermark, [600,600])->save($newPath);
+
+        }
+
+
+        return;
+    }
 
 }

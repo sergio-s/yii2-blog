@@ -28,4 +28,9 @@ return [
     '@usersImg-path' => '@frontend/web/img/users',
     '@noAvatar' => '@usersImg-web/default.jpg',
 
+    //папка водяных знаков
+    '@watermarkImg-web' =>  $baseUrl.'/img/watermark',//
+    '@watermarkImg-path' => '@frontend/web/img/watermark',
+
+
 ];

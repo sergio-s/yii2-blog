@@ -3,6 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use common\components\behaviors\PurifyBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "blog_posts_table".
@@ -14,6 +17,9 @@ use Yii;
  * @property string $h1
  * @property string $content
  * @property string $createdDate
+ * @property string $updatedDate
+ * @property int    $autorId
+ * @property int    $updaterId
  *
  * @property BlogCategorisPostsTable[] $blogCategorisPostsTables
  */
@@ -39,7 +45,7 @@ class BlogPostsTable extends \yii\db\ActiveRecord
         return [
             [['alias', 'title', 'description', 'h1'], 'required'],
             [['content'], 'string'],
-            [['createdDate'], 'safe'],
+            [['createdDate','updatedDate','autorId','updaterId'], 'safe'],
             [['alias', 'title', 'description', 'h1', 'img'], 'string', 'max' => 255],
             [['category_id'], 'safe'],//id категории для промежуточной таблицы связей
 
@@ -87,10 +93,40 @@ class BlogPostsTable extends \yii\db\ActiveRecord
             'h1' => 'H1',
             'content' => 'Контент',
             'createdDate' => 'Дата создания',
+            'updatedDate' => 'Дата обновления',
+            'autorId' => 'Автор',
+            'updaterId' => 'Редактор',
+
             'category_id' => 'Выбрать (изменить) категорию',
             'file' => 'Загрузка изображения'
         ];
     }
+
+    public function behaviors()
+    {
+        return [
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'autorId',
+                'updatedByAttribute' => 'updaterId',
+            ],
+            'timestamp' => [//Использование поведения TimestampBehavior ActiveRecord
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    \yii\db\BaseActiveRecord::EVENT_BEFORE_INSERT => ['createdDate'],
+                    \yii\db\BaseActiveRecord::EVENT_BEFORE_UPDATE => ['updatedDate'],
+
+                ],
+                'value' => new \yii\db\Expression('NOW()'),
+
+            ],
+//            'purify' => [
+//                'class' => PurifyBehavior::className(),
+//                'attributes' => ['message']
+//            ]
+        ];
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery

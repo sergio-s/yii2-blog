@@ -35,3 +35,5 @@ phpunit.phar
 .jpg
 .png
 .gif
+
+/phpm

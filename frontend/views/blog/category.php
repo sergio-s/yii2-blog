@@ -8,8 +8,8 @@ use yii\widgets\LinkPager;//для пагинации
 use common\models\comments\Comments;
 
 //$this->title = 'Страницы сайта';
-$this->params['breadcrumbs'][] = array('label'=> 'Статьи', 'url'=>Url::toRoute('/blog/index'));
-$this->params['breadcrumbs'][] = Html::encode($h1);
+$this->params['breadcrumbs'][] = array('label'=> 'Все статьи', 'url'=>Url::toRoute('/blog/index'));
+$this->params['breadcrumbs'][] = strip_tags(trim($h1));
 ?>
 <!---------------------------------Секция вертикальная подборка материалов---------------------------------------------->
 <!--все материалы категории-->
@@ -49,6 +49,8 @@ $this->params['breadcrumbs'][] = Html::encode($h1);
                         <div class="textbox-selection-vertical">
                             <h4 class="h4-selection-vertical"><a href="<?=Url::toRoute(['/blog/post', 'alias' => $post->alias]);?>"><?= Html::encode($post->h1); ?></a></h4>
                             <p><?=BaseStringHelper::truncateWords(strip_tags($post->description), 28, $suffix = '...' );?></p>
+                            <p><?php //echo$post->createdDate;?></p>
+                            <p><?php //echo $post->id;?></p>
                         </div>
                     </div>
                 </div>

@@ -32,6 +32,9 @@ class GoogleMapWidget extends Widget
     public $marker = [];
 
     public $clustererDir;//где лежит библиотека для обработки класторизации на карте гугл
+    public $clustererMaxZoom;//цифра - масштаб объединения маркеров
+    public $clustererGridSize;
+    public $clustererMinimumClusterSize;
 
     public $panorama = [];
 
@@ -43,6 +46,20 @@ class GoogleMapWidget extends Widget
             $bundle = new $bundleName;
             $this->clustererDir = $bundle->baseUrl;//берем базовый путь из asset класса, где библиотека подклюается
 
+        }
+
+        //масштаб, при катором курсоры сливаются в один
+        if(NULL === $this->clustererMaxZoom){
+            $this->clustererMaxZoom = 8;//подхлдит для отдельных адресов в масштабе города
+        }
+
+        //размер ячейки сетки в пикселях
+        if(NULL === $this->clustererGridSize){
+            $this->clustererGridSize = 50;
+        }
+
+        if(NULL === $this->clustererMinimumClusterSize){
+            $this->clustererMinimumClusterSize = 4;//минимальное количество объединения маркера
         }
 
         //$this->marker
@@ -222,7 +239,10 @@ $js = <<< JS
             }
 
             var options = {
-                imagePath: '{$this->clustererDir}/js-marker-clusterer-gh-pages/images/m'
+                imagePath: '{$this->clustererDir}/js-marker-clusterer-gh-pages/images/m',
+                gridSize:{$this->clustererGridSize},
+                minimumClusterSize: {$this->clustererMinimumClusterSize},
+                maxZoom: {$this->clustererMaxZoom},//устанавливаем радиус обьединения в общий маркер
             };
 
             var markerCluster = new MarkerClusterer({$this->mapId}, markers, options);

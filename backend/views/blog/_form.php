@@ -114,10 +114,14 @@ echo $form->field($model, 'content')->widget(Widget::className(), [
 
     <?php //echo $form->field($model, 'createdDate')->textInput() ?>
 
-    <?= $form->field($model, 'createdDate')->widget(\yii\jui\DatePicker::classname(), [
-                                                                                 'language' => 'ru',
-                                                                                 'dateFormat' => 'yyyy-MM-dd',
-                                                                                 ]) ?>
+    <?php
+
+//echo $form->field($model, 'createdDate')->widget(\yii\jui\DatePicker::classname(), [
+//                                                                                 'language' => 'ru',
+//                                                                                 'dateFormat' => 'yyyy-MM-dd',
+//                                                                                 ])
+
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

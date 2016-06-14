@@ -816,6 +816,12 @@ a{
 
 }
 
+.blogpagecontent{
+    overflow: hidden;
+}
+.blogpagecontent img{
+    width: 100%;
+}
 .blog-post > div.blogpagecontent > div {
     border-bottom: 2px #f7d2e4 dashed;
     border-top: 2px #f7d2e4 dashed;
