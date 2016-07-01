@@ -35,6 +35,10 @@ class GeoController extends BaseFront
         }
 
         Yii::$app->view->title .= ': рейтинг роддомов';
+        
+        Yii::$app->view->registerMetaTag(['name' => 'description','content' => 'Рейтинг роддомов - '.Yii::$app->name]);
+        Yii::$app->view->registerMetaTag(['name' => 'keywords','content' => 'рейтинг роддомов '.Yii::$app->name]);
+
         $this->h1 = "Рейтинг роддомов";
 
         //всего городов в базе,относящейся к этой стране
@@ -101,6 +105,17 @@ class GeoController extends BaseFront
         }
 
         Yii::$app->view->title .= ": рейтинг роддомов - {$city->name}";
+
+        if(isset($city->description) && NULL !== $city->description)
+        {
+            \Yii::$app->view->registerMetaTag(['name' => 'description','content' => $city->description]);
+        }
+
+        if(isset($city->keywords) && NULL !== $city->keywords)
+        {
+            \Yii::$app->view->registerMetaTag(['name' => 'keywords','content' => $city->keywords]);
+        }
+
         $this->h1 = "{$city->name} : рейтинг роддомов";
 
         //Массив для передачи в виджет карты GoogleMapWidget::widget
@@ -143,6 +158,17 @@ class GeoController extends BaseFront
         }
 
         Yii::$app->view->title .= ": {$institution->name}";
+
+        if(isset($institution->description) && NULL !== $institution->description)
+        {
+            \Yii::$app->view->registerMetaTag(['name' => 'description','content' => $institution->description]);
+        }
+
+        if(isset($institution->keywords) && NULL !== $institution->keywords)
+        {
+            \Yii::$app->view->registerMetaTag(['name' => 'keywords','content' => $institution->keywords]);
+        }
+
         $this->h1 = "{$institution->name}";
 
 

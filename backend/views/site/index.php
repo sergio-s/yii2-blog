@@ -23,6 +23,14 @@ $this->title = 'Админчасть';
             </ul>
         </div>
         <hr>
+        <div class="lead">
+            <h3>Энциклопедия</h3>
+            <ul>
+                <li style="list-style:none"><small><a href="<?php echo Url::toRoute('/wiki-letters/index'); ?>">Категории букв</a></small></li>
+                <li style="list-style:none"><small><a href="<?php echo Url::toRoute('/wiki-terms/index'); ?>">Термины</a></small></li>
+            </ul>
+        </div>
+        <hr>
 </div>
 
     <div class="body-content">

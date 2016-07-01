@@ -76,6 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'alias',
             'title',
             'description',
+            'keywords',
             'h1',
             // 'content:ntext',
             // 'createdDate',

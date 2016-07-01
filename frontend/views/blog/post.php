@@ -36,9 +36,9 @@ $this->params['breadcrumbs'][] = strip_tags(trim($post->h1));
     <!--    вывод главной картинки с ватермаркой или без, в зависимости от настроек -->
     <?php if(isset($post->img)): ?>
         <?php if(file_exists(Yii::getAlias('@blogImg-path/'.$post->id.'/watermark/'.$post->img)) && true === Yii::getAlias(Yii::$app->params['watermarkOn'])): ?>
-            <?php echo Html::img('@blogImg-web/'.$post->id.'/watermark/'.$post->img, ['alt'=>'', 'class'=>'gen-img-blogPost']);?>
+            <?php echo Html::img('@blogImg-web/'.$post->id.'/watermark/'.$post->img, ['alt'=> $post->alt ? $post->alt : Yii::$app->name, 'class'=>'gen-img-blogPost']);?>
         <?php else:?>
-            <?php echo Html::img('@blogImg-web/'.$post->id.'/'.$post->img, ['alt'=>'', 'class'=>'gen-img-blogPost']);?>
+            <?php echo Html::img('@blogImg-web/'.$post->id.'/'.$post->img, ['alt'=> $post->alt ? $post->alt : Yii::$app->name, 'class'=>'gen-img-blogPost']);?>
         <?php endif;?>
     <?php endif;?>
 
@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = strip_tags(trim($post->h1));
 
 
     <hr>
-    <!-- <small>Дата публикации: <?=Yii::$app->formatter->asDate($post->createdDate, 'd MMMM yyyy');?></small> -->
+    <!-- <small>Дата публикации: <?php //echo Yii::$app->formatter->asDate($post->createdDate, 'd MMMM yyyy');?></small> -->
     <script type="text/javascript" src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8"></script>
     <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,whatsapp"></div>

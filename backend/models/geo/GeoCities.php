@@ -40,7 +40,7 @@ class GeoCities extends \yii\db\ActiveRecord
             [['phone_code', 'country_id', 'name', 'address', 'lat', 'lng'], 'required'],
             [['country_id', 'id_center'], 'integer'],
             [['lat', 'lng'], 'number'],
-            [['description'], 'string'],
+            [['description', 'keywords'], 'string'],
             [['phone_code'], 'string', 'max' => 10],
             [['name', 'address'], 'string', 'max' => 255],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => GeoCountries::className(), 'targetAttribute' => ['country_id' => 'id']],
@@ -62,6 +62,7 @@ class GeoCities extends \yii\db\ActiveRecord
             'lat' => 'широта',
             'lng' => 'долгота',
             'description' => 'Description',
+            'keywords' => 'Ключевые слова',
         ];
     }
 

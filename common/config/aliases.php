@@ -20,6 +20,9 @@ return [
     '@blogImg-web' =>  $baseUrl.'/img/blog',//
     '@blogImg-path' => '@frontend/web/img/blog',
 
+    '@wikiImg-web' =>  $baseUrl.'/img/wiki',//
+    '@wikiImg-path' => '@frontend/web/img/wiki',
+
     '@geoImg-web' =>  $baseUrl.'/img/geo',
     '@geoImg-path' => '@frontend/web/img/geo',
 

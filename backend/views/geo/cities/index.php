@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'lat',
             'lng',
             'description:ntext',
+            'keywords',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

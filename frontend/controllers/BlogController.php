@@ -38,6 +38,10 @@ class BlogController extends BaseFront
         //передаем тайтл
         Yii::$app->view->title .= '- все статьи';
         Yii::$app->view->title .= (isset($pageNum) && NULL != $pageNum) ? ' - страница '.$pageNum : '';
+
+        Yii::$app->view->registerMetaTag(['name' => 'description','content' => 'Все статьи сайта - '.Yii::$app->name]);
+        Yii::$app->view->registerMetaTag(['name' => 'keywords','content' => Yii::$app->name]);
+
         $h1 = "Все статьи";
 
         $query = BlogPostsTable::getAllPosts();
@@ -127,6 +131,18 @@ class BlogController extends BaseFront
             Yii::$app->view->title .= " - $currentCategory->title ";
             Yii::$app->view->title .= (isset($pageNum) && NULL != $pageNum) ? ' - страница '.$pageNum : '';
         }
+
+        if(isset($currentCategory->description) && NULL !== $currentCategory->description)
+        {
+            \Yii::$app->view->registerMetaTag(['name' => 'description','content' => $currentCategory->description]);
+        }
+
+        if(isset($currentCategory->keywords) && NULL !== $currentCategory->keywords)
+        {
+            \Yii::$app->view->registerMetaTag(['name' => 'keywords','content' => $currentCategory->keywords]);
+        }
+
+
         $h1 = $currentCategory->h1;
 
 
@@ -161,6 +177,16 @@ class BlogController extends BaseFront
         if($post->title)
         {
             Yii::$app->view->title .= '- '.$post->title;
+        }
+        
+        if(isset($post->description) && NULL !== $post->description)
+        {
+            \Yii::$app->view->registerMetaTag(['name' => 'description','content' => $post->description]);
+        }
+
+        if(isset($post->keywords) && NULL !== $post->keywords)
+        {
+            \Yii::$app->view->registerMetaTag(['name' => 'keywords','content' => $post->keywords]);
         }
 
 

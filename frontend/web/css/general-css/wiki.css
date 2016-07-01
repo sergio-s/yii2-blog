@@ -1,0 +1,21 @@
+.lettersList, .termList{
+    overflow: hidden;
+    padding-left: 0;
+}
+.lettersList li{
+    float:left;
+    margin-right: 5px;
+}
+li.allLettersList:after{
+    content: "|";
+    padding-left: 4px;
+}
+.termList li{
+    line-height: 100%;
+    margin-bottom: 8px;
+}
+.termListHead{
+    font-weight: bold;
+/*    text-align: center;*/
+    font-size: 140%;
+}

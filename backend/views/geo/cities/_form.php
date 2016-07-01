@@ -30,8 +30,22 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'lng')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?php //echo $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'keywords',
+            [
+            'template' =>
+                        '<div class="form-group"><label class="control-label">{label}'
+                        . Html::a(' (как заполнять)', ['#'], ['data-toggle' => 'tooltip','title' => "Перечислите ключевые слова через запятую"])
+                        . '</label>'
+                        .'{input}{error}{hint}'
+                        . '</div>',
+
+            ]
+            )->textInput(['maxlength' => true]) ?>
+    
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
@@ -39,3 +53,19 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+
+$script = <<< JS
+
+// инициализировать все элементы на страницы, имеющих атрибут data-toggle="tooltip", как компоненты tooltip
+$('[data-toggle="tooltip"]').tooltip()
+
+$('[data-toggle="tooltip"]').click(function( event ) {
+  event.preventDefault();
+});
+JS;
+
+$this->registerJs($script, yii\web\View::POS_READY);
+
+?>

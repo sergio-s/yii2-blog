@@ -74,16 +74,41 @@ use yii\helpers\Url;
                                                                         'initialPreview'=>[
                                                                             Html::img("@blogImg-web/{$model->id}/thumb/{$model->img}", ['class'=>'file-preview-image', 'alt'=>'нет изображения', 'title'=>'The Moon']),//картинка ,которая уже загружена у обновляемой записи
                                                                         ],
-                                                                                                                                        //'uploadAsync' => true,
+                                                                        'maxFileSize'=>5000,
+                                                                        'minImageWidth'=> 1084,
+                                                                        'minImageHeight'=> 864,   
                                                     ],
                                                 ]);
 
 
     ?>
 
+    <?= $form->field($model, 'alt',
+        [
+        'template' =>
+                    '<div class="form-group"><label class="control-label">{label}'
+                    . Html::a(' (как заполнять)', ['#'], ['data-toggle' => 'tooltip','title' => "Краткое описание картинки. "])
+                    . '</label>'
+                    .'{input}{error}{hint}'
+                    . '</div>',
+
+        ]
+        )->textInput(['maxlength' => true]) ?>
 
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'keywords',
+            [
+            'template' =>
+                        '<div class="form-group"><label class="control-label">{label}'
+                        . Html::a(' (как заполнять)', ['#'], ['data-toggle' => 'tooltip','title' => "Перечисление ключевых слов через запятую"])
+                        . '</label>'
+                        .'{input}{error}{hint}'
+                        . '</div>',
+
+            ]
+            )->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'h1')->textInput(['maxlength' => true]) ?>
 
@@ -130,3 +155,15 @@ echo $form->field($model, 'content')->widget(Widget::className(), [
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+
+$script = <<< JS
+
+  // инициализировать все элементы на страницы, имеющих атрибут data-toggle="tooltip", как компоненты tooltip
+  $('[data-toggle="tooltip"]').tooltip()
+JS;
+
+$this->registerJs($script, yii\web\View::POS_READY);
+
+?>

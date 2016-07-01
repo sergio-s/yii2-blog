@@ -17,7 +17,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-
+//для того, чтобы роутер находил контроллеры в подпапках
     'controllerMap' => [
         'geo-cities' =>[
                 'class' =>'backend\controllers\geo\GeoCitiesController'
@@ -25,6 +25,13 @@ return [
         'geo-institutions' =>[
                 'class' =>'backend\controllers\geo\GeoInstitutionsController'
         ],
+        'wiki-letters' =>[
+                'class' =>'backend\controllers\wiki\WikiLettersController'
+        ],
+        'wiki-terms' =>[
+                'class' =>'backend\controllers\wiki\WikiTermsController'
+        ],
+
     ],
 
     'modules' => [

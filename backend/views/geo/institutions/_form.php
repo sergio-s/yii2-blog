@@ -54,6 +54,20 @@ use yii\helpers\Url;
 
     <?php //echo $form->field($model, 'file[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'keywords',
+            [
+            'template' =>
+                        '<div class="form-group"><label class="control-label">{label}'
+                        . Html::a(' (как заполнять)', ['#'], ['data-toggle' => 'tooltip','title' => "Перечислите ключевые слова через запятую"])
+                        . '</label>'
+                        .'{input}{error}{hint}'
+                        . '</div>',
+
+            ]
+            )->textInput(['maxlength' => true]) ?>
+
     <?php   echo $form->field($model, 'file[]') ->fileInput()
                                                 ->widget(FileInput::classname(), [
                                                     'options' => [
@@ -110,52 +124,43 @@ use yii\helpers\Url;
 
                                                 ]);
 
-//удаляем иконку загрузки на сервер к картинке превью
-$script = <<< JS
-jQuery(".kv-file-upload,.file-upload-indicator").remove();
-
-$('.file-input :file').on('fileselect', function(event, numFiles, label) {
-        jQuery(".kv-file-upload,.file-upload-indicator").remove();
-});
-    jQuery(".kv-file-upload").remove();
-JS;
-$this->registerJs($script, yii\web\View::POS_READY);
-
     ?>
 
 
-    <?php echo $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <!--    ТЕКСТОВЫЙ РЕДАКТОР С ЗАГРУЗКОЙ КАРТИНОК-->
-<?php
-//    echo $form->field($model, 'description')->widget(Widget::className(), [
-//        'settings' => [
-//            'lang' => 'ru',
-//            'minHeight' => 200,
-//            //'imageManagerJson' => Url::to(['/blog/redactor-images-get']),
-//            //'imageUpload' => Url::to(['/blog/redactor-image-upload']),
-//            'plugins' => [
-//                //'imagemanager',
-//                'clips',
-//                'fullscreen',
-//                'fontcolor',
-//                'fontfamily',
-//                'fontsize',
-//                'video',
-//                'blockwrap',
-//             ]
-//        ]
-//    ]);
-    ?>
-  <!-- ###   ТЕКСТОВЫЙ РЕДАКТОР С ЗАГРУЗКОЙ КАРТИНОК  ### -->
-
-    <?php //echo $form->field($model, 'rating')->textInput(['maxlength' => true]) ?>
-
+    <hr style="border: none;color: green;background-color: green;height: 2px;">
+    <br><br><br>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+
+$script = <<< JS
+
+//удаляем иконку загрузки на сервер к картинке превью
+jQuery(".kv-file-upload,.file-upload-indicator").remove();
+
+$('.file-input :file').on('fileselect', function(event, numFiles, label) {
+        jQuery(".kv-file-upload,.file-upload-indicator").remove();
+});
+jQuery(".kv-file-upload").remove();
+
+//////////////////////////////////////////////////////////////////
+
+// инициализировать все элементы на страницы, имеющих атрибут data-toggle="tooltip", как компоненты tooltip
+$('[data-toggle="tooltip"]').tooltip()
+
+$('[data-toggle="tooltip"]').click(function( event ) {
+  event.preventDefault();
+});
+JS;
+
+$this->registerJs($script, yii\web\View::POS_READY);
+
+?>

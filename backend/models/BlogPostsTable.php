@@ -14,7 +14,10 @@ use yii\behaviors\TimestampBehavior;
  * @property string $alias
  * @property string $title
  * @property string $description
+ * @property string $keywords
  * @property string $h1
+ * @property string $img
+ * @property string $alt
  * @property string $content
  * @property string $createdDate
  * @property string $updatedDate
@@ -46,8 +49,8 @@ class BlogPostsTable extends \yii\db\ActiveRecord
             [['alias', 'title', 'description', 'h1'], 'required'],
             [['content'], 'string'],
             [['createdDate','updatedDate','autorId','updaterId'], 'safe'],
-            [['alias', 'title', 'description', 'h1', 'img'], 'string', 'max' => 255],
-            [['category_id'], 'safe'],//id категории для промежуточной таблицы связей
+            [['alias', 'title', 'description', 'h1', 'keywords', 'img', 'alt'], 'string', 'max' => 255],
+            [['category_id', 'alt'], 'safe'],//id категории для промежуточной таблицы связей
 
             //валидация картинки из формы
 //            [['file'],  'safe'],
@@ -80,6 +83,10 @@ class BlogPostsTable extends \yii\db\ActiveRecord
 //        ];
 //    }
 
+
+
+
+
     /**
      * @inheritdoc
      */
@@ -88,8 +95,9 @@ class BlogPostsTable extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'alias' => 'Алиас',
-            'title' => 'Тайтл',
-            'description' => 'Краткое описание',
+            'title' => 'title',
+            'description' => 'description',
+            'keywords' => 'keywords',
             'h1' => 'H1',
             'content' => 'Контент',
             'createdDate' => 'Дата создания',
@@ -98,7 +106,8 @@ class BlogPostsTable extends \yii\db\ActiveRecord
             'updaterId' => 'Редактор',
 
             'category_id' => 'Выбрать (изменить) категорию',
-            'file' => 'Загрузка изображения'
+            'file' => 'Загрузка изображения',
+            'alt' => 'alt изображения'
         ];
     }
 

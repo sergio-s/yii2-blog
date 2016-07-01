@@ -25,6 +25,14 @@ return [
                 'rating/city/<cityId:\d+>' => 'geo/cities',//вывод отдельного города и информации о нем
                 'rating/hospital/<instId:\d+>' => 'geo/institutions',//вывод отдельного роддома
 
+                //роуты wiki
+                'wiki' => 'wiki/index',//вывод всех терминов wiki
+                'wiki/letter/<alias:[\w]+>' => 'wiki/letter',//вывод отдельной категории по букве
+                'wiki/<alias:[\w_-]+>' => 'wiki/term',//вывод отдельного термина wiki
+
+                //калькулятор выплат по беременности
+                'calculator-<action:[\w-]+>' => 'calculator/<action>',
+
             ],
         ];
 ?>

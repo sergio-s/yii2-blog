@@ -51,7 +51,7 @@ class GeoInstitutions extends \yii\db\ActiveRecord
             [['country_id', 'city_id', 'name', 'address', 'lat', 'lng', 'description'], 'required'],
             [['country_id', 'city_id'], 'integer'],
             [['lat', 'lng', 'rating'], 'number'],
-            [['description'], 'string'],
+            [['description', 'keywords'], 'string'],
             [['name', 'address'], 'string', 'max' => 255],
             [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => GeoCities::className(), 'targetAttribute' => ['city_id' => 'id']],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => GeoCountries::className(), 'targetAttribute' => ['country_id' => 'id']],
@@ -89,7 +89,7 @@ class GeoInstitutions extends \yii\db\ActiveRecord
             'phonesNumbers' => 'Телефоны',//кастомное поле из другой таблицы
             'phone_char' => 'Телефоны через запятую. Пример: 8 (495) 494-83-30, 8 (495) 495-00-30',//кастомное поле из другой таблицы ддя create и update форм
             'file' => 'Фотографии',//кастомное поле из другой таблицы
-
+            'keywords' => 'Ключевые слова',
         ];
     }
 
@@ -105,6 +105,7 @@ class GeoInstitutions extends \yii\db\ActiveRecord
                                         'lat',
                                         'lng',
                                         'description',
+                                        'keywords'
                                         //без рейтинга
                                     ];
         $scenarios[self::SCENARIO_UPDATE] = [

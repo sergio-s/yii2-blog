@@ -51,11 +51,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'alias',
             'title',
             'description',
+            'keywords',
+            'alt',
             'h1',
             'content:ntext',
             'createdDate',
             'updatedDate',
-            
+
             [
                 'label'  => $model->attributeLabels()['autorId'],
                 'value'  => ($userName = User::findByUserId($model->autorId))? $userName->username : 'не известен',
