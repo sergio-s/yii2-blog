@@ -6,6 +6,7 @@ use Yii;
 use common\components\behaviors\PurifyBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use app\models\authors\Authors;
 
 /**
  * This is the model class for table "blog_posts_table".
@@ -29,6 +30,7 @@ use yii\behaviors\TimestampBehavior;
 class BlogPostsTable extends \yii\db\ActiveRecord
 {
     public $category_id;
+    public $writer_id;//назначенный писатель (автор),т.е. не тот, кто создал, а назначенный автор в орме добавления поста
     public $file;//загружаемое изображение
 //    public $del_img;//удаляемое изображение
 
@@ -50,7 +52,7 @@ class BlogPostsTable extends \yii\db\ActiveRecord
             [['content'], 'string'],
             [['createdDate','updatedDate','autorId','updaterId'], 'safe'],
             [['alias', 'title', 'description', 'h1', 'keywords', 'img', 'alt'], 'string', 'max' => 255],
-            [['category_id', 'alt'], 'safe'],//id категории для промежуточной таблицы связей
+            [['category_id', 'alt', 'writer_id'], 'safe'],//id категории для промежуточной таблицы связей
 
             //валидация картинки из формы
 //            [['file'],  'safe'],
@@ -102,12 +104,13 @@ class BlogPostsTable extends \yii\db\ActiveRecord
             'content' => 'Контент',
             'createdDate' => 'Дата создания',
             'updatedDate' => 'Дата обновления',
-            'autorId' => 'Автор',
+            'autorId' => 'Создал',
             'updaterId' => 'Редактор',
 
             'category_id' => 'Выбрать (изменить) категорию',
             'file' => 'Загрузка изображения',
-            'alt' => 'alt изображения'
+            'alt' => 'alt изображения',
+            'writer_id' => 'Установленный автор',//не создатель материала
         ];
     }
 
@@ -143,6 +146,24 @@ class BlogPostsTable extends \yii\db\ActiveRecord
     public function getBlogCategorisPostsTables()
     {
         return $this->hasMany(BlogCategorisPostsTable::className(), ['id_post' => 'id']);
+    }
+
+    //получаем связанные назначенных авторов
+    public function getWriters()
+    {
+        return $this->hasMany(Authors::className(), ['id' => 'id_author'])
+                ->viaTable('authors_posts', ['id_post' => 'id']);
+    }
+
+    public function getWriter()
+    {
+        return $this->getWriters()->one();
+    }
+
+     //получаем автора
+    public function getWriterFullName()
+    {
+        return $this->writer->first_name.' '.$this->writer->last_name;
     }
 
         //получаем все категории, к которым принадлежит пост

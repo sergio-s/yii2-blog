@@ -7,6 +7,8 @@ use yii\web\UploadedFile;
 use kartik\file\FileInput;
 use vova07\imperavi\Widget;
 use yii\helpers\Url;
+use app\models\authors\Authors;
+use yii\helpers\ArrayHelper;
 
 
 
@@ -50,6 +52,13 @@ use yii\helpers\Url;
         }
     ?>
 
+    <?= $form->field($model, 'writer_id')->dropDownList(
+
+        ArrayHelper::map(Authors::find()->all(),'id','authorFullName'),
+        ['prompt' => $prompt]
+
+    )->label() ?>
+
     <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
@@ -76,7 +85,7 @@ use yii\helpers\Url;
                                                                         ],
                                                                         'maxFileSize'=>5000,
                                                                         'minImageWidth'=> 1084,
-                                                                        'minImageHeight'=> 864,   
+                                                                        'minImageHeight'=> 864,
                                                     ],
                                                 ]);
 

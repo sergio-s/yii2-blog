@@ -30,6 +30,7 @@ class Comments extends \yii\db\ActiveRecord
     const TYPE_BLOGPOST = "blog_post";
     const TYPE_TERMS = "wiki_terms";
     const TYPE_GEOINSTITUTIONS = "geo_institutions";
+    const TYPE_AUTHORS = "author_profile";
     const ACTIVE = 1;//соотносится с полем status = 1 в таблице comments бд
     const DISABLED = 0;//соотносится с полем status = 0 в таблице comments бд
 
@@ -48,6 +49,7 @@ class Comments extends \yii\db\ActiveRecord
             self::TYPE_BLOGPOST => 'Статьи блога',
             self::TYPE_TERMS => 'Термины энциклопедии',
             self::TYPE_GEOINSTITUTIONS => 'Карточка роддома',
+            self::TYPE_AUTHORS => 'Профиль автора',
         ];
     }
 

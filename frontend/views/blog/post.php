@@ -16,6 +16,18 @@ $this->params['breadcrumbs'][] = strip_tags(trim($post->h1));
 ?>
 
 <div class="blog-post">
+
+<!--автор-->
+    <?php if(isset($post->author) && !empty($post->author)):?>
+        <div class="authorBox">
+            <a class="authorImg" href="<?=Url::toRoute(['/author/index', 'id' => $post->author->id ]);?>">
+                <?php echo Html::img('@authorsImg-web/'.$post->author->id.'/thumb/'.$post->author->img, ['alt'=> $post->authorFullName,'title'=> 'Автор статьи - '.$post->authorFullName, 'class'=>'']);?>
+            </a>
+            <a class="authorLink" href="<?=Url::toRoute(['/author/index', 'id' => $post->author->id ]);?>"><?=$post->authorFullName;?></a>
+        </div>
+    <?php endif;?>
+<!--автор-->
+
     <h1><?= Html::encode($post->h1) ?></h1>
 
     <?php if(isset($post->parentCategoris)):?>
@@ -48,6 +60,18 @@ $this->params['breadcrumbs'][] = strip_tags(trim($post->h1));
         <?php echo $post->content;?>
     </div>
 
+    <hr>
+    <!--автор-->
+    <?php if(isset($post->author) && !empty($post->author)):?>
+        <div class="authorBox">
+            <a class="authorImg" href="<?=Url::toRoute(['/author/index', 'id' => $post->author->id ]);?>">
+                <?php echo Html::img('@authorsImg-web/'.$post->author->id.'/thumb/'.$post->author->img, ['alt'=> $post->authorFullName,'title'=> 'Автор статьи - '.$post->authorFullName, 'class'=>'']);?>
+            </a>
+            <a class="authorLink" href="<?=Url::toRoute(['/author/index', 'id' => $post->author->id ]);?>"><?=$post->authorFullName;?></a>
+        </div>
+    <?php endif;?>
+    <!--автор-->
+    <hr>
     <!--///////////////////////////////////секция Похожие статьи  (выводим,если постов > 1 в текущей категории)////////////////////////////////////////////-->
     <?php if(BlogPostsTable::categoryCountPosts($post->parentCategoris[0]->id) > 1):?>
     <div class="row selection">

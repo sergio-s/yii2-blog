@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-
+use app\models\authors\Authors;
 /**
  * This is the model class for table "blog_posts_table".
  *
@@ -93,6 +93,25 @@ class BlogPostsTable extends \yii\db\ActiveRecord
     public function getParentCategoris()
     {
         return $this->hasMany(BlogCategorisTable::className(), ['id' => 'id_category'])->viaTable('blog_categoris_posts_table', ['id_post' => 'id']);
+    }
+
+    //получаем авторов
+    public function getAuthors()
+    {
+        return $this->hasMany(Authors::className(), ['id' => 'id_author'])
+                ->viaTable('authors_posts', ['id_post' => 'id']);
+    }
+
+    //получаем автора
+    public function getAuthor()
+    {
+        return $this->getAuthors()->one();
+    }
+
+    //получаем автора
+    public function getAuthorFullName()
+    {
+        return $this->author->first_name.' '.$this->author->last_name;
     }
 
     //выборка соседних записей у текущей записи по принципу 2-слева, 2-справа при условии, что общее число записей

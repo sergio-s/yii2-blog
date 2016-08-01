@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = 'Обновить';
         'categoris_name' => $categoris_name,
         'perent_categoris' => $perent_categoris,
         'selected' => $selected,
+        'prompt' => $prompt,
     ]) ?>
 
 </div>

@@ -33,6 +33,9 @@ return [
                 //калькулятор выплат по беременности
                 'calculator-<action:[\w-]+>' => 'calculator/<action>',
 
+                //профиль автора
+                'author/<id:\d+>' => 'author/index',
+
             ],
         ];
 ?>

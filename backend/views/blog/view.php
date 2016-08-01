@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use common\models\User;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\BlogPostsTable */
@@ -57,7 +58,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'content:ntext',
             'createdDate',
             'updatedDate',
+            [
+                'label'  => $model->attributeLabels()['writer_id'].' '.Html::a(' (?)', ['#'], ['data-toggle' => 'tooltip','title' => "Это поле содержит установленного, а не фактического автора статьи. Фактический автор статьи устанавливается автоматически."]),
+                'value'  => ($model->writer)? $model->writerFullName : 'не известен',
 
+            ],
             [
                 'label'  => $model->attributeLabels()['autorId'],
                 'value'  => ($userName = User::findByUserId($model->autorId))? $userName->username : 'не известен',
@@ -73,3 +78,18 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<?php
+
+$script = <<< JS
+// инициализировать все элементы на страницы, имеющих атрибут data-toggle="tooltip", как компоненты tooltip
+$('[data-toggle="tooltip"]').tooltip()
+
+$('[data-toggle="tooltip"]').click(function( event ) {
+  event.preventDefault();
+});
+JS;
+
+$this->registerJs($script, yii\web\View::POS_READY);
+
+?>

@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use app\models\BlogPostsTable;
 use app\models\BlogCategorisTable;
+use app\models\authors;
 use yii\data\Pagination;
 use yii\helpers\Url;
 /**
@@ -178,7 +179,7 @@ class BlogController extends BaseFront
         {
             Yii::$app->view->title .= '- '.$post->title;
         }
-        
+
         if(isset($post->description) && NULL !== $post->description)
         {
             \Yii::$app->view->registerMetaTag(['name' => 'description','content' => $post->description]);

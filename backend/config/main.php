@@ -31,6 +31,9 @@ return [
         'wiki-terms' =>[
                 'class' =>'backend\controllers\wiki\WikiTermsController'
         ],
+        'author' =>[
+                'class' =>'backend\controllers\authors\AuthorController'
+        ],
 
     ],
 

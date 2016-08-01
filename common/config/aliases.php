@@ -17,23 +17,27 @@ return [
 
 //    ПУТИ К ИЗОБРАЖЕНИЯМ КОНТЕНТА
 
-    '@blogImg-web' =>  $baseUrl.'/img/blog',//
-    '@blogImg-path' => '@frontend/web/img/blog',
+    '@blogImg-web' =>  $baseUrl.'/img/blog',//для веб
+    '@blogImg-path' => '@frontend/web/img/blog',//для файловой системы
 
-    '@wikiImg-web' =>  $baseUrl.'/img/wiki',//
-    '@wikiImg-path' => '@frontend/web/img/wiki',
+    '@wikiImg-web' =>  $baseUrl.'/img/wiki',//для веб
+    '@wikiImg-path' => '@frontend/web/img/wiki',//для файловой системы
 
-    '@geoImg-web' =>  $baseUrl.'/img/geo',
-    '@geoImg-path' => '@frontend/web/img/geo',
+    '@geoImg-web' =>  $baseUrl.'/img/geo',//для веб
+    '@geoImg-path' => '@frontend/web/img/geo',//для файловой системы
 
 
-    '@usersImg-web' =>  $baseUrl.'/img/users',//
-    '@usersImg-path' => '@frontend/web/img/users',
+    '@usersImg-web' =>  $baseUrl.'/img/users',//для веб
+    '@usersImg-path' => '@frontend/web/img/users',//для файловой системы
     '@noAvatar' => '@usersImg-web/default.jpg',
 
+    //авторы постов
+    '@authorsImg-web' =>  $baseUrl.'/img/authors',//для веб
+    '@authorsImg-path' => '@frontend/web/img/authors',//для файловой системы
+
     //папка водяных знаков
-    '@watermarkImg-web' =>  $baseUrl.'/img/watermark',//
-    '@watermarkImg-path' => '@frontend/web/img/watermark',
+    '@watermarkImg-web' =>  $baseUrl.'/img/watermark',//для веб
+    '@watermarkImg-path' => '@frontend/web/img/watermark',//для файловой системы
 
 
 ];

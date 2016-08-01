@@ -14,6 +14,7 @@ use yii\web\UploadedFile;
 use yii\imagine\Image;
 use yii\imagine\Gd;
 use yii\helpers\FileHelper;
+use app\models\authors\AuthorsPosts;
 
 /**
  * BlogController implements the CRUD actions for BlogPostsTable model.
@@ -162,6 +163,11 @@ class BlogController extends BaseAdmin
                     //сохранение родительской категории, выбранной в выпадающем меню
                     $this->saveParentCategory($model->id, $model->category_id );
 
+                    //сохранить выбранного автора, если автор был выбран (не обязательный атрибут)
+                    if(null !== $model->writer_id){
+                        $this->saveWriter($model->id, $model->writer_id, 'сreate');
+                    }
+
                     // ID нового элемента
                     $new_id = $model->id;
 
@@ -212,6 +218,11 @@ class BlogController extends BaseAdmin
                 //обновление родительской категории, выбранной в выпадающем меню с флагом true
                 $this->saveParentCategory($model->id, $model->category_id);
 
+                //сохранить выбранного автора, если автор был выбран (не обязательный атрибут)
+                if(null !== $model->writer_id){
+                    $this->saveWriter($model->id, $model->writer_id, 'сreate');
+                }
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
@@ -229,9 +240,12 @@ class BlogController extends BaseAdmin
                 $categoris_name[$category->id] = $category->title;
             }
 
+            $prompt = 'Назначить автора';
+
             return $this->render('create', [
                 'model' => $model,
                 'categoris_name' => $categoris_name,
+                'prompt' => $prompt,
             ]);
         }
     }
@@ -268,6 +282,15 @@ class BlogController extends BaseAdmin
 
                         //обновление родительской категории, выбранной в выпадающем меню с флагом true
                         $this->saveParentCategory($model->id, $model->category_id, true );
+
+                        //сохранить выбранного автора, если автор был выбран (не обязательный атрибут)
+                        if(!empty($model->writer_id)){
+        //                    var_dump(Yii::$app->request->post());die;
+                            $this->saveWriter($model->id, $model->writer_id, 'update');
+                        }else{
+                            $this->saveWriter($model->id, $model->writer_id, 'delete');//если выбрано поле prompt('не назначать автора') из выпадающего списка,то возвращается empty и мы удаляем связь поста с автором
+                        }
+
 
                         // ID нового элемента
                         $new_id = $model->id;
@@ -326,6 +349,14 @@ class BlogController extends BaseAdmin
                 //обновление родительской категории, выбранной в выпадающем меню с флагом true
                 $this->saveParentCategory($model->id, $model->category_id, true );
 
+                //сохранить выбранного автора, если автор был выбран (не обязательный атрибут)
+                if(!empty($model->writer_id)){
+//                    var_dump(Yii::$app->request->post());die;
+                    $this->saveWriter($model->id, $model->writer_id, 'update');
+                }else{
+                    $this->saveWriter($model->id, $model->writer_id, 'delete');//если выбрано поле prompt('не назначать автора') из выпадающего списка,то возвращается empty и мы удаляем связь поста с автором
+                }
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
 
@@ -352,12 +383,21 @@ class BlogController extends BaseAdmin
                 $selected = NULL;
             }
 
+            $prompt = 'Назначить автора';
+            //гетер getAuthor()
+            if(null !== $model->writer){
+                $model->writer_id = $model->writer->id;
+                $prompt = 'Не назначать автора';
+                //$prompt = NULL;
+            }
+
 
             return $this->render('update', [
                 'model' => $model,
                 'categoris_name' => $categoris_name,
                 'perent_categoris' => $perent_categoris,
                 'selected' => $selected,
+                'prompt' => $prompt,
             ]);
         }
     }
@@ -425,6 +465,47 @@ class BlogController extends BaseAdmin
         $cat_post_table->save();
 
     }
+
+    //сохранение или удаление назнаенного автора (не создателя поста)
+    protected function saveWriter($id_post, $id_author, $action){
+//    var_dump($id_author);die;
+        if($action === 'update'){
+            $authorsPosts = AuthorsPosts::find()->where(['id_post' => $id_post])->one();//из табл authors_posts
+            //если автор назначен
+            if(null !== $authorsPosts){
+                $authorsPosts->id_author = $id_author;//обновленный id_author
+            }
+            //если автор еще не назначен
+            else
+            {
+                $authorsPosts = new AuthorsPosts();
+                $authorsPosts->id_post   = $id_post;
+                $authorsPosts->id_author = $id_author;
+            }
+
+            $authorsPosts->save();
+            return;
+        }
+
+        if($action === 'сreate'){
+            $authorsPosts = new AuthorsPosts();
+            $authorsPosts->id_post   = $id_post;
+            $authorsPosts->id_author = $id_author;
+            $authorsPosts->save();
+            return;
+        }
+
+        if($action === 'delete'){
+            //если в форме у автора выбрана опция - "убрать авторство"
+            $authorsPosts = AuthorsPosts::find()->where(['id_post' => $id_post])->one();//из табл authors_posts
+            //если автор был назначен - удаляем связь из authors_posts, если автор не назначен - return
+            if(null !== $authorsPosts){
+                $authorsPosts->delete();
+            }
+            return;
+        }
+    }
+
 
     //пакетная замена водяных знаков
     public static function chengeAllWatermarks()

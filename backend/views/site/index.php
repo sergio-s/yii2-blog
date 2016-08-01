@@ -12,6 +12,7 @@ $this->title = 'Админчасть';
 
         <hr>
         <p class="lead"><a href="<?php echo Url::toRoute('/blog/index'); ?>">Блог</a></p>
+        <p class="lead"><a href="<?php echo Url::toRoute('/author/index'); ?>">Авторы</a></p>
         <hr>
         <p class="lead"><a href="<?php echo Url::toRoute('/comments/index'); ?>">Комментарии</a></p>
         <hr>

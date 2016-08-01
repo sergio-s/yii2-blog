@@ -78,6 +78,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             'keywords',
             'h1',
+            [
+                'attribute' => 'writer_id',
+                'format' => 'raw',
+                'label' => 'Установленный автор',
+                'value' =>  function ($model)
+                            {
+                                if(isset($model->writer) && null !== $model->writer )
+                                {
+                                    return $model->writerFullName;
+                                }
+                            }
+             ],
+
             // 'content:ntext',
             // 'createdDate',
 
@@ -89,3 +102,18 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     </div>-->
 </div>
+
+<?php
+
+$script = <<< JS
+// инициализировать все элементы на страницы, имеющих атрибут data-toggle="tooltip", как компоненты tooltip
+$('[data-toggle="tooltip"]').tooltip()
+
+$('[data-toggle="tooltip"]').click(function( event ) {
+  event.preventDefault();
+});
+JS;
+
+$this->registerJs($script, yii\web\View::POS_READY);
+
+?>
