@@ -32,8 +32,8 @@ phpunit.phar
 # dumpDb dir
 /dumpDb
 
-.jpg
-.png
-.gif
+*.jpg
+*.png
+*.gif
 
 /phpm/*
