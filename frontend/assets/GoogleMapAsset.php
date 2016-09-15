@@ -35,7 +35,7 @@ class GoogleMapAsset extends AssetBundle
     ];
 
     public $js = [
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBRQ5xGQGpHg59uHsJzlrxnXhgMI5KmbsA&callback=initMap&libraries=places',
+        'https://maps.googleapis.com/maps/api/js?key=код_ключа&callback=initMap&libraries=places',
         'js-marker-clusterer-gh-pages/src/markerclusterer.js',
         //'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js',
     ];
